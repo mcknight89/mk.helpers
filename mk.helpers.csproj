@@ -7,8 +7,8 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.0.6</Version>
-    <PackageReleaseNotes>added StreamExtensions with image detector</PackageReleaseNotes>
+    <Version>1.0.8</Version>
+    <PackageReleaseNotes>Added Change tracker which returns a list of changes when comparing two objects e.g. var changes = someObject.Changes(someOtherObject)</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
