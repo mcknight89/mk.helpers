@@ -120,6 +120,14 @@ namespace mk.helpers
             }
             return Changes(oldEntity, newEntity);
         }
+        public static void CopyPropertiesFrom(this object source, object destination, out List<EntityChange> changes)
+        {
+            CopyProperties(destination, source, out changes);
+        }
+        public static void CopyPropertiesFrom(this object source, object destination, params string[] ignore)
+        {
+            CopyProperties(destination, source, ignore);
+        }
 
         public static void CopyProperties(this object source, object destination, out List<EntityChange> changes)
         {
