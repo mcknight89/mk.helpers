@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "mk.helpers/1.0.7": {
+      "mk.helpers/1.1.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "3.1.9",
           "NETStandard.Library": "2.0.3",
@@ -434,7 +434,7 @@
     }
   },
   "libraries": {
-    "mk.helpers/1.0.7": {
+    "mk.helpers/1.1.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

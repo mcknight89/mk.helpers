@@ -7,8 +7,8 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.0.7</Version>
-    <PackageReleaseNotes>some fixes</PackageReleaseNotes>
+    <Version>1.1.0</Version>
+    <PackageReleaseNotes>Updates and fixes</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
