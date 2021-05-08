@@ -7,8 +7,8 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.0.6</Version>
-    <PackageReleaseNotes>added StreamExtensions with image detector</PackageReleaseNotes>
+    <Version>1.0.7</Version>
+    <PackageReleaseNotes>some fixes</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

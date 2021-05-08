@@ -18,16 +18,6 @@ namespace mk.helpers
                  {ImageFormat.JPEG,new [] {new byte[] { 255, 216, 255, 224 }, new byte[] { 255, 216, 255, 225 } } },  // JPEG
             };
 
-        public enum ImageFormat
-        {
-            None,
-            BMP,
-            GIF,
-            PNG,
-            TIFF,
-            JPEG,
-        }
-
         public static byte[] ReadExactly(this Stream stream, int count, int pos = 0)
         {
             stream.Position = pos;
@@ -44,7 +34,7 @@ namespace mk.helpers
             return buffer;
         }
 
-        internal static ImageFormat ReadImageFormatFromHeader(this Stream input)
+        public static ImageFormat ReadImageFormatFromHeader(this Stream input)
         {
             input.Position = 0;
             var result = _ImageHeaders?.FirstOrDefault(x => x.Value.Any(e => e.SequenceEqual(input.ReadExactly(e.Length))));

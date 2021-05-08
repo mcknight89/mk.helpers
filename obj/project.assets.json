@@ -1695,7 +1695,7 @@
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
-    "version": "1.0.6",
+    "version": "1.0.7",
     "restore": {
       "projectUniqueName": "Z:\\source\\mk.helpers\\mk.helpers.csproj",
       "projectName": "mk.helpers",
