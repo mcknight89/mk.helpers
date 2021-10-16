@@ -1,0 +1,10 @@
+D:\local source\mk.helpers\obj\Debug\netstandard2.1\mk.helpers.csproj.AssemblyReference.cache
+D:\local source\mk.helpers\obj\Debug\netstandard2.1\mk.helpers.GeneratedMSBuildEditorConfig.editorconfig
+D:\local source\mk.helpers\obj\Debug\netstandard2.1\mk.helpers.AssemblyInfoInputs.cache
+D:\local source\mk.helpers\obj\Debug\netstandard2.1\mk.helpers.AssemblyInfo.cs
+D:\local source\mk.helpers\obj\Debug\netstandard2.1\mk.helpers.csproj.CoreCompileInputs.cache
+D:\local source\mk.helpers\bin\Debug\netstandard2.1\mk.helpers.deps.json
+D:\local source\mk.helpers\bin\Debug\netstandard2.1\mk.helpers.dll
+D:\local source\mk.helpers\bin\Debug\netstandard2.1\mk.helpers.pdb
+D:\local source\mk.helpers\obj\Debug\netstandard2.1\mk.helpers.dll
+D:\local source\mk.helpers\obj\Debug\netstandard2.1\mk.helpers.pdb

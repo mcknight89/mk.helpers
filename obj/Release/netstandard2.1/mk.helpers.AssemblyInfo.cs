@@ -12,12 +12,12 @@ using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("mk.helpers")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyCopyrightAttribute("Copyright (c) Michael Knights")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("A ton of helpers and extensions useful for dotnet devleopment aimed at making dev" +
     "elopment a breeze.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.1.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.1.2")]
 [assembly: System.Reflection.AssemblyProductAttribute("mk.helpers")]
 [assembly: System.Reflection.AssemblyTitleAttribute("mk.helpers")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
