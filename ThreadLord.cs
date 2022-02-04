@@ -192,7 +192,7 @@ namespace mk.helpers
         }
         public ThreadLord<T> WaitAll(Action whileWaiting = null)
         {
-            while (!workers.All(d => d == null || d.IsCompletedSuccessfully) || Enqueued > 0 || !manager.IsCompleted)
+            while (!workers.All(d => d == null || d.IsCompletedSuccessfully) || Enqueued > 0)
             {
                 whileWaiting?.Invoke();
                 Thread.Sleep(25);

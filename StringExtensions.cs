@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace mk.helpers
 {
@@ -90,6 +91,16 @@ namespace mk.helpers
             }
         }
 
+        public static string ToHtml(this string text)
+        {
+            text = HttpUtility.HtmlEncode(text);
+            text = text.Replace("\r\n", "\r");
+            text = text.Replace("\n", "\r");
+            text = text.Replace("\r", "<br>\r\n");
+            text = text.Replace("  ", " &nbsp;");
+            return text;
+        }
+
         public static string BytesToString(this long byteCount)
         {
             string[] suf = { "B", "KB", "MB", "GB", "TB", "PB", "EB" }; //Longs run out around EB
@@ -109,7 +120,6 @@ namespace mk.helpers
             var str = phrase.RemoveAccent().ToLower();   
             str = Regex.Replace(str, @"[^a-z0-9\s-]", "");
             str = Regex.Replace(str, @"\s+", " ").Trim();
-            str = str.Substring(0, str.Length <= 45 ? str.Length : 45).Trim();
             str = Regex.Replace(str, @"\s", "-");
             return str;
         }

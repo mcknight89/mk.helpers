@@ -2,13 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Copyright>Copyright (c) Michael Knights</Copyright>
+    <Copyright>Copyright (c) Mike Knights</Copyright>
     <Description>A ton of helpers and extensions useful for dotnet devleopment aimed at making development a breeze.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.1.2</Version>
-    <PackageReleaseNotes>Added IPHelper with the IpAddressToNumber and NumberToIpAddress methods for easier data management of ips</PackageReleaseNotes>
+    <Version>1.1.4</Version>
+    <PackageReleaseNotes>
+		Fixed issue with ThreadLord not stopping correctly on WaitAllAndStop()
+		Added ToHtml string extension, basic helper to convert text to html (very basic)
+	</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
