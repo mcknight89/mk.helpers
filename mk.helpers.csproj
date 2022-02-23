@@ -7,10 +7,11 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.1.4</Version>
+    <Version>1.1.5</Version>
     <PackageReleaseNotes>
-		Fixed issue with ThreadLord not stopping correctly on WaitAllAndStop()
-		Added ToHtml string extension, basic helper to convert text to html (very basic)
+		Added a bunch of http client extensions for handling json requsts
+		Added a file helper with DownloadFileAsync, ReadJsonArrayFile
+		Renamed DownloadWithProgressAsync to DownloadDataAsync
 	</PackageReleaseNotes>
   </PropertyGroup>
 
