@@ -1,37 +1,37 @@
 {
   "format": 1,
   "restore": {
-    "Z:\\source\\mk.helpers\\mk.helpers.sandbox\\mk.helpers.sandbox.csproj": {}
+    "D:\\local source\\mk.helpers\\mk.helpers.sandbox\\mk.helpers.sandbox.csproj": {}
   },
   "projects": {
-    "Z:\\source\\mk.helpers\\mk.helpers.csproj": {
-      "version": "1.1.0",
+    "D:\\local source\\mk.helpers\\mk.helpers.csproj": {
+      "version": "1.1.7",
       "restore": {
-        "projectUniqueName": "Z:\\source\\mk.helpers\\mk.helpers.csproj",
+        "projectUniqueName": "D:\\local source\\mk.helpers\\mk.helpers.csproj",
         "projectName": "mk.helpers",
-        "projectPath": "Z:\\source\\mk.helpers\\mk.helpers.csproj",
+        "projectPath": "D:\\local source\\mk.helpers\\mk.helpers.csproj",
         "packagesPath": "C:\\Users\\mk\\.nuget\\packages\\",
-        "outputPath": "Z:\\source\\mk.helpers\\obj\\",
+        "outputPath": "D:\\local source\\mk.helpers\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\mk\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netstandard2.0"
+          "netstandard2.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "Z:\\source\\mk.helpers\\bin\\Release": {},
+          "D:\\local source\\datatoolkit\\packages-local": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netstandard2.0": {
-            "targetAlias": "netstandard2.0",
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
             "projectReferences": {}
           }
         },
@@ -42,18 +42,12 @@
         }
       },
       "frameworks": {
-        "netstandard2.0": {
-          "targetAlias": "netstandard2.0",
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.9, )"
-            },
-            "NETStandard.Library": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.0.3, )",
-              "autoReferenced": true
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -86,41 +80,46 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "Z:\\source\\mk.helpers\\mk.helpers.sandbox\\mk.helpers.sandbox.csproj": {
+    "D:\\local source\\mk.helpers\\mk.helpers.sandbox\\mk.helpers.sandbox.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "Z:\\source\\mk.helpers\\mk.helpers.sandbox\\mk.helpers.sandbox.csproj",
+        "projectUniqueName": "D:\\local source\\mk.helpers\\mk.helpers.sandbox\\mk.helpers.sandbox.csproj",
         "projectName": "mk.helpers.sandbox",
-        "projectPath": "Z:\\source\\mk.helpers\\mk.helpers.sandbox\\mk.helpers.sandbox.csproj",
+        "projectPath": "D:\\local source\\mk.helpers\\mk.helpers.sandbox\\mk.helpers.sandbox.csproj",
         "packagesPath": "C:\\Users\\mk\\.nuget\\packages\\",
-        "outputPath": "Z:\\source\\mk.helpers\\mk.helpers.sandbox\\obj\\",
+        "outputPath": "D:\\local source\\mk.helpers\\mk.helpers.sandbox\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\mk\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "Z:\\source\\mk.helpers\\bin\\Release": {},
+          "D:\\local source\\datatoolkit\\packages-local": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "Z:\\source\\mk.helpers\\mk.helpers.csproj": {
-                "projectPath": "Z:\\source\\mk.helpers\\mk.helpers.csproj"
+              "D:\\local source\\mk.helpers\\mk.helpers.csproj": {
+                "projectPath": "D:\\local source\\mk.helpers\\mk.helpers.csproj"
               }
             }
           }
@@ -144,12 +143,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[5.0.14, 5.0.14]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

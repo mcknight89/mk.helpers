@@ -7,11 +7,9 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.1.5</Version>
+    <Version>1.1.7</Version>
     <PackageReleaseNotes>
-		Added a bunch of http client extensions for handling json requsts
-		Added a file helper with DownloadFileAsync, ReadJsonArrayFile
-		Renamed DownloadWithProgressAsync to DownloadDataAsync
+		Fixed a bug in the ThreadLord class, that would cause a limit to stall the process
 	</PackageReleaseNotes>
   </PropertyGroup>
 

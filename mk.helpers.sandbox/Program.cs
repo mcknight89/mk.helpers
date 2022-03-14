@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace mk.helpers.sandbox
 {
@@ -6,9 +7,48 @@ namespace mk.helpers.sandbox
     {
         static void Main(string[] args)
         {
-            StaticData.Add("SomeInt", "1");
+            var tl = new ThreadLord<string>((d) =>
+            {
+                Thread.Sleep(10);
+            });
 
-            int? i = StaticData.GetInt("SomeInt");
+            for (int i = 0; i < 10000; i++)
+                tl.Enqueue(Guid.NewGuid().ToString());
+
+            tl.LimitQueue(1000).Start();
+
+
+            for (int i = 0; i < 10000; i++)
+            {
+                
+                if (i%100==1)
+                    Console.WriteLine($"E: {tl.Enqueued} P: {tl.Processed}, LS: {tl.ProcessedLastSecond}");
+
+                tl.Enqueue(Guid.NewGuid().ToString());
+                tl.Enqueue(Guid.NewGuid().ToString());
+                tl.Enqueue(Guid.NewGuid().ToString());
+                tl.Enqueue(Guid.NewGuid().ToString());
+                tl.Enqueue(Guid.NewGuid().ToString());
+                tl.Enqueue(Guid.NewGuid().ToString());
+                tl.Enqueue(Guid.NewGuid().ToString());
+                tl.Enqueue(Guid.NewGuid().ToString());
+                tl.Enqueue(Guid.NewGuid().ToString());
+                tl.Enqueue(Guid.NewGuid().ToString());
+            }
+
+            tl.WaitAllAndStop(() =>
+            {
+                Console.WriteLine($"E: {tl.Enqueued} P: {tl.Processed}, LS: {tl.ProcessedLastSecond}");
+            });
+
+            var ts = Execution.Time(() =>
+            {
+                Thread.Sleep(1000);
+            }, (ts) =>
+            {
+                Console.WriteLine($"#1 time {ts.TotalMilliseconds}");
+            });
+            Console.WriteLine($"#2 time {ts.TotalMilliseconds}");
         }
     }
 }

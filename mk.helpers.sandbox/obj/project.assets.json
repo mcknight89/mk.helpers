@@ -529,9 +529,9 @@
           }
         }
       },
-      "mk.helpers/1.1.0": {
+      "mk.helpers/1.1.7": {
         "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
+        "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "3.1.9",
           "Newtonsoft.Json": "12.0.3",
@@ -1627,7 +1627,7 @@
         "version.txt"
       ]
     },
-    "mk.helpers/1.1.0": {
+    "mk.helpers/1.1.7": {
       "type": "project",
       "path": "../mk.helpers.csproj",
       "msbuildProject": "../mk.helpers.csproj"
@@ -1635,44 +1635,44 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "mk.helpers >= 1.1.0"
+      "mk.helpers >= 1.1.7"
     ]
   },
   "packageFolders": {
     "C:\\Users\\mk\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "Z:\\source\\mk.helpers\\mk.helpers.sandbox\\mk.helpers.sandbox.csproj",
+      "projectUniqueName": "D:\\local source\\mk.helpers\\mk.helpers.sandbox\\mk.helpers.sandbox.csproj",
       "projectName": "mk.helpers.sandbox",
-      "projectPath": "Z:\\source\\mk.helpers\\mk.helpers.sandbox\\mk.helpers.sandbox.csproj",
+      "projectPath": "D:\\local source\\mk.helpers\\mk.helpers.sandbox\\mk.helpers.sandbox.csproj",
       "packagesPath": "C:\\Users\\mk\\.nuget\\packages\\",
-      "outputPath": "Z:\\source\\mk.helpers\\mk.helpers.sandbox\\obj\\",
+      "outputPath": "D:\\local source\\mk.helpers\\mk.helpers.sandbox\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
         "C:\\Users\\mk\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "Z:\\source\\mk.helpers\\bin\\Release": {},
+        "D:\\local source\\datatoolkit\\packages-local": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "Z:\\source\\mk.helpers\\mk.helpers.csproj": {
-              "projectPath": "Z:\\source\\mk.helpers\\mk.helpers.csproj"
+            "D:\\local source\\mk.helpers\\mk.helpers.csproj": {
+              "projectPath": "D:\\local source\\mk.helpers\\mk.helpers.csproj"
             }
           }
         }
@@ -1696,12 +1696,18 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[5.0.14, 5.0.14]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

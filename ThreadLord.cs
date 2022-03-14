@@ -102,14 +102,10 @@ namespace mk.helpers
 
         public void Enqueue(T data)
         {
-            if (queueLimit != 0 && queue.Count > queueLimit)
-            {
-                workerCallback.Invoke(data);
-            }
-            else
-            {
+            while (queueLimit != 0 && queue.Count > queueLimit)
+                Thread.Sleep(10);
+            if (data != null)
                 queue.Enqueue(data);
-            }
         }
 
 
