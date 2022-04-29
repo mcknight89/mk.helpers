@@ -8,3 +8,13 @@ D:\local source\mk.helpers\obj\Release\netstandard2.1\mk.helpers.csproj.CoreComp
 D:\local source\mk.helpers\obj\Release\netstandard2.1\mk.helpers.dll
 D:\local source\mk.helpers\obj\Release\netstandard2.1\mk.helpers.pdb
 D:\local source\mk.helpers\obj\Release\netstandard2.1\mk.helpers.csproj.AssemblyReference.cache
+E:\Source\mk.helpers\bin\Release\netstandard2.1\mk.helpers.deps.json
+E:\Source\mk.helpers\bin\Release\netstandard2.1\mk.helpers.dll
+E:\Source\mk.helpers\bin\Release\netstandard2.1\mk.helpers.pdb
+E:\Source\mk.helpers\obj\Release\netstandard2.1\mk.helpers.csproj.AssemblyReference.cache
+E:\Source\mk.helpers\obj\Release\netstandard2.1\mk.helpers.GeneratedMSBuildEditorConfig.editorconfig
+E:\Source\mk.helpers\obj\Release\netstandard2.1\mk.helpers.AssemblyInfoInputs.cache
+E:\Source\mk.helpers\obj\Release\netstandard2.1\mk.helpers.AssemblyInfo.cs
+E:\Source\mk.helpers\obj\Release\netstandard2.1\mk.helpers.csproj.CoreCompileInputs.cache
+E:\Source\mk.helpers\obj\Release\netstandard2.1\mk.helpers.dll
+E:\Source\mk.helpers\obj\Release\netstandard2.1\mk.helpers.pdb

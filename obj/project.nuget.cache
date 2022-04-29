@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oDvKAEUT6/jQn9/qilmq6u3JCTt0xME3FmjL6I8EqUjpvQDdS1PvoPSzQPtLPxkSpPAs8beEWvO8h01JGrYLFg==",
+  "dgSpecHash": "KCKbsYGRWCI8ZrHPwyG1E4zkwg2n+46PI5aFAI3rsQhd1KBLn3y3EJ8Ms0jzQbkzHutK6fgWRtpg2oaKWuiu3g==",
   "success": true,
-  "projectFilePath": "D:\\local source\\mk.helpers\\mk.helpers.csproj",
+  "projectFilePath": "E:\\Source\\mk.helpers\\mk.helpers.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mk\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\mk\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",

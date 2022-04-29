@@ -1521,24 +1521,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mk\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\mk\\.nuget\\packages\\": {}
   },
   "project": {
-    "version": "1.1.7",
+    "version": "1.1.8",
     "restore": {
-      "projectUniqueName": "D:\\local source\\mk.helpers\\mk.helpers.csproj",
+      "projectUniqueName": "E:\\Source\\mk.helpers\\mk.helpers.csproj",
       "projectName": "mk.helpers",
-      "projectPath": "D:\\local source\\mk.helpers\\mk.helpers.csproj",
+      "projectPath": "E:\\Source\\mk.helpers\\mk.helpers.csproj",
       "packagesPath": "C:\\Users\\mk\\.nuget\\packages\\",
-      "outputPath": "D:\\local source\\mk.helpers\\obj\\",
+      "outputPath": "E:\\Source\\mk.helpers\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
         "C:\\Users\\mk\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1546,7 +1541,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "D:\\local source\\datatoolkit\\packages-local": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1605,7 +1599,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

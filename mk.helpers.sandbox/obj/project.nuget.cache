@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+A5vfLxTfGOWyFWVtVQ3PpOPf9oyw0iD9BRr/Dnx6lwNSRhkZ/AJlPhjGSz8OmfzsGF4bXO6WyjSaL22kKlZ9Q==",
+  "dgSpecHash": "Z5eVchNm/d7N2ntBySY36itKLfQStnJ0+6orqLVQboerN+Ix0jpfjO1xXUlP+YfzntecAGNKmUi6cgZ3SqwA8A==",
   "success": true,
-  "projectFilePath": "D:\\local source\\mk.helpers\\mk.helpers.sandbox\\mk.helpers.sandbox.csproj",
+  "projectFilePath": "E:\\Source\\mk.helpers\\mk.helpers.sandbox\\mk.helpers.sandbox.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mk\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\mk\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
@@ -44,7 +44,7 @@
     "C:\\Users\\mk\\.nuget\\packages\\system.text.encoding.codepages\\4.7.1\\system.text.encoding.codepages.4.7.1.nupkg.sha512",
     "C:\\Users\\mk\\.nuget\\packages\\system.threading.channels\\4.7.1\\system.threading.channels.4.7.1.nupkg.sha512",
     "C:\\Users\\mk\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
-    "C:\\Users\\mk\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.14\\microsoft.netcore.app.host.win-x64.5.0.14.nupkg.sha512"
+    "C:\\Users\\mk\\.nuget\\packages\\mk.helpers\\1.1.8\\mk.helpers.1.1.8.nupkg.sha512"
   ],
   "logs": []
 }
