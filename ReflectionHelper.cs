@@ -150,7 +150,7 @@ namespace mk.helpers
             return (type.IsValueType & type.IsPrimitive);
         }
 
-        public static T DeepClone<T>(this T obj) where T : ISerializable
+        public static T DeepClone<T>(this T obj)
         {
             using (var ms = new MemoryStream())
             {

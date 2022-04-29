@@ -1524,7 +1524,7 @@
     "C:\\Users\\mk\\.nuget\\packages\\": {}
   },
   "project": {
-    "version": "1.1.8",
+    "version": "1.1.10",
     "restore": {
       "projectUniqueName": "E:\\Source\\mk.helpers\\mk.helpers.csproj",
       "projectName": "mk.helpers",
