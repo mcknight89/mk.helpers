@@ -47,6 +47,7 @@ namespace mk.helpers
             };
         }
 
+
         public static EnumWrapper<T> FromName(string enumValue)
         {
             if (EnumHelper.TryParse<T>(enumValue, out T result))

@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -152,14 +153,7 @@ namespace mk.helpers
 
         public static T DeepClone<T>(this T obj)
         {
-            using (var ms = new MemoryStream())
-            {
-                var formatter = new BinaryFormatter();
-                formatter.Serialize(ms, obj);
-                ms.Position = 0;
-
-                return (T)formatter.Deserialize(ms);
-            }
+            return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(obj, Formatting.None));
         }
 
         public static void CopyProperties(this object source, object destination, params string[] ignore)

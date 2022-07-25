@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 
 namespace mk.helpers.sandbox
@@ -7,6 +8,17 @@ namespace mk.helpers.sandbox
     {
         static void Main(string[] args)
         {
+            var arr = new[]
+            {
+                "a",
+                "b",
+                "c"
+            };
+
+            var dict = arr.Select((d, i) => new { d, i }).ToConcurrentDictionary(d => d.d, d => d.i);
+
+            var get = dict.TryGet("c");
+
             var tl = new ThreadLord<string>((d) =>
             {
                 Thread.Sleep(10);

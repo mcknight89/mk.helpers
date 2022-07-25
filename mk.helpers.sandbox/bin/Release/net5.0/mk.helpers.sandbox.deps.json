@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v5.0": {
       "mk.helpers.sandbox/1.0.0": {
         "dependencies": {
-          "mk.helpers": "1.1.6"
+          "mk.helpers": "1.1.11"
         },
         "runtime": {
           "mk.helpers.sandbox.dll": {}
@@ -402,7 +402,7 @@
           }
         }
       },
-      "mk.helpers/1.1.6": {
+      "mk.helpers/1.1.11": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "3.1.9",
           "Newtonsoft.Json": "12.0.3",
@@ -703,7 +703,7 @@
       "path": "system.windows.extensions/4.7.0",
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
     },
-    "mk.helpers/1.1.6": {
+    "mk.helpers/1.1.11": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
