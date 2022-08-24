@@ -8,13 +8,26 @@ namespace mk.helpers
 {
     public static class CsvHelper
     {
+        public static string ToCsv<T>(this IEnumerable<T> items) where T : class
+            => ToCsv<T>(items,false,',');
+        public static string ToCsv<T>(this IEnumerable<T> items, char delimiter = ',') where T : class
+            => ToCsv<T>(items, false, delimiter);
 
-        public static string ItemsToCsv<T>(IEnumerable<T> items) where T : class
+        public static string ToCsv<T>(this IEnumerable<T> items, bool addHeader = false, char delimiter = ',') where T : class
         {
+            using (var sw = new StringWriter())
+            { 
+                foreach (var item in items)
+                {
+                    sw.Write(item.ToCsv(addHeader, delimiter));
+                    addHeader = false;
+                }
+                return sw.ToString();
+            }
+        }
 
-
-            var output = "";
-            var delimiter = ',';
+        public static string ToCsv<T>(this T item, bool addHeader = false, char delimiter = ',') where T : class
+        {
             var properties = typeof(T).GetProperties()
              .Where(n =>
              n.PropertyType == typeof(string)
@@ -25,22 +38,23 @@ namespace mk.helpers
              || n.PropertyType == typeof(int)
              || n.PropertyType == typeof(DateTime)
              || n.PropertyType == typeof(DateTime?));
+
             using (var sw = new StringWriter())
             {
-                var header = properties
-                .Select(n => n.Name)
-                .Aggregate((a, b) => a + delimiter + b);
-                sw.WriteLine(header);
-                foreach (var item in items)
+                if (addHeader)
                 {
-                    var row = properties
-                    .Select(n => n.GetValue(item, null))
-                    .Select(n => n == null ? "null" : n.ToString()).Aggregate((a, b) => a + delimiter + b);
-                    sw.WriteLine(row);
+                    var header = properties
+                    .Select(n => n.Name)
+                    .Aggregate((a, b) => a + delimiter + b);
+                    sw.WriteLine(header);
                 }
-                output = sw.ToString();
+                var row = properties
+                .Select(n => n.GetValue(item, null))
+                .Select(n => n == null ? "null" : n.ToString()).Aggregate((a, b) => a + delimiter + b);
+                sw.WriteLine(row);
+
+                return sw.ToString();
             }
-            return output;
         }
     }
 }

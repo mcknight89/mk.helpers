@@ -1524,7 +1524,7 @@
     "C:\\Users\\mk\\.nuget\\packages\\": {}
   },
   "project": {
-    "version": "1.1.12",
+    "version": "1.1.13",
     "restore": {
       "projectUniqueName": "E:\\Source\\mk.helpers\\mk.helpers.csproj",
       "projectName": "mk.helpers",
@@ -1541,6 +1541,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "E:\\Source\\mage\\dotnet-local-packages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

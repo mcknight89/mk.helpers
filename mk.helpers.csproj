@@ -7,9 +7,9 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.1.12</Version>
+    <Version>1.1.13</Version>
     <PackageReleaseNotes>
-		Added some dictionary extentions
+		Improved the CSV extensions
 	</PackageReleaseNotes>
   </PropertyGroup>
 

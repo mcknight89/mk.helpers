@@ -529,7 +529,7 @@
           }
         }
       },
-      "mk.helpers/1.1.12": {
+      "mk.helpers/1.1.13": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
@@ -1627,7 +1627,7 @@
         "version.txt"
       ]
     },
-    "mk.helpers/1.1.12": {
+    "mk.helpers/1.1.13": {
       "type": "project",
       "path": "../mk.helpers.csproj",
       "msbuildProject": "../mk.helpers.csproj"
@@ -1635,7 +1635,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "mk.helpers >= 1.1.12"
+      "mk.helpers >= 1.1.13"
     ]
   },
   "packageFolders": {
@@ -1659,6 +1659,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "E:\\Source\\mage\\dotnet-local-packages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
