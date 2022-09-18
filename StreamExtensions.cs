@@ -16,6 +16,7 @@ namespace mk.helpers
                  {ImageFormat.PNG, new [] {new byte[] { 137, 80, 78, 71 } }},    // PNG
                  {ImageFormat.TIFF,new [] {new byte[] { 73, 73, 42 },new byte[] { 77, 77, 42 } }}, // TIFF
                  {ImageFormat.JPEG,new [] {new byte[] { 255, 216, 255, 224 }, new byte[] { 255, 216, 255, 225 } } },  // JPEG
+                 {ImageFormat.WEBP, new [] {new byte[]  {82, 73, 70, 70} }},    
             };
 
         public static byte[] ReadExactly(this Stream stream, int count, int pos = 0)

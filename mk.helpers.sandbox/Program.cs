@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading;
 
@@ -8,25 +9,37 @@ namespace mk.helpers.sandbox
     {
         static void Main(string[] args)
         {
-            var obj1 = new
+
+            using (var stream = File.OpenRead(@"C:\Users\mk\Pictures\2a398c06-lg.webp"))
             {
-                Name = "Mike",
-                DOB = "22/11/89"
-            };
-            var obj2 = new
-            {
-                Name = "Chris",
-                DOB = "10/01/20"
-            };
+                var type = stream.ReadImageFormatFromHeader();
 
-            
+            }
+                //var obj1 = new
+                //{
+                //    Name = "Mike",
+                //    DOB = "22/11/89"
+                //};
+                //var obj2 = new
+                //{
+                //    Name = "Chris, adf ,qadfdaf ,ad,f, da \t\t",
+                //    DOB = "10/01/20"
+                //};
 
-            var csv1 = obj1.ToCsv(true);
-
-            var csv = new[] { obj1, obj2 }.ToCsv(true);
 
 
-            return;
+
+                //var res = "some shit".ToBase64();
+
+                //var csv1 = obj1.ToCsv(true);
+
+                //var csv = new[] { obj1, obj2 }.ToCsv(true);
+
+                //Tasks.
+
+
+
+                return;
 
 
 

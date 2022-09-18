@@ -12,5 +12,6 @@ namespace mk.helpers
         PNG,
         TIFF,
         JPEG,
+        WEBP
     }
 }

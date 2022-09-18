@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 
@@ -124,10 +125,35 @@ namespace mk.helpers
             return str;
         }
 
+
+        public static byte[] ToBytesUtf8(this string str)
+        {
+            return Encoding.UTF8.GetBytes(str);
+        }
+        public static byte[] ToBytesUtf32(this string str)
+        {
+            return Encoding.UTF32.GetBytes(str);
+        }
+        public static byte[] ToBytesUtf7(this string str)
+        {
+            return Encoding.UTF7.GetBytes(str);
+        }
+
+        public static byte[] ToBytesAscii(this string str)
+        {
+            return Encoding.ASCII.GetBytes(str);
+        }
+        public static byte[] ToBytesUnicode(this string str)
+        {
+            return Encoding.Unicode.GetBytes(str);
+        }
+
+
+
         public static string RemoveAccent(this string txt)
         {
-            byte[] bytes = System.Text.Encoding.GetEncoding("Cyrillic").GetBytes(txt);
-            return System.Text.Encoding.ASCII.GetString(bytes);
+            byte[] bytes = Encoding.GetEncoding("Cyrillic").GetBytes(txt);
+            return Encoding.ASCII.GetString(bytes);
         }
 
         public static string TrimStart(this string target, string trimString)
@@ -171,6 +197,31 @@ namespace mk.helpers
             return str.ToUpper();
         }
 
+        /// <summary>
+        /// Short hand method to convert a string to base64 encoded string
+        /// </summary>
+        /// <param name="str">Input string</param>
+        /// <param name="encoding">The type of text encoding to use. Defaults to Encoding.UTF8</param>
+        public static string ToBase64(this string str, Encoding encoding=null)
+        {
+            var encode = encoding ?? Encoding.UTF8;
+            var plainTextBytes = encode.GetBytes(str);
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+
+
+        /// <summary>
+        /// Short hand method to convert a string to base64 encoded bytes
+        /// </summary>
+        /// <param name="str">Input string</param>
+        /// <param name="encoding">The type of text encoding to use. Defaults to Encoding.UTF8</param>
+        public static byte[] ToBase64Bytes(this string str, Encoding encoding = null)
+        {
+            var encode = encoding ?? Encoding.UTF8;
+            var plainTextBytes = encode.GetBytes(str);
+            return plainTextBytes;
+        }
+
         public static string ConvertCapsToWords(this string str)
         {
             return Regex.Replace(str, "(\\B[A-Z])", " $1");
@@ -193,7 +244,16 @@ namespace mk.helpers
         }
 
 
-
+        public static string ReplaceStart(this string str, string start, string replacement)
+        {
+            if (str != null && replacement != null && str.Length >= start.Length && str.Length > 0 && start.Length > 0
+                && str.Substring(0, start.Length) == start
+                )
+            {
+                str = string.Concat(replacement, str.Substring(start.Length, str.Length - start.Length));
+            }
+            return str;
+        }
         private static int Compute(string source, string target)
         {
             if ((source == null) || (target == null)) return 0;

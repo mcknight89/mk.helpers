@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace mk.helpers
 {
-    public class ThreadLord<T>
+    public class ThreadLord<T> : IDisposable
     {
         private int queueLimit = 0;
         private int maxThreads = 0;
@@ -26,6 +26,7 @@ namespace mk.helpers
 
         private LordState _state = LordState.Stopped;
         public LordState State { get { return _state; } }
+
 
         public enum LordState
         {
@@ -71,16 +72,19 @@ namespace mk.helpers
                 }
 
                 // While any threads free for work
-                if (workers.Any(d => d == null || d.IsCompletedSuccessfully))
+                if (workers.Any(d => d == null || d.Status == TaskStatus.RanToCompletion))
                 {
                     // Find free indic
                     var indic = workers.Select((s, i) => new { s, i })
-                        .Where(d => d.s == null || d.s.IsCompletedSuccessfully)
+                        .Where(d => d.s == null || d.s.Status == TaskStatus.RanToCompletion)
                         .Select(d => d.i).First();
                     // Add work
                     workers[indic] = Task.Factory.StartNew(Worker);
                 }
-                Thread.Sleep(1);
+                else
+                {
+                    Thread.Sleep(100);
+                }
             }
             _state = LordState.Stopped;
         }
@@ -89,6 +93,9 @@ namespace mk.helpers
         {
             while (Enqueued > 0)
             {
+                if (_state != LordState.Running)
+                    throw new InvalidOperationException("cancellation requested");
+
                 queue.TryDequeue(out var work);
                 if (work != null)
                 {
@@ -111,7 +118,7 @@ namespace mk.helpers
 
         public void Clear()
         {
-            queue.Clear();
+            queue = new ConcurrentQueue<T>();
         }
 
         public ThreadLord<T> LimitQueue(int limit)
@@ -148,7 +155,7 @@ namespace mk.helpers
         {
             get
             {
-                return maxThreads - workers.Count(d => d == null || d.IsCompletedSuccessfully);
+                return maxThreads - workers.Count(d => d == null || d.Status == TaskStatus.RanToCompletion);
             }
         }
 
@@ -171,12 +178,27 @@ namespace mk.helpers
                 return data.Sum() / data.Count();
             }
         }
-
+        public long QueueLimit
+        {
+            get
+            {
+                return queueLimit;
+            }
+        }
         public long Processed
         {
             get
             {
                 return processed;
+            }
+        }
+        public long CurrentlyProcessing
+        {
+            get
+            {
+                return workers.Count() - workers.Select((s, i) => new { s, i })
+                        .Where(d => d.s == null || d.s.Status == TaskStatus.RanToCompletion)
+                        .Select(d => d.i).Count();
             }
         }
 
@@ -188,7 +210,7 @@ namespace mk.helpers
         }
         public ThreadLord<T> WaitAll(Action whileWaiting = null)
         {
-            while (!workers.All(d => d == null || d.IsCompletedSuccessfully) || Enqueued > 0)
+            while (!workers.All(d => d == null || d.Status == TaskStatus.RanToCompletion) || Enqueued > 0)
             {
                 whileWaiting?.Invoke();
                 Thread.Sleep(25);
@@ -196,5 +218,10 @@ namespace mk.helpers
             return this;
         }
 
+        public void Dispose()
+        {
+            Stop();
+            queue = null;
+        }
     }
 }

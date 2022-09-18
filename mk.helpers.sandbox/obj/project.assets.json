@@ -529,7 +529,7 @@
           }
         }
       },
-      "mk.helpers/1.1.13": {
+      "mk.helpers/1.1.16": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
@@ -1627,7 +1627,7 @@
         "version.txt"
       ]
     },
-    "mk.helpers/1.1.13": {
+    "mk.helpers/1.1.16": {
       "type": "project",
       "path": "../mk.helpers.csproj",
       "msbuildProject": "../mk.helpers.csproj"
@@ -1635,7 +1635,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "mk.helpers >= 1.1.13"
+      "mk.helpers >= 1.1.16"
     ]
   },
   "packageFolders": {
