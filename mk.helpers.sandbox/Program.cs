@@ -1,4 +1,6 @@
-﻿using System;
+﻿using mk.helpers.Store;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -7,14 +9,53 @@ namespace mk.helpers.sandbox
 {
     class Program
     {
+        public class Cake
+        {
+            public string s1 { get; set; }
+            public List<string> l1 { get;set; }
+        }
+
         static void Main(string[] args)
         {
+            InMemoryStore.Set("TestA", "Test A");
+            InMemoryStore.Set("TestB", "Test B");
+            InMemoryStore.Set("TestC", "Test C", TimeSpan.FromSeconds(2));
+            InMemoryStore.Set("TestD", "Test D");
 
-            using (var stream = File.OpenRead(@"C:\Users\mk\Pictures\2a398c06-lg.webp"))
+            InMemoryStore.Set("Stuff", new Cake
             {
-                var type = stream.ReadImageFormatFromHeader();
+                l1 = new List<string> { "1", "" },
+                s1 = "dfd"
 
-            }
+            });
+
+            var test1 = InMemoryStore.Get<string>("TestC");
+            var test2 = InMemoryStore.Get<int>("TestC");
+
+            var test3 = InMemoryStore.Get<Cake>("Stuff");
+
+            var expiry = InMemoryStore.GetExpiry("TestC");
+          //  var memeoryBytes = InMemoryStore.CalculateEstimatedMemoryUsageBytes();
+            var count = InMemoryStore.TotalEntries();
+
+            Thread.Sleep(2000);
+
+            var test4 = InMemoryStore.Get<int>("TestC");
+
+            InMemoryStore.Invalidate("TestA");
+
+            count = InMemoryStore.TotalEntries();
+
+            InMemoryStore.InvalidateAll();
+
+            count = InMemoryStore.TotalEntries();
+            return;
+
+            //using (var stream = File.OpenRead(@"C:\Users\mk\Pictures\2a398c06-lg.webp"))
+            //{
+            //    var type = stream.ReadImageFormatFromHeader();
+
+            //}
                 //var obj1 = new
                 //{
                 //    Name = "Mike",
@@ -39,7 +80,7 @@ namespace mk.helpers.sandbox
 
 
 
-                return;
+                //return;
 
 
 

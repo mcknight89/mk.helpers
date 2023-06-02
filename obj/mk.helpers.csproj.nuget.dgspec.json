@@ -5,7 +5,7 @@
   },
   "projects": {
     "E:\\Source\\mk.helpers\\mk.helpers.csproj": {
-      "version": "1.1.16",
+      "version": "1.1.17",
       "restore": {
         "projectUniqueName": "E:\\Source\\mk.helpers\\mk.helpers.csproj",
         "projectName": "mk.helpers",
@@ -72,7 +72,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -81,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

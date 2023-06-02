@@ -7,9 +7,9 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.1.16</Version>
+    <Version>1.1.17</Version>
     <PackageReleaseNotes>
-		Added WebP to ReadImageFormatFromHeader
+		Added In MemoryStore for storing data in memory with automatic expiry
 	</PackageReleaseNotes>
   </PropertyGroup>
 
