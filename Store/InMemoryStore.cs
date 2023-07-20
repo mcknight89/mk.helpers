@@ -16,6 +16,9 @@ namespace mk.helpers.Store
         private static ConcurrentDictionary<string, StoreValue> _storage { get; set; } = new ConcurrentDictionary<string, StoreValue>();
         private static object _lock = new object();
 
+        /// <summary>
+        /// Sets a value in the store with the specified key and optional expiry time.
+        /// </summary>
         public static void Set<T>(string key, T value, TimeSpan? expiry = null)
         {
             lock (_lock)
@@ -31,6 +34,9 @@ namespace mk.helpers.Store
             }
         }
 
+        /// <summary>
+        /// Gets the value associated with the given key. Returns a default value if the key is not found.
+        /// </summary>
         public static T Get<T>(string key, T setOnNull)
         {
             return Get<T>(key, () =>
@@ -39,13 +45,15 @@ namespace mk.helpers.Store
             });
         }
 
+        /// <summary>
+        /// Gets the value associated with the given key. Generates and sets a value if the key is not found.
+        /// </summary>
         public static T Get<T>(string key, Func<T>? setOnNull = null)
         {
             var find = _storage.ContainsKey(key) ? _storage[key] : null;
 
             if (find != null && find.ExpiresOn != null && find.ExpiresOn < DateTime.UtcNow)
                 find = null;
-
 
             if (find == null && setOnNull != null)
             {
@@ -63,7 +71,9 @@ namespace mk.helpers.Store
             return (T)find.Value;
         }
 
-
+        /// <summary>
+        /// Gets the remaining time until the value associated with the given key expires.
+        /// </summary>
         public static TimeSpan? GetExpiry(string key)
         {
             var find = _storage.ContainsKey(key) ? _storage[key] : null;
@@ -73,6 +83,10 @@ namespace mk.helpers.Store
             return find.ExpiresOn - DateTime.UtcNow;
         }
 
+        /// <summary>
+        /// Invalidates and removes the value associated with the given key from the store.
+        /// Returns true if the key was found and removed, false otherwise.
+        /// </summary>
         public static bool Invalidate(string key)
         {
             lock (_lock)
@@ -85,15 +99,20 @@ namespace mk.helpers.Store
                 Task.Run(() => CleanUp());
                 return false;
             }
-
         }
 
+        /// <summary>
+        /// Invalidates and removes all key-value pairs from the store.
+        /// </summary>
         public static void InvalidateAll()
         {
             lock (_lock)
                 _storage.Clear();
         }
 
+        /// <summary>
+        /// Internal method to remove expired key-value pairs from the store.
+        /// </summary>
         private static void CleanUp()
         {
             lock (_lock)
@@ -108,30 +127,14 @@ namespace mk.helpers.Store
             }
         }
 
+        /// <summary>
+        /// Returns the total number of key-value pairs currently stored in the store after cleaning up expired entries.
+        /// </summary>
         public static int TotalEntries()
         {
             CleanUp();
             return _storage.Count;
         }
-
-        //public static long CalculateEstimatedMemoryUsageBytes()
-        //{
-        //    try
-        //    {
-        //        BinaryFormatter bf = new BinaryFormatter();
-        //        MemoryStream ms = new MemoryStream();
-        //        byte[] Array;
-        //        bf.Serialize(ms, _storage);
-        //        Array = ms.ToArray();
-        //        return Array.Length;
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //    }
-        //    return 0;
-        //}
-
     }
 
     [Serializable]

@@ -7,18 +7,21 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.1.17</Version>
+    <Version>1.1.18</Version>
     <PackageReleaseNotes>
-		Added In MemoryStore for storing data in memory with automatic expiry
+		Fixed the JPEG header detection in SteamExtensions
 	</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="mk.helpers.sandbox\**" />
+    <Compile Remove="mk.helpers.tests\**" />
     <Compile Remove="Redis\**" />
     <EmbeddedResource Remove="mk.helpers.sandbox\**" />
+    <EmbeddedResource Remove="mk.helpers.tests\**" />
     <EmbeddedResource Remove="Redis\**" />
     <None Remove="mk.helpers.sandbox\**" />
+    <None Remove="mk.helpers.tests\**" />
     <None Remove="Redis\**" />
   </ItemGroup>
 
