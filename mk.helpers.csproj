@@ -7,9 +7,9 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.1.18</Version>
+    <Version>1.1.19</Version>
     <PackageReleaseNotes>
-		Fixed the JPEG header detection in SteamExtensions
+		Added new class PerfTimer, essentially a slightly worse performance timer system.diagnostics, but with way better features
 	</PackageReleaseNotes>
   </PropertyGroup>
 

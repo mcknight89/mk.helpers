@@ -12,7 +12,7 @@
           "MSTest.TestFramework": "2.2.10",
           "Microsoft.NET.Test.Sdk": "17.3.2",
           "coverlet.collector": "3.1.2",
-          "mk.helpers": "1.1.17",
+          "mk.helpers": "1.1.18",
           "Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions": "14.0.0.0"
         },
         "runtime": {
@@ -810,7 +810,7 @@
           }
         }
       },
-      "mk.helpers/1.1.17": {
+      "mk.helpers/1.1.18": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "3.1.9",
           "Newtonsoft.Json": "12.0.3",
@@ -1294,7 +1294,7 @@
       "path": "system.windows.extensions/4.7.0",
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
     },
-    "mk.helpers/1.1.17": {
+    "mk.helpers/1.1.18": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
