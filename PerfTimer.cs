@@ -90,6 +90,7 @@ namespace mk.helpers
             lock (_lock) // Thread-safe operation using lock
             {
                 Stop();
+                Reset();
                 Start();
                 return this;
             }
