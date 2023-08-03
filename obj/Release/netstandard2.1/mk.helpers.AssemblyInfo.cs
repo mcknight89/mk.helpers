@@ -17,7 +17,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute("A ton of helpers and extensions useful for dotnet devleopment aimed at making dev" +
     "elopment a breeze.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.1.20")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.1.22")]
 [assembly: System.Reflection.AssemblyProductAttribute("mk.helpers")]
 [assembly: System.Reflection.AssemblyTitleAttribute("mk.helpers")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
