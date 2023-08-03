@@ -12,6 +12,11 @@ namespace mk.helpers
             => ToCsv<T>(items,false,',');
         public static string ToCsv<T>(this IEnumerable<T> items, char delimiter = ',') where T : class
             => ToCsv<T>(items, false, delimiter);
+        public static string ToCsv<T>(this List<T> items) where T : class
+      => ToCsv<T>(items, false, ',');
+        public static string ToCsv<T>(this List<T> items, char delimiter = ',') where T : class
+            => ToCsv<T>(items, false, delimiter);
+
 
 
         public static string ToCsv<T>(this IEnumerable<T> items, bool addHeader = false, char delimiter = ',') where T : class
@@ -20,7 +25,7 @@ namespace mk.helpers
             { 
                 foreach (var item in items)
                 {
-                    sw.Write(item.ToCsv(addHeader, delimiter));
+                    sw.Write(ToCsv(item,addHeader, delimiter));
                     addHeader = false;
                 }
                 return sw.ToString();
@@ -33,23 +38,19 @@ namespace mk.helpers
             {
                 foreach (var item in items)
                 {
-                    sw.Write(item.ToCsv(addHeader, delimiter));
+                    sw.Write(ToCsv(item, addHeader, delimiter));
                     addHeader = false;
                 }
                 return sw.ToString();
             }
         }
 
-        public static string ToCsv<T>(this T item, bool addHeader = false, char delimiter = ',') where T : class
+
+        public static string ToCsv<T>(T item, bool addHeader = false, char delimiter = ',') where T : class
         {
-             string _EscapeString(string value)
+            string _EscapeString(string value)
             {
                 var mustQuote = value.Any(x => x == ',' || x == '\"' || x == '\r' || x == '\n');
-
-                if (!mustQuote)
-                {
-                    return value;
-                }
 
                 value = value.Replace("\"", "\"\"");
 
@@ -57,32 +58,40 @@ namespace mk.helpers
             }
 
             var properties = typeof(T).GetProperties()
-             .Where(n =>
-             n.PropertyType == typeof(string)
-             || n.PropertyType == typeof(bool)
-             || n.PropertyType == typeof(char)
-             || n.PropertyType == typeof(byte)
-             || n.PropertyType == typeof(decimal)
-             || n.PropertyType == typeof(int)
-             || n.PropertyType == typeof(DateTime)
-             || n.PropertyType == typeof(DateTime?));
+                          .Where(n =>
+                              n.PropertyType == typeof(string) ||
+                              n.PropertyType == typeof(bool) ||
+                              n.PropertyType == typeof(char) ||
+                              n.PropertyType == typeof(byte) ||
+                              n.PropertyType == typeof(decimal) ||
+                              n.PropertyType == typeof(int) ||
+                              n.PropertyType == typeof(DateTime) ||
+                              n.PropertyType == typeof(DateTime?) ||
+                              n.PropertyType == typeof(double) || // Additional primitive types
+                              n.PropertyType == typeof(float) ||
+                              n.PropertyType == typeof(short) ||
+                              n.PropertyType == typeof(ushort) ||
+                              n.PropertyType == typeof(long) ||
+                              n.PropertyType == typeof(ulong) ||
+                              n.PropertyType == typeof(sbyte)
+                          );
 
             using (var sw = new StringWriter())
             {
                 if (addHeader)
                 {
                     var header = properties
-                    .Select(n => n.Name)
-                    .Aggregate((a, b) => a + delimiter + b);
+                        .Select(n => n.Name)
+                        .Aggregate((a, b) => a + delimiter + b);
                     sw.WriteLine(header);
                 }
                 var fields = properties
-                .Select(n => n.GetValue(item, null))
-                .Select(n => n == null ? "null" : n)
-                .Select(n=> n.GetType() == typeof(string) ? _EscapeString(n.ToString()) : n.ToString())
-                .ToList();
-                
-                var agg = fields.Aggregate((a, b) => a + delimiter + b);
+                    .Select(n => n.GetValue(item, null))
+                    .Select(n => n == null ? "null" : n)
+                    .Select(n => n.GetType() == typeof(string) ? _EscapeString(n.ToString()) : n.ToString())
+                    .ToList();
+
+                var agg = string.Join(delimiter.ToString(), fields); // Use string.Join instead of Aggregate
                 sw.WriteLine(agg);
 
                 return sw.ToString();
