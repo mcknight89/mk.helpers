@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace mk.helpers
+namespace mk.helpers.Types
 {
     public class EnumWrapper<T> where T : struct, IConvertible
     {
@@ -31,7 +31,7 @@ namespace mk.helpers
         public static T GetEnum(EnumWrapper<T> enumWrapper)
         {
             if (enumWrapper == null)
-                return default(T);
+                return default;
             return (T)(object)enumWrapper.Key;
         }
 
@@ -50,12 +50,12 @@ namespace mk.helpers
 
         public static EnumWrapper<T> FromName(string enumValue)
         {
-            if (EnumHelper.TryParse<T>(enumValue, out T result))
+            if (EnumHelper.TryParse(enumValue, out T result))
                 return FromValue(result);
 
-            if (EnumHelper.TryParse<T>(enumValue.ToUpper(), out T result2))
+            if (EnumHelper.TryParse(enumValue.ToUpper(), out T result2))
                 return FromValue(result2);
-            if (EnumHelper.TryParse<T>(enumValue.ToLower(), out T result3))
+            if (EnumHelper.TryParse(enumValue.ToLower(), out T result3))
                 return FromValue(result3);
 
             return null;

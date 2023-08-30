@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using mk.helpers.Types;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,11 +14,7 @@ namespace mk.helpers
 
     public static class FileHelper
     {
-        public class DownloadFileResult
-        {
-            public string FilePath { get; set; }
-            public long Size { get; set; }
-        }
+
 
         public static async Task<DownloadFileResult> DownloadFileAsync(string url, Action<long>? onDownloadProgress, string filePath = null)
         {

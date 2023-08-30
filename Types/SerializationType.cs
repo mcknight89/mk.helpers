@@ -8,9 +8,10 @@ using System.Text;
 using System.IO;
 
 
-namespace mk.helpers
+namespace mk.helpers.Types
 {
-    public enum SerializationType {
+    public enum SerializationType
+    {
         Json,
         Bson,
         Xml,

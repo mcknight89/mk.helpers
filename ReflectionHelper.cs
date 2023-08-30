@@ -1,3 +1,4 @@
+using mk.helpers.Types;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,16 @@ using System.Threading.Tasks;
 
 namespace mk.helpers
 {
+    /// <summary>
+    /// Provides utility methods for reflection-related operations.
+    /// </summary>
     public static class ReflectionHelper
     {
+        /// <summary>
+        /// Checks if the provided type is a simple type (value type, primitive type, or simple reference type).
+        /// </summary>
+        /// <param name="type">The type to be checked.</param>
+        /// <returns><c>true</c> if the type is a simple type; otherwise, <c>false</c>.</returns>
         public static bool IsSimpleType(
    this Type type)
         {
@@ -31,6 +40,12 @@ namespace mk.helpers
                (Convert.GetTypeCode(type) != TypeCode.Object);
         }
 
+
+        /// <summary>
+        /// Retrieves the underlying type of a member (event, field, method, or property).
+        /// </summary>
+        /// <param name="member">The member to retrieve the underlying type for.</param>
+        /// <returns>The underlying type of the member.</returns>
         public static Type GetUnderlyingType(this MemberInfo member)
         {
             switch (member.MemberType)
@@ -50,6 +65,15 @@ namespace mk.helpers
                     );
             }
         }
+
+        /// <summary>
+        /// Compares the public properties of two objects of the same type and checks if they are equal.
+        /// </summary>
+        /// <typeparam name="T">The type of the objects to compare.</typeparam>
+        /// <param name="self">The first object.</param>
+        /// <param name="to">The second object.</param>
+        /// <param name="ignore">A list of property names to ignore during comparison.</param>
+        /// <returns><c>true</c> if the public properties are equal; otherwise, <c>false</c>.</returns>
         public static bool PublicPropertiesEqual<T>(this T self, T to, params string[] ignore) where T : class
         {
             if (self != null && to != null)
@@ -67,6 +91,13 @@ namespace mk.helpers
             }
             return self == to;
         }
+
+        /// <summary>
+        /// Determines the changes between two objects and returns a list of <see cref="EntityChange"/> instances.
+        /// </summary>
+        /// <param name="oldEntity">The old object.</param>
+        /// <param name="newEntity">The new object.</param>
+        /// <returns>A list of <see cref="EntityChange"/> instances representing the changes.</returns>
         public static List<EntityChange> Changes(this object oldEntity, object newEntity)
         {
             List<EntityChange> Changes(object oldEntry, object newEntry, string prefixname = "")
@@ -124,38 +155,87 @@ namespace mk.helpers
             }
             return Changes(oldEntity, newEntity);
         }
+
+
+        /// <summary>
+        /// Copies the properties from the source object to the destination object and returns the changes made.
+        /// </summary>
+        /// <param name="source">The source object.</param>
+        /// <param name="destination">The destination object.</param>
+        /// <param name="changes">The list of changes made during copying.</param>
         public static void CopyPropertiesFrom(this object source, object destination, out List<EntityChange> changes)
         {
             CopyProperties(destination, source, out changes);
         }
+
+        /// <summary>
+        /// Copies the properties from the source object to the destination object, ignoring specified properties.
+        /// </summary>
+        /// <param name="source">The source object.</param>
+        /// <param name="destination">The destination object.</param>
+        /// <param name="ignore">An array of property names to ignore during copying.</param>
         public static void CopyPropertiesFrom(this object source, object destination, params string[] ignore)
         {
             CopyProperties(destination, source, ignore);
         }
 
+        /// <summary>
+        /// Copies the properties from the source object to the destination object and captures the changes made.
+        /// </summary>
+        /// <param name="source">The source object.</param>
+        /// <param name="destination">The destination object.</param>
+        /// <param name="changes">The list of changes made during copying.</param>
         public static void CopyProperties(this object source, object destination, out List<EntityChange> changes)
         {
             changes = destination.Changes(source);
             CopyProperties(source, destination);
         }
 
+
+        /// <summary>
+        /// Copies the properties from the source object to the destination object, ignoring specified properties, and captures the changes made.
+        /// </summary>
+        /// <param name="source">The source object.</param>
+        /// <param name="destination">The destination object.</param>
+        /// <param name="changes">The list of changes made during copying.</param>
+        /// <param name="ignore">An array of property names to ignore during copying.</param>
         public static void CopyProperties(this object source, object destination, out List<EntityChange> changes, params string[] ignore)
         {
             changes = destination.Changes(source);
             CopyProperties(source, destination, ignore);
         }
 
+
+        /// <summary>
+        /// Checks if the provided type is a primitive type.
+        /// </summary>
+        /// <param name="type">The type to check.</param>
+        /// <returns><c>true</c> if the type is a primitive type; otherwise, <c>false</c>.</returns>
         public static bool IsPrimitive(this Type type)
         {
             if (type == typeof(String)) return true;
             return (type.IsValueType & type.IsPrimitive);
         }
 
+
+        /// <summary>
+        /// Creates a deep clone of the provided object using JSON serialization.
+        /// </summary>
+        /// <typeparam name="T">The type of the object to clone.</typeparam>
+        /// <param name="obj">The object to be cloned.</param>
+        /// <returns>The deep-cloned object.</returns>
         public static T DeepClone<T>(this T obj)
         {
             return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(obj, Formatting.None));
         }
 
+
+        /// <summary>
+        /// Copies the properties from the source object to the destination object, ignoring specified properties.
+        /// </summary>
+        /// <param name="source">The source object.</param>
+        /// <param name="destination">The destination object.</param>
+        /// <param name="ignore">An array of property names to ignore during copying.</param>
         public static void CopyProperties(this object source, object destination, params string[] ignore)
         {
             if (source == null || destination == null)

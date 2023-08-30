@@ -107,7 +107,7 @@ namespace mk.helpers
         }
 
 
-        //https://stackoverflow.com/questions/1468637/filling-in-missing-dates-using-a-linq-group-by-date-query
+        //Source: https://stackoverflow.com/questions/1468637/filling-in-missing-dates-using-a-linq-group-by-date-query
         public static IEnumerable<T> FillInEmptyDates<T>(this IEnumerable<DateTime> allDates, IEnumerable<T> sourceData, Func<T, DateTime> dateSelector, Func<DateTime, T> defaultItemFactory)
         {
             // iterate through the source collection

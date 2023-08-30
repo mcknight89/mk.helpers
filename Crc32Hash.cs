@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mk.helpers
 {
-    // From https://github.com/damieng/DamienGKit/blob/master/CSharp/DamienG.Library/Security/Cryptography/Crc32.cs
+
     /// <summary>
     /// Implements a 32-bit CRC hash algorithm compatible with Zip etc.
     /// </summary>
@@ -16,6 +16,7 @@ namespace mk.helpers
     /// interface or remember that the result of one Compute call needs to be ~ (XOR) before
     /// being passed in as the seed for the next Compute call.
     /// </remarks>
+    /// Source https://github.com/damieng/DamienGKit/blob/master/CSharp/DamienG.Library/Security/Cryptography/Crc32.cs
     public sealed class Crc32Hash : HashAlgorithm
     {
         public const UInt32 DefaultPolynomial = 0xedb88320u;
