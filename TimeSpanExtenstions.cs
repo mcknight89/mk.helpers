@@ -1,22 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace mk.helpers
 {
-    public static  class TimeSpanExtenstions
+    /// <summary>
+    /// Provides extension methods for working with <see cref="TimeSpan"/> objects.
+    /// </summary>
+    public static class TimeSpanExtenstions
     {
+        /// <summary>
+        /// Rounds the given <see cref="TimeSpan"/> to the nearest multiple of the specified <see cref="TimeSpan"/>.
+        /// </summary>
+        /// <param name="a">The <see cref="TimeSpan"/> to be rounded.</param>
+        /// <param name="roundTo">The <see cref="TimeSpan"/> multiple to round to.</param>
+        /// <returns>The rounded <see cref="TimeSpan"/>.</returns>
         public static TimeSpan RoundToNearest(this TimeSpan a, TimeSpan roundTo)
         {
             long ticks = (long)(Math.Round(a.Ticks / (double)roundTo.Ticks) * roundTo.Ticks);
             return new TimeSpan(ticks);
         }
+
         /// <summary>
-        /// Converts <see cref="TimeSpan"/> objects to a simple human-readable string.  Examples: 3.1 seconds, 2 minutes, 4.23 hours, etc.
+        /// Converts a <see cref="TimeSpan"/> object to a simple human-readable string representation.
         /// </summary>
-        /// <param name="span">The timespan.</param>
-        /// <param name="significantDigits">Significant digits to use for output.</param>
-        /// <returns></returns>
+        /// <param name="span">The <see cref="TimeSpan"/> to be converted.</param>
+        /// <param name="significantDigits">The number of significant digits to use for output. Default is 3.</param>
+        /// <returns>The human-readable string representation of the <see cref="TimeSpan"/>.</returns>
         public static string ToHumanTimeString(this TimeSpan span, int significantDigits = 3)
         {
             var format = "G" + significantDigits;
@@ -26,9 +35,12 @@ namespace mk.helpers
                         : (span.TotalHours < 24 ? span.TotalHours.ToString(format) + " hours"
                                                 : span.TotalDays.ToString(format) + " days")));
         }
+
         /// <summary>
-        /// Calculates the sum of the given timeSpans.
+        /// Calculates the sum of a collection of <see cref="TimeSpan"/> objects.
         /// </summary>
+        /// <param name="timeSpans">The collection of <see cref="TimeSpan"/> objects.</param>
+        /// <returns>The sum of the <see cref="TimeSpan"/> objects.</returns>
         public static TimeSpan Sum(this IEnumerable<TimeSpan> timeSpans)
         {
             TimeSpan sumTillNowTimeSpan = TimeSpan.Zero;
@@ -42,12 +54,14 @@ namespace mk.helpers
         }
 
         /// <summary>
-        /// Multiplies a given timeSpans.
+        /// Multiplies a <see cref="TimeSpan"/> by a specified multiplier.
         /// </summary>
+        /// <param name="timeSpan">The <see cref="TimeSpan"/> to be multiplied.</param>
+        /// <param name="multiplier">The multiplier value.</param>
+        /// <returns>The result of the multiplication as a new <see cref="TimeSpan"/>.</returns>
         public static TimeSpan Multiply(this TimeSpan timeSpan, int multiplier)
         {
             return TimeSpan.FromTicks(timeSpan.Ticks * multiplier);
         }
-
     }
 }
