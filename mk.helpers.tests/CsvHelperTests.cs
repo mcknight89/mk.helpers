@@ -19,6 +19,7 @@ namespace mk.helpers.tests
             };
             var csv = items.ToCsv(addHeader: true);
             var expectedCsv = "Name,Age,Email,IsMarried,IsAByte\r\n\"John\",\"30\",\"john@example.com\",\"true\",\"1\"\r\n\"Alice\",\"25\",\"alice@example.com\",\"false\",\"0\"\r\n";
+            expectedCsv = expectedCsv.Replace("\r\n", Environment.NewLine);
             Assert.AreEqual(expectedCsv, csv);
         }
 
