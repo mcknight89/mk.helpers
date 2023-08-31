@@ -65,7 +65,7 @@ namespace mk.helpers.tests
 
         private class TestData
         {
-            public string Name { get; set; }
+            public string? Name { get; set; }
             public int Age { get; set; }
         }
     }

@@ -69,7 +69,7 @@ namespace mk.helpers.tests
         [TestMethod]
         public void TestIsNullOrEmpty()
         {
-            string str = null;
+            string? str = null;
             bool result = str.IsNullOrEmpty();
             Assert.IsTrue(result);
         }

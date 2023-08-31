@@ -36,9 +36,9 @@ namespace mk.helpers.tests
     // Sample class for testing
     public class Person
     {
-        public string Name { get; set; }
+        public required string Name { get; set; }
         public int Age { get; set; }
-        public string Email { get; set; }
+        public required string Email { get; set; }
         public bool IsMarried { get; set; }
         public byte IsAByte { get; set; }
     }

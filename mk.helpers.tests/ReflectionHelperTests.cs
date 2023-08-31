@@ -57,18 +57,18 @@ namespace mk.helpers.tests
             Assert.IsFalse(obj1.PublicPropertiesEqual(obj2));
         }
 
-     
-    }
 
-    public class EventClass { public event EventHandler Event; }
+    }
+#pragma warning disable CS0067
+    public class EventClass { public event EventHandler? Event; }
     public class FieldClass { public int Field; }
     public class MethodClass { public string Method() => ""; }
     public class PropertyClass { public int Property { get; set; } }
-
+#pragma warning restore CS0067 
     public class SampleObject
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 
 }

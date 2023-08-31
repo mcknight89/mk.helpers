@@ -23,7 +23,7 @@ namespace mk.helpers.tests
         [TestMethod]
         public void Denullify_RemoveNullItems()
         {
-            var items = new List<string> { "abc", null, "def", null, "ghi" };
+            var items = new List<string?> { "abc", null, "def", null, "ghi" };
             var result = items.Denullify();
             CollectionAssert.AreEqual(new[] { "abc", "def", "ghi" }, result.ToList());
         }
@@ -63,7 +63,7 @@ namespace mk.helpers.tests
         [TestMethod]
         public void Denullify_RemoveNullItemsFromList()
         {
-            var list = new List<string> { "a", null, "b", null, "c" };
+            var list = new List<string?> { "a", null, "b", null, "c" };
             var result = list.Denullify().ToList();
             var expectedList = new List<string> { "a", "b", "c" };
             CollectionAssert.AreEqual(expectedList, result);

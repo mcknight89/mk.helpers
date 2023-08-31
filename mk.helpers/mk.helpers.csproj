@@ -1,41 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <Copyright>Copyright (c) Mike Knights</Copyright>
-    <Description>A ton of helpers and extensions useful for dotnet devleopment aimed at making development a breeze.</Description>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.1.22</Version>
-    <PackageReleaseNotes>
-		CsvHelper now supports boolean values
-	</PackageReleaseNotes>
-	<GenerateDocumentationFile>true</GenerateDocumentationFile>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<Description>A comprehensive collection of utility and extension methods designed to enhance your .NET development experience. With a wide array of helper methods, this library aims to simplify various tasks and processes, making your development journey a breeze.</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+		<Version>1.2.0</Version>
+		<PackageReleaseNotes>
+			Added a bunch of unit tests to improve the quality of the code.
+			Rearranged the project to make it easier to navigate and understand.
+			Removed old methods that are already implemented in the latest .NET versions.
+			Tidied up the project by removing unused code and comments.
+			Added XML comments to all methods to improve documentatio
+		</PackageReleaseNotes>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<RepositoryUrl>https://github.com/mcknight89/mk.helpers</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="mk.helpers.sandbox\**" />
-    <Compile Remove="mk.helpers.tests\**" />
-    <Compile Remove="Redis\**" />
-    <EmbeddedResource Remove="mk.helpers.sandbox\**" />
-    <EmbeddedResource Remove="mk.helpers.tests\**" />
-    <EmbeddedResource Remove="Redis\**" />
-    <None Remove="mk.helpers.sandbox\**" />
-    <None Remove="mk.helpers.tests\**" />
-    <None Remove="Redis\**" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="DataValidator.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.2" />
-    <PackageReference Include="StackExchange.Redis" Version="2.1.58" />
-    <PackageReference Include="System.Runtime.Caching" Version="4.7.0" />
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		<PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.2" />
+		<PackageReference Include="StackExchange.Redis" Version="2.1.58" />
+		<PackageReference Include="System.Runtime.Caching" Version="4.7.0" />
+		<PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.1" />
+	</ItemGroup>
 
 </Project>
