@@ -1,0 +1,22 @@
+name: Unit Tests
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '5.x' # Adjust the version
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build and Test
+      run: dotnet test --no-restore --verbosity normal
