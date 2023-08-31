@@ -1,3 +1,4 @@
+[![Unit Tests](https://github.com/mcknight89/mk.helpers/actions/workflows/tests.yml/badge.svg)](https://github.com/mcknight89/mk.helpers/actions/workflows/tests.yml)
 # mk.helpers
 
 `mk.helpers` is a comprehensive collection of utility and extension methods designed to enhance your .NET development experience. With a wide array of helper methods, this library aims to simplify various tasks and processes, making your development journey a breeze.
