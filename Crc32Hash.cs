@@ -5,7 +5,6 @@ using System.Text;
 
 namespace mk.helpers
 {
-
     /// <summary>
     /// Implements a 32-bit CRC hash algorithm compatible with Zip etc.
     /// </summary>
@@ -16,10 +15,17 @@ namespace mk.helpers
     /// interface or remember that the result of one Compute call needs to be ~ (XOR) before
     /// being passed in as the seed for the next Compute call.
     /// </remarks>
-    /// Source https://github.com/damieng/DamienGKit/blob/master/CSharp/DamienG.Library/Security/Cryptography/Crc32.cs
+    /// Source: https://github.com/damieng/DamienGKit/blob/master/CSharp/DamienG.Library/Security/Cryptography/Crc32.cs
     public sealed class Crc32Hash : HashAlgorithm
     {
+        /// <summary>
+        /// Default polynomial value for CRC32 calculation.
+        /// </summary>
         public const UInt32 DefaultPolynomial = 0xedb88320u;
+
+        /// <summary>
+        /// Default seed value for CRC32 calculation.
+        /// </summary>
         public const UInt32 DefaultSeed = 0xffffffffu;
 
         static UInt32[] defaultTable;
@@ -28,11 +34,19 @@ namespace mk.helpers
         readonly UInt32[] table;
         UInt32 hash;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Crc32Hash"/> class using the default polynomial and seed values.
+        /// </summary>
         public Crc32Hash()
             : this(DefaultPolynomial, DefaultSeed)
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Crc32Hash"/> class using the specified polynomial and seed values.
+        /// </summary>
+        /// <param name="polynomial">The polynomial value to use for CRC32 calculation.</param>
+        /// <param name="seed">The seed value to use for CRC32 calculation.</param>
         public Crc32Hash(UInt32 polynomial, UInt32 seed)
         {
             if (!BitConverter.IsLittleEndian)
@@ -42,16 +56,19 @@ namespace mk.helpers
             this.seed = hash = seed;
         }
 
+        /// <inheritdoc/>
         public override void Initialize()
         {
             hash = seed;
         }
 
+        /// <inheritdoc/>
         protected override void HashCore(byte[] array, int ibStart, int cbSize)
         {
             hash = CalculateHash(table, hash, array, ibStart, cbSize);
         }
 
+        /// <inheritdoc/>
         protected override byte[] HashFinal()
         {
             var hashBuffer = UInt32ToBigEndianBytes(~hash);
@@ -59,18 +76,37 @@ namespace mk.helpers
             return hashBuffer;
         }
 
+        /// <inheritdoc/>
         public override int HashSize { get { return 32; } }
 
+        /// <summary>
+        /// Computes the CRC32 hash value for the specified buffer using the default seed value.
+        /// </summary>
+        /// <param name="buffer">The input buffer for which to compute the hash value.</param>
+        /// <returns>The computed CRC32 hash value.</returns>
         public static UInt32 Compute(byte[] buffer)
         {
             return Compute(DefaultSeed, buffer);
         }
 
+        /// <summary>
+        /// Computes the CRC32 hash value for the specified buffer using the specified seed value.
+        /// </summary>
+        /// <param name="seed">The seed value to use for CRC32 calculation.</param>
+        /// <param name="buffer">The input buffer for which to compute the hash value.</param>
+        /// <returns>The computed CRC32 hash value.</returns>
         public static UInt32 Compute(UInt32 seed, byte[] buffer)
         {
             return Compute(DefaultPolynomial, seed, buffer);
         }
 
+        /// <summary>
+        /// Computes the CRC32 hash value for the specified buffer using the specified polynomial and seed values.
+        /// </summary>
+        /// <param name="polynomial">The polynomial value to use for CRC32 calculation.</param>
+        /// <param name="seed">The seed value to use for CRC32 calculation.</param>
+        /// <param name="buffer">The input buffer for which to compute the hash value.</param>
+        /// <returns>The computed CRC32 hash value.</returns>
         public static UInt32 Compute(UInt32 polynomial, UInt32 seed, byte[] buffer)
         {
             return ~CalculateHash(InitializeTable(polynomial), seed, buffer, 0, buffer.Length);

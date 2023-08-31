@@ -7,9 +7,21 @@ using System.Threading.Tasks;
 
 namespace mk.helpers
 {
-   
+    /// <summary>
+    /// Provides extension methods for working with <see cref="Dictionary{TKey, TValue}"/> and <see cref="ConcurrentDictionary{TKey, TValue}"/> collections.
+    /// </summary>
     public static class DictionaryExtensions
     {
+        /// <summary>
+        /// Converts an <see cref="IEnumerable{TSource}"/> to a <see cref="ConcurrentDictionary{TKey, TElement}"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in the source collection.</typeparam>
+        /// <typeparam name="TKey">The type of the dictionary keys.</typeparam>
+        /// <typeparam name="TElement">The type of the dictionary values.</typeparam>
+        /// <param name="source">The source collection.</param>
+        /// <param name="keySelector">A function to extract keys from elements.</param>
+        /// <param name="elementSelector">A function to extract values from elements.</param>
+        /// <returns>A <see cref="ConcurrentDictionary{TKey, TElement}"/> containing the elements of the source collection.</returns>
         public static ConcurrentDictionary<TKey, TElement> ToConcurrentDictionary<TSource, TKey, TElement>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector)
         {
             if (source == null) throw new Exception("Source is null");
@@ -21,6 +33,17 @@ namespace mk.helpers
             return d;
         }
 
+        /// <summary>
+        /// Converts an <see cref="IEnumerable{TSource}"/> to a <see cref="ConcurrentDictionary{TKey, TElement}"/> using a specified comparer.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in the source collection.</typeparam>
+        /// <typeparam name="TKey">The type of the dictionary keys.</typeparam>
+        /// <typeparam name="TElement">The type of the dictionary values.</typeparam>
+        /// <param name="source">The source collection.</param>
+        /// <param name="keySelector">A function to extract keys from elements.</param>
+        /// <param name="elementSelector">A function to extract values from elements.</param>
+        /// <param name="comparer">An equality comparer to compare keys.</param>
+        /// <returns>A <see cref="ConcurrentDictionary{TKey, TElement}"/> containing the elements of the source collection.</returns>
         public static ConcurrentDictionary<TKey, TElement> ToConcurrentDictionary<TSource, TKey, TElement>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector, IEqualityComparer<TKey> comparer)
         {
             if (source == null) throw new Exception("Source is null");
@@ -31,12 +54,25 @@ namespace mk.helpers
             foreach (TSource element in source) d.TryAdd(keySelector(element), elementSelector(element));
             return d;
         }
+
+        /// <summary>
+        /// Converts an <see cref="IEnumerable{TSource}"/> to a <see cref="ConcurrentBag{TSource}"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in the source collection.</typeparam>
+        /// <param name="source">The source collection.</param>
+        /// <returns>A <see cref="ConcurrentBag{TSource}"/> containing the elements of the source collection.</returns>
         public static ConcurrentBag<TSource> ToConcurrentBag<TSource>(this IEnumerable<TSource> source)
         {
             if (source == null) throw new Exception("Source is null");
             return new ConcurrentBag<TSource>(source);
         }
 
+        /// <summary>
+        /// Increments the value at a specified key in a <see cref="Dictionary{TKey, TValue}"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of keys in the dictionary.</typeparam>
+        /// <param name="dictionary">The dictionary.</param>
+        /// <param name="index">The key to increment.</param>
         public static void IncrementAt<T>(this Dictionary<T, int> dictionary, T index)
         {
             int count = 0;
@@ -44,6 +80,12 @@ namespace mk.helpers
             dictionary[index] = ++count;
         }
 
+        /// <summary>
+        /// Increments the value at a specified key in a <see cref="ConcurrentDictionary{TKey, TValue}"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of keys in the dictionary.</typeparam>
+        /// <param name="dictionary">The dictionary.</param>
+        /// <param name="index">The key to increment.</param>
         public static void IncrementAt<T>(this ConcurrentDictionary<T, int> dictionary, T index)
         {
             int count = 0;
@@ -51,12 +93,19 @@ namespace mk.helpers
             dictionary[index] = ++count;
         }
 
+        /// <summary>
+        /// Tries to get a value from a <see cref="ConcurrentDictionary{TKey, TValue}"/> based on a key.
+        /// </summary>
+        /// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
+        /// <param name="dictionary">The dictionary.</param>
+        /// <param name="key">The key to look up.</param>
+        /// <returns>The value associated with the key, or the default value if not found.</returns>
         public static TValue TryGet<TKey, TValue>(this ConcurrentDictionary<TKey, TValue> dictionary, TKey key)
         {
             if (dictionary?.ContainsKey(key) == true)
                 return dictionary[key];
             return default(TValue);
         }
-
     }
 }

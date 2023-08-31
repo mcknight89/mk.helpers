@@ -12,10 +12,18 @@ using System.Threading.Tasks;
 namespace mk.helpers
 {
 
+    /// <summary>
+    /// Provides utility methods for file-related operations.
+    /// </summary>
     public static class FileHelper
     {
-
-
+        /// <summary>
+        /// Asynchronously downloads a file from the specified URL and saves it to the specified file path.
+        /// </summary>
+        /// <param name="url">The URL of the file to download.</param>
+        /// <param name="onDownloadProgress">An optional action to report download progress.</param>
+        /// <param name="filePath">The file path to save the downloaded file. If not provided, a temporary file will be used.</param>
+        /// <returns>A task representing the asynchronous operation and containing information about the downloaded file.</returns>
         public static async Task<DownloadFileResult> DownloadFileAsync(string url, Action<long>? onDownloadProgress, string filePath = null)
         {
             var client = new HttpClient();
@@ -52,6 +60,15 @@ namespace mk.helpers
             };
         }
 
+
+        /// <summary>
+        /// Reads a JSON array file and processes its elements asynchronously.
+        /// </summary>
+        /// <typeparam name="T">The type of objects in the JSON array.</typeparam>
+        /// <param name="filePath">The path of the JSON array file to read.</param>
+        /// <param name="onData">An action to process each deserialized object.</param>
+        /// <param name="onProgress">An action to report progress while reading the file.</param>
+        /// <param name="readSynchronously">Specifies whether to read synchronously or asynchronously.</param>
         public static void ReadJsonArrayFile<T>(string filePath, Action<T> onData, Action<double> onProgress, bool readSynchronously = false)
         {
             Task[] tasks = new Task[10];

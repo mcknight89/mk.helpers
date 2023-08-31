@@ -1,15 +1,10 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using mk.helpers;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace mk.helpers.tests
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using mk.helpers;
-    using System;
-    using System.Collections.Generic;
 
     [TestClass]
     public class CsvHelperTests
