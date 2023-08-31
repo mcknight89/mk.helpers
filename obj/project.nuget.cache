@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BrYdU9L8QPQd/IcvtlH1ZWPj+OC52k0xAUcvXqmGyu36ntqpi8iPSWzzVp8lnPIrwpsFFyWDXtdIKPLTGZ0M8g==",
+  "dgSpecHash": "iAlM3UxqNUP+jJWpR0Cz9/z/zPVi8ZqzI6Esfh2PLldUFN0I3hJlAOvlOU8v6CuV1hTqa6aZGVpRWIt83+wtlQ==",
   "success": true,
-  "projectFilePath": "D:\\Source\\mk.helpers\\mk.helpers.csproj",
+  "projectFilePath": "D:\\Source\\mk.helpers\\mk.helpers\\mk.helpers.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mk\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\mk\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
