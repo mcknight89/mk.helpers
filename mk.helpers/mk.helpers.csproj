@@ -8,13 +8,9 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<FileVersion>1.0.0.0</FileVersion>
-		<Version>1.2.0</Version>
+		<Version>1.2.1</Version>
 		<PackageReleaseNotes>
-			Added a bunch of unit tests to improve the quality of the code.
-			Rearranged the project to make it easier to navigate and understand.
-			Removed old methods that are already implemented in the latest .NET versions.
-			Tidied up the project by removing unused code and comments.
-			Added XML comments to all methods to improve documentatio
+			Added IP address validation methods and unit tests to the IpHelper
 		</PackageReleaseNotes>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<RepositoryUrl>https://github.com/mcknight89/mk.helpers</RepositoryUrl>
