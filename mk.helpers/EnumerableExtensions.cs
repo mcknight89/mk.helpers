@@ -94,5 +94,86 @@ namespace mk.helpers.Types
             if (null == source) throw new ArgumentNullException(nameof(source));
             return list.Contains(source);
         }
+
+
+        /// <summary>
+        /// Sorts a collection based on the order of a reference collection using specified key selectors.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in the source and reference collections.</typeparam>
+        /// <typeparam name="TKey">The type of the sorting key.</typeparam>
+        /// <param name="source">The source collection to be sorted.</param>
+        /// <param name="orderReference">The reference collection that defines the desired order.</param>
+        /// <param name="sourceKeySelector">A function to extract the sorting key from elements in the source collection.</param>
+        /// <param name="compareKeySelector">A function to extract the sorting key from elements in the reference collection for comparison.</param>
+        /// <returns>A new IEnumerable<TSource> sorted based on the order in the reference collection.</returns>
+        /// <remarks>
+        /// This method sorts the source collection based on the order of elements in the reference collection.
+        /// It allows you to specify different key selectors for the source and reference collections.
+        /// </remarks>
+        public static IEnumerable<TSource> SortByReference<TSource, TKey>(
+            this IEnumerable<TSource> source,
+            IEnumerable<TSource> orderReference,
+            Func<TSource, TKey> sourceKeySelector,
+            Func<TSource, TKey> compareKeySelector)
+        {
+            var keyToIndex = orderReference
+                .Select((item, index) => new { Key = compareKeySelector(item), Index = index })
+                .ToDictionary(x => x.Key, x => x.Index);
+
+            return source.OrderBy(item =>
+            {
+                if (keyToIndex.TryGetValue(sourceKeySelector(item), out var index))
+                {
+                    return index;
+                }
+                // Handle missing keys by placing them at the end (you can use orderReference.Count or any other suitable value)
+                return orderReference.Count();
+            });
+        }
+
+        /// <summary>
+        /// Sorts a collection of strings based on the order of a reference collection.
+        /// </summary>
+        /// <param name="listToSort">The list of strings to be sorted.</param>
+        /// <param name="orderReference">The reference list of strings that defines the desired order.</param>
+        /// <returns>A new List<string> sorted based on the order in the reference collection.</returns>
+        public static List<string> SortByReference(this List<string> listToSort, List<string> orderReference)
+        {
+            return listToSort
+                .OrderBy(item =>
+                {
+                    int index = orderReference.IndexOf(item);
+                    return index != -1 ? index : orderReference.Count;
+                })
+                .ToList();
+        }
+
+
+
+        /// <summary>
+        /// Filters items from a source collection based on keys found in a reference collection using specified key selectors.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in the source and reference collections.</typeparam>
+        /// <typeparam name="TKey">The type of the key used for filtering.</typeparam>
+        /// <param name="source">The source collection from which to filter items.</param>
+        /// <param name="orderReference">The reference collection containing the keys for filtering.</param>
+        /// <param name="sourceKeySelector">A function to extract the key from elements in the source collection.</param>
+        /// <param name="compareKeySelector">A function to extract the key from elements in the reference collection for comparison.</param>
+        /// <returns>An IEnumerable&lt;TSource&gt; containing items from the source collection that have keys present in the reference collection.</returns>
+        /// <remarks>
+        /// This method filters items from the source collection based on keys found in the reference collection.
+        /// It allows you to specify different key selectors for the source and reference collections.
+        /// </remarks>
+        public static IEnumerable<TSource> FilterByReference<TSource, TKey>(
+            this IEnumerable<TSource> source,
+            IEnumerable<TSource> orderReference,
+            Func<TSource, TKey> sourceKeySelector,
+            Func<TSource, TKey> compareKeySelector)
+        {
+            var referenceKeys = new HashSet<TKey>(orderReference.Select(compareKeySelector));
+
+            return source.Where(item => referenceKeys.Contains(sourceKeySelector(item)));
+        }
+
     }
 }
