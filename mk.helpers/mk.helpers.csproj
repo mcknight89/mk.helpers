@@ -14,6 +14,7 @@
 			Added RemoveDuplicates method which uses a lambda expression to determine if an item is a duplicate
 		</PackageReleaseNotes>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<DocumentationFile>bin\Release\netstandard2.1\mk.helpers.xml</DocumentationFile>
 		<RepositoryUrl>https://github.com/mcknight89/mk.helpers</RepositoryUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>

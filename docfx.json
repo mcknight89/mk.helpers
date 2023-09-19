@@ -1,0 +1,23 @@
+{
+    "metadata": [
+        {
+            "src": [
+                {
+                    "files": ["mk.helpers/mk.helpers.csproj"]
+                }
+            ],
+            "dest": "docs", 
+            "disableGitFeatures": false,
+            "disableDefaultFilter": false,
+            "properties": {
+                "TargetFramework": "netstandard2.1"
+            }
+        }
+    ],
+    "build": {
+        "template": [
+            "default"
+        ],
+        
+    }
+}
