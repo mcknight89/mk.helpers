@@ -97,38 +97,54 @@ namespace mk.helpers.Types
 
 
         /// <summary>
-        /// Sorts a collection based on the order of a reference collection using specified key selectors.
+        /// Sorts a collection based on the order of a reference collection using a custom comparison predicate.
         /// </summary>
-        /// <typeparam name="TSource">The type of elements in the source and reference collections.</typeparam>
-        /// <typeparam name="TKey">The type of the sorting key.</typeparam>
+        /// <typeparam name="TSource">The type of elements in the source collection.</typeparam>
+        /// <typeparam name="TOrder">The type of elements in the reference collection.</typeparam>
         /// <param name="source">The source collection to be sorted.</param>
         /// <param name="orderReference">The reference collection that defines the desired order.</param>
-        /// <param name="sourceKeySelector">A function to extract the sorting key from elements in the source collection.</param>
-        /// <param name="compareKeySelector">A function to extract the sorting key from elements in the reference collection for comparison.</param>
-        /// <returns>A new IEnumerable<TSource> sorted based on the order in the reference collection.</returns>
+        /// <param name="comparisonPredicate">A custom comparison predicate that takes elements from both collections and returns a boolean indicating their relative order.</param>
+        /// <returns>A new IEnumerable&lt;TSource&gt; sorted based on the custom comparison predicate.</returns>
         /// <remarks>
+        /// <para>
         /// This method sorts the source collection based on the order of elements in the reference collection.
-        /// It allows you to specify different key selectors for the source and reference collections.
+        /// </para>
+        /// <para>
+        /// It allows you to specify a custom comparison predicate that determines the sorting order based on elements from both collections.
+        /// </para>
+        /// <para>
+        /// If a key in the source collection cannot be found in the orderReference collection, it is placed at the end of the sorted result.
+        /// </para>
         /// </remarks>
-        public static IEnumerable<TSource> SortByReference<TSource, TKey>(
+        public static IEnumerable<TSource> SortByReference<TSource, TOrder>(
             this IEnumerable<TSource> source,
-            IEnumerable<TSource> orderReference,
-            Func<TSource, TKey> sourceKeySelector,
-            Func<TSource, TKey> compareKeySelector)
+            IEnumerable<TOrder> orderReference,
+            Func<TSource, TOrder, bool> comparisonPredicate)
         {
-            var keyToIndex = orderReference
-                .Select((item, index) => new { Key = compareKeySelector(item), Index = index })
-                .ToDictionary(x => x.Key, x => x.Index);
+            var indexedSource = source.Select((item, index) => new { Item = item, Index = index });
 
-            return source.OrderBy(item =>
-            {
-                if (keyToIndex.TryGetValue(sourceKeySelector(item), out var index))
+            // Sort the indexed source based on the orderReference
+            var sorted = indexedSource
+                .OrderBy(entry =>
                 {
-                    return index;
-                }
-                // Handle missing keys by placing them at the end (you can use orderReference.Count or any other suitable value)
-                return orderReference.Count();
-            });
+                    var sourceItem = entry.Item;
+                    var orderIndex = orderReference
+                        .Select((item, index) => new { Item = item, Index = index })
+                        .FirstOrDefault(referenceItem => comparisonPredicate(sourceItem, referenceItem.Item))?
+                        .Index ?? int.MaxValue;
+                    return orderIndex;
+                })
+                .Select(entry => entry.Item);
+
+            return sorted;
+        }
+
+        private static bool OrderReferenceComparison<TSource, TOrder>(
+            this TSource sourceItem,
+            IEnumerable<TOrder> orderReference,
+            Func<TSource, TOrder, bool> comparisonPredicate)
+        {
+            return orderReference.Any(orderItem => comparisonPredicate(sourceItem, orderItem));
         }
 
         /// <summary>
@@ -151,28 +167,70 @@ namespace mk.helpers.Types
 
 
         /// <summary>
-        /// Filters items from a source collection based on keys found in a reference collection using specified key selectors.
+        /// Filters items from a source collection based on a comparison predicate against a reference collection.
         /// </summary>
-        /// <typeparam name="TSource">The type of elements in the source and reference collections.</typeparam>
-        /// <typeparam name="TKey">The type of the key used for filtering.</typeparam>
+        /// <typeparam name="TSource">The type of elements in the source collection.</typeparam>
+        /// <typeparam name="TOrder">The type of elements in the reference collection.</typeparam>
         /// <param name="source">The source collection from which to filter items.</param>
-        /// <param name="orderReference">The reference collection containing the keys for filtering.</param>
-        /// <param name="sourceKeySelector">A function to extract the key from elements in the source collection.</param>
-        /// <param name="compareKeySelector">A function to extract the key from elements in the reference collection for comparison.</param>
-        /// <returns>An IEnumerable&lt;TSource&gt; containing items from the source collection that have keys present in the reference collection.</returns>
+        /// <param name="orderReference">The reference collection used for comparison.</param>
+        /// <param name="comparisonPredicate">A predicate that determines whether an item in the source collection should be included based on the reference collection.</param>
+        /// <returns>An IEnumerable&lt;TSource&gt; containing items from the source collection that satisfy the comparison predicate.</returns>
         /// <remarks>
-        /// This method filters items from the source collection based on keys found in the reference collection.
-        /// It allows you to specify different key selectors for the source and reference collections.
+        /// This method filters items from the source collection based on a comparison predicate against a reference collection.
+        /// The comparisonPredicate function is used to determine if an item should be included in the result.
         /// </remarks>
-        public static IEnumerable<TSource> FilterByReference<TSource, TKey>(
+        public static IEnumerable<TSource> FilterByReference<TSource, TOrder>(
             this IEnumerable<TSource> source,
-            IEnumerable<TSource> orderReference,
-            Func<TSource, TKey> sourceKeySelector,
-            Func<TSource, TKey> compareKeySelector)
+            IEnumerable<TOrder> orderReference,
+            Func<TSource, TOrder, bool> comparisonPredicate)
         {
-            var referenceKeys = new HashSet<TKey>(orderReference.Select(compareKeySelector));
+            // Use the comparisonPredicate to determine if an item should be included
+            return source.Where(item => orderReference.Any(orderItem => comparisonPredicate(item, orderItem)));
+        }
+        /// <summary>
+        /// Removes duplicate items from a collection based on a comparison predicate.
+        /// </summary>
+        /// <typeparam name="TSource">The type of elements in the source collection.</typeparam>
+        /// <param name="source">The source collection to remove duplicates from.</param>
+        /// <param name="comparisonPredicate">A predicate to determine duplicate items.</param>
+        /// <returns>An IEnumerable&lt;TSource&gt; containing unique elements based on the comparison predicate.</returns>
+        public static IEnumerable<TSource> RemoveDuplicates<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TSource, bool> comparisonPredicate)
+        {
+            var distinctItems = new List<TSource>();
 
-            return source.Where(item => referenceKeys.Contains(sourceKeySelector(item)));
+            foreach (var item in source)
+            {
+                if (!distinctItems.Any(existingItem => comparisonPredicate(existingItem, item)))
+                {
+                    distinctItems.Add(item);
+                }
+            }
+
+            return distinctItems;
+        }
+
+        private class LambdaEqualityComparer<TSource> : IEqualityComparer<TSource>
+        {
+            private readonly Func<TSource, TSource, bool> _equalsFunc;
+            private readonly Func<TSource, int> _getHashCodeFunc;
+
+            public LambdaEqualityComparer(Func<TSource, TSource, bool> equalsFunc)
+            {
+                _equalsFunc = equalsFunc;
+                _getHashCodeFunc = obj => obj.GetHashCode();
+            }
+
+            public bool Equals(TSource x, TSource y)
+            {
+                return _equalsFunc(x, y);
+            }
+
+            public int GetHashCode(TSource obj)
+            {
+                return _getHashCodeFunc(obj);
+            }
         }
 
     }

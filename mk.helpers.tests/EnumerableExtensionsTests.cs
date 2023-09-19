@@ -98,10 +98,7 @@ namespace mk.helpers.tests
             new Item { Name = "Bob" },
             new Item { Name = "Frank" },
         };
-            var sortedResult = source.SortByReference(
-                orderReference,
-                sourceItem => sourceItem.Name,
-                compareItem => compareItem.Name).ToList();
+            var sortedResult = source.SortByReference(orderReference, (a, b) => a.Name == b.Name).ToList();
 
             Assert.AreEqual(3, sortedResult.Count);
             Assert.AreEqual("Rob", sortedResult[0].Name);
@@ -119,10 +116,7 @@ namespace mk.helpers.tests
             new Item { Name = "Bob" },
         };
 
-            var sortedResult = source.SortByReference(
-                orderReference,
-                sourceItem => sourceItem.Name,
-                compareItem => compareItem.Name).ToList();
+            var sortedResult = source.SortByReference(orderReference, (a, b) => a.Name == b.Name).ToList();
 
             Assert.AreEqual(0, sortedResult.Count);
         }
@@ -200,8 +194,7 @@ namespace mk.helpers.tests
 
             var filteredSource = source.FilterByReference(
                 orderReference,
-                item => item,
-                item => item
+                (a, b) => a == b
             ).ToList();
 
             CollectionAssert.AreEqual(new List<string> { "Apple", "Banana", "Cherry" }, filteredSource);
@@ -228,13 +221,76 @@ namespace mk.helpers.tests
             var expectedAfterFilter = new[] { "Alice", "Bob", "Carol" };
             var expectedAfterSort = new[] { "Alice", "Carol", "Bob" };
 
-            var filtered = source.FilterByReference(filter, x => x.Name, x => x.Name);
-            
+            var filtered = source.FilterByReference(filter, (a, b) => a.Name == b.Name);
+
             CollectionAssert.AreEqual(expectedAfterFilter, filtered.Select(x => x.Name).ToList());
 
-            var sorted = filtered.SortByReference(filter, x => x.Name, x => x.Name);
+            var sorted = filtered.SortByReference(filter, (a, b) => a.Name == b.Name);
 
             CollectionAssert.AreEqual(expectedAfterSort, sorted.Select(x => x.Name).ToList());
         }
+
+
+
+        [TestMethod]
+        public void RemoveDuplicates_RemovesDuplicates_WithCustomComparison()
+        {
+            List<int> source = new List<int> { 1, 2, 2, 3, 4, 4, 5 };
+            var result = source.RemoveDuplicates((x, y) => x == y).ToList();
+            CollectionAssert.AreEqual(new List<int> { 1, 2, 3, 4, 5 }, result);
+        }
+
+        [TestMethod]
+        public void RemoveDuplicates_PreservesOrder_WithCustomComparison()
+        {
+            List<int> source = new List<int> { 5, 4, 3, 2, 1 };
+            var result = source.RemoveDuplicates((x, y) => x == y).ToList();
+            CollectionAssert.AreEqual(new List<int> { 5, 4, 3, 2, 1 }, result);
+        }
+
+        [TestMethod]
+        public void RemoveDuplicates_RemovesNoDuplicates_WithAlwaysFalseComparison()
+        {
+            List<int> source = new List<int> { 1, 2, 3, 4, 5 };
+            var result = source.RemoveDuplicates((x, y) => false).ToList();
+            CollectionAssert.AreEqual(new List<int> { 1, 2, 3, 4, 5 }, result);
+        }
+
+        [TestMethod]
+        public void RemoveDuplicates_RemovesAllDuplicates_WithAlwaysTrueComparison()
+        {
+            List<int> source = new List<int> { 1, 1, 1, 1, 1 };
+            var result = source.RemoveDuplicates((x, y) => true).ToList();
+            Assert.AreEqual(1, result.Count); // There should be only one element left.
+        }
+
+        [TestMethod]
+        public void RemoveDuplicates_RemovesDuplicates_WithCustomComparisonForComplexObject()
+        {
+            var source = new List<Person>
+            {
+                new Person { Name = "Alice", Age = 30 },
+                new Person { Name = "Bob", Age = 25 },
+                new Person { Name = "Carol", Age = 35 },
+                new Person { Name = "David", Age = 40 },
+                new Person { Name = "Alice", Age = 30 }, // Duplicate
+                new Person { Name = "Carol", Age = 35 }, // Duplicate
+            };
+
+            var result = source.RemoveDuplicates((x, y) => x.Name == y.Name).ToList();
+
+            Assert.AreEqual("Alice", result[0].Name);
+            Assert.AreEqual(30, result[0].Age);
+
+            Assert.AreEqual("Bob", result[1].Name);
+            Assert.AreEqual(25, result[1].Age);
+
+            Assert.AreEqual("Carol", result[2].Name);
+            Assert.AreEqual(35, result[2].Age);
+
+            Assert.AreEqual("David", result[3].Name);
+            Assert.AreEqual(40, result[3].Age);
+        }
     }
+
 }

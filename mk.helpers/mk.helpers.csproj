@@ -8,10 +8,10 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<FileVersion>1.0.0.0</FileVersion>
-		<Version>1.2.2</Version>
+		<Version>1.2.3</Version>
 		<PackageReleaseNotes>
-			Added two new ienumerable extensions: SortByReference and FilterByReference which allow you to sort and filter a collection based on a reference collection.
-			(Unit tests too)
+			Fix a bug in both SortByReference and FilterByReference, they now take in a lambda expression instead keys
+			Added RemoveDuplicates method which uses a lambda expression to determine if an item is a duplicate
 		</PackageReleaseNotes>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<RepositoryUrl>https://github.com/mcknight89/mk.helpers</RepositoryUrl>
