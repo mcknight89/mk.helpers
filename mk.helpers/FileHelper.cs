@@ -1,17 +1,16 @@
 ﻿using mk.helpers.Types;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace mk.helpers
 {
-
     /// <summary>
     /// Provides utility methods for file-related operations.
     /// </summary>
@@ -60,7 +59,6 @@ namespace mk.helpers
             };
         }
 
-
         /// <summary>
         /// Reads a JSON array file and processes its elements asynchronously.
         /// </summary>
@@ -75,54 +73,44 @@ namespace mk.helpers
 
             if (!File.Exists(filePath))
                 throw new FileNotFoundException();
-            JsonSerializer serializer = new JsonSerializer();
 
             using FileStream s = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using StreamReader sr = new StreamReader(s);
-            using JsonReader reader = new JsonTextReader(sr);
+            using JsonDocument document = JsonDocument.Parse(sr.BaseStream);
             var lastProgress = DateTime.Now;
 
-            while (reader.Read())
+            foreach (var element in document.RootElement.EnumerateArray())
             {
-                // deserialize only when there's "{" character in the stream
-                if (reader.TokenType == JsonToken.StartObject)
+                var o = JsonSerializer.Deserialize<T>(element.GetRawText());
+
+                if (readSynchronously)
                 {
-                    var o = serializer.Deserialize<T>(reader);
+                    onData?.Invoke(o);
+                }
+                else
+                {
+                    while (!tasks.Any(d => d == null || d.IsCompletedSuccessfully))
+                    {
+                        Thread.Sleep(1);
+                    }
 
+                    var indic = tasks.Select((s, i) => new { s, i })
+                        .Where(d => d.s == null || d.s.IsCompletedSuccessfully)
+                        .Select(d => d.i).First();
 
-                    if (readSynchronously)
+                    tasks[indic] = Task.Factory.StartNew(() =>
                     {
                         onData?.Invoke(o);
-                    }
-                    else
-                    {
-                        while (!tasks.Any(d => d == null || d.IsCompletedSuccessfully))
-                        {
-                            Thread.Sleep(1);
-                        }
+                    });
+                }
 
-                        var indic = tasks.Select((s, i) => new { s, i })
-                            .Where(d => d.s == null || d.s.IsCompletedSuccessfully)
-                            .Select(d => d.i).First();
-
-                        tasks[indic] = Task.Factory.StartNew(() =>
-                        {
-                            onData?.Invoke(o);
-                        });
-                    }
-
-                    if (lastProgress.AddSeconds(2) < DateTime.Now)
-                    {
-                        lastProgress = DateTime.Now;
-                        var progress = Math.Round((double)sr.BaseStream.Position / sr.BaseStream.Length * 100, 2);
-                        onProgress?.Invoke(progress);
-                    }
-
+                if (lastProgress.AddSeconds(2) < DateTime.Now)
+                {
+                    lastProgress = DateTime.Now;
+                    var progress = Math.Round((double)sr.BaseStream.Position / sr.BaseStream.Length * 100, 2);
+                    onProgress?.Invoke(progress);
                 }
             }
-            return;
         }
     }
-
-
 }

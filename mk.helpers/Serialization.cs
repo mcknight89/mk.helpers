@@ -1,15 +1,16 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Bson;
-using Newtonsoft.Json.Linq;
+﻿using mk.helpers.Types;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
+using System.Buffers;
+using System.Buffers.Binary;
 using System.IO;
-using mk.helpers.Types;
+using System.Text;
+using System.Text.Json;
 
 namespace mk.helpers
 {
+    /// <summary>
+    /// Provides methods for data serialization and deserialization using JSON and BSON formats.
+    /// </summary>
     public static class Serialization
     {
         private static Encoding _encoding = Encoding.Default;
@@ -62,6 +63,7 @@ namespace mk.helpers
             }
             return null;
         }
+
         /// <summary>
         /// Converts an object to its JSON representation.
         /// </summary>
@@ -72,7 +74,7 @@ namespace mk.helpers
         {
             SetEncoding();
 
-            return JsonConvert.SerializeObject(obj);
+            return JsonSerializer.Serialize(obj);
         }
 
         /// <summary>
@@ -82,7 +84,10 @@ namespace mk.helpers
         /// <param name="value">The object to be converted.</param>
         /// <returns>The JSON representation of the object as a byte array.</returns>
         public static byte[] ToJsonBytes<T>(T value) where T : class
-            => _encoding.GetBytes(ToJson(value));
+        {
+            var jsonString = ToJson(value);
+            return _encoding.GetBytes(jsonString);
+        }
 
         /// <summary>
         /// Converts a JSON string to an object of the specified type.
@@ -94,7 +99,7 @@ namespace mk.helpers
         {
             SetEncoding();
 
-            return JsonConvert.DeserializeObject<T>(obj);
+            return JsonSerializer.Deserialize<T>(obj);
         }
 
         /// <summary>
@@ -104,7 +109,11 @@ namespace mk.helpers
         /// <param name="obj">The JSON byte array to be deserialized.</param>
         /// <returns>The deserialized object of the specified type.</returns>
         public static T FromJsonBytes<T>(byte[] obj) where T : class
-            => FromJson<T>(_encoding.GetString(obj));
+        {
+            var jsonString = _encoding.GetString(obj);
+            return FromJson<T>(jsonString);
+        }
+
         /// <summary>
         /// Converts a BSON string to an object of the specified type.
         /// </summary>
@@ -122,13 +131,9 @@ namespace mk.helpers
                     return (T)(object)value;
 
                 using (var ms = new MemoryStream(data))
-                using (var reader = new BsonDataReader(ms))
+                using (var reader = new StreamReader(ms))
                 {
-                    var serializer = new JsonSerializer();
-                    if (typeof(IEnumerable).IsAssignableFrom(typeof(T)))
-                        reader.ReadRootValueAsArray = true;
-
-                    var obj = serializer.Deserialize<T>(reader);
+                    var obj = JsonSerializer.Deserialize<T>(reader.ReadToEnd());
                     return obj;
                 }
             }
@@ -145,7 +150,23 @@ namespace mk.helpers
         /// <param name="obj">The BSON byte array to be deserialized.</param>
         /// <returns>The deserialized object of the specified type.</returns>
         public static T FromBsonBytes<T>(byte[] obj) where T : class
-            => FromBson<T>(_encoding.GetString(obj));
+        {
+            SetEncoding();
+
+            try
+            {
+                using (var ms = new MemoryStream(obj))
+                using (var reader = new BinaryReader(ms))
+                {
+                    var res = JsonSerializer.Deserialize<T>(reader.ReadString());
+                    return res;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
         /// <summary>
         /// Converts an object to its BSON representation as a string.
@@ -154,7 +175,22 @@ namespace mk.helpers
         /// <param name="value">The object to be converted.</param>
         /// <returns>The BSON representation of the object as a string.</returns>
         public static string ToBson<T>(T value) where T : class
-            => _encoding.GetString(ToBsonBytes(value));
+        {
+            SetEncoding();
+
+            using (var ms = new MemoryStream())
+            using (var writer = new BinaryWriter(ms))
+            {
+                var json = JsonSerializer.Serialize(value);
+                writer.Write(json);
+                writer.Flush();
+                ms.Seek(0, SeekOrigin.Begin);
+                using (var reader = new StreamReader(ms))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+        }
 
         /// <summary>
         /// Converts an object to its BSON representation as a byte array.
@@ -167,10 +203,12 @@ namespace mk.helpers
             SetEncoding();
 
             using (var ms = new MemoryStream())
-            using (var datawriter = new BsonDataWriter(ms))
+            using (var writer = new BinaryWriter(ms))
             {
-                var serializer = new JsonSerializer();
-                serializer.Serialize(datawriter, value);
+                var json = JsonSerializer.Serialize(value);
+                writer.Write(json);
+                writer.Flush();
+                ms.Seek(0, SeekOrigin.Begin);
                 return ms.ToArray();
             }
         }

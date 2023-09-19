@@ -1,14 +1,9 @@
 using mk.helpers.Types;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace mk.helpers
 {
@@ -226,7 +221,19 @@ namespace mk.helpers
         /// <returns>The deep-cloned object.</returns>
         public static T DeepClone<T>(this T obj)
         {
-            return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(obj, Formatting.None));
+            if (obj is null)
+            {
+                throw new ArgumentNullException(nameof(obj));
+            }
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+                WriteIndented = false, // Set to true if you want indented JSON
+            };
+
+            var serializedObj = JsonSerializer.Serialize(obj, options);
+            return JsonSerializer.Deserialize<T>(serializedObj, options);
         }
 
 

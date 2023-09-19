@@ -8,24 +8,20 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<FileVersion>1.0.0.0</FileVersion>
-		<Version>1.2.3</Version>
+		<Version>1.2.4</Version>
 		<PackageReleaseNotes>
-			Fix a bug in both SortByReference and FilterByReference, they now take in a lambda expression instead keys
-			Added RemoveDuplicates method which uses a lambda expression to determine if an item is a duplicate
+			Replaced Newtonsoft.json with System.Text.Json
 		</PackageReleaseNotes>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<DocumentationFile>bin\Release\netstandard2.1\mk.helpers.xml</DocumentationFile>
 		<RepositoryUrl>https://github.com/mcknight89/mk.helpers</RepositoryUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
 
 
 	<ItemGroup>
-		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-		<PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.2" />
-		<PackageReference Include="StackExchange.Redis" Version="2.1.58" />
-		<PackageReference Include="System.Runtime.Caching" Version="4.7.0" />
 		<PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.1" />
+		<PackageReference Include="System.Text.Json" Version="7.0.3" />
+		
 	</ItemGroup>
 
 </Project>

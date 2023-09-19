@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace mk.helpers
@@ -32,7 +31,7 @@ namespace mk.helpers
         /// <param name="value">The object value to be added.</param>
         public static void AddObject<T>(string key, T value) where T : class
         {
-            Add(key, JsonConvert.SerializeObject(value, Formatting.None));
+            Add(key, Serialization.ToJson(value));
         }
 
         /// <summary>
@@ -155,7 +154,7 @@ namespace mk.helpers
             var value = _data[key];
             try
             {
-                return JsonConvert.DeserializeObject<T>(value);
+                return Serialization.FromJson<T>(value);
             }
             catch
             {
