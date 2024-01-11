@@ -8,9 +8,9 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<FileVersion>1.0.0.0</FileVersion>
-		<Version>1.2.4</Version>
+		<Version>1.2.5</Version>
 		<PackageReleaseNotes>
-			Replaced Newtonsoft.json with System.Text.Json
+			Fix for InMemoryStore not handling nullable primitive types very well and always returning null
 		</PackageReleaseNotes>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<RepositoryUrl>https://github.com/mcknight89/mk.helpers</RepositoryUrl>

@@ -152,5 +152,38 @@ namespace mk.helpers.tests
             // Assert
             Assert.IsFalse(result);
         }
+
+
+        [TestMethod]
+        public void Set_WithDecimal_ShouldAddToStore()
+        {
+            InMemoryStore.InvalidateAll();
+            // Arrange
+            string key = "TestKey";
+            decimal value = 1.23m;
+
+            // Act
+            InMemoryStore.Set(key, value);
+
+            // Assert
+            Assert.IsTrue(InMemoryStore.Get<decimal>(key) == value);
+        }
+
+
+        // set get decimal?
+        [TestMethod]
+        public void Set_WithNullableDecimal_ShouldAddToStore()
+        {
+            InMemoryStore.InvalidateAll();
+            // Arrange
+            string key = "TestKey";
+            decimal? value = 1.23m;
+
+            // Act
+            InMemoryStore.Set(key, value);
+
+            // Assert
+            Assert.IsTrue(InMemoryStore.Get<decimal?>(key) == value);
+        }
     }
 }

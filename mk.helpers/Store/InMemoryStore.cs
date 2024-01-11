@@ -62,12 +62,24 @@ namespace mk.helpers.Store
                     Set<T>(key, res);
                     return res;
                 }
-                return default(T)!;
+                return default!;
             }
-            if (find == null || find.Value.GetType() != typeof(T))
-                return default(T)!;
 
-            return (T)find.Value;
+            var targetType = typeof(T);
+            var valueType = find?.Value?.GetType();
+            if (valueType == null || (targetType.IsGenericType && targetType.GetGenericTypeDefinition() == typeof(Nullable<>)))
+            {
+                // Handle nullable types
+                if (Nullable.GetUnderlyingType(targetType) != valueType)
+                    return default!;
+            }
+            else if (valueType != targetType)
+            {
+                // Handle non-nullable types
+                return default!;
+            }
+
+            return find?.Value == null ? default! : (T)find.Value;
         }
 
         /// <summary>
