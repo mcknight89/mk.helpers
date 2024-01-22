@@ -1,13 +1,15 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using mk.helpers.Store;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
-
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace mk.helpers.tests
 {
     [TestClass]
-    public class InMemoryStoreTests
+    public class TempStreamTests
     {
         [TestMethod]
         public void TempStream_CreateAndWriteToFile_Success()
@@ -24,6 +26,7 @@ namespace mk.helpers.tests
             }
         }
 
+
         [TestMethod]
         public void TempStream_CreateAndDispose_DeletesFile()
         {
@@ -32,7 +35,7 @@ namespace mk.helpers.tests
 
             using (TempStream tempStream = new TempStream())
             {
-                filePath = (tempStream.InnerStream as FileStream)?.Name;
+                filePath = (tempStream as TempStream)?.IsFileStream == true ? (tempStream.InnerStream as FileStream)?.Name : null;
                 tempStream.Write(testData, 0, testData.Length);
             }
             Assert.IsFalse(File.Exists(filePath), "File should not exist after disposal");
@@ -46,10 +49,13 @@ namespace mk.helpers.tests
 
             using (TempStream tempStream = new TempStream(keepFileOnDispose: true))
             {
-                filePath = (tempStream.InnerStream as FileStream)?.Name;
+                filePath = (tempStream as TempStream)?.IsFileStream == true ? (tempStream.InnerStream as FileStream)?.Name : null;
                 tempStream.Write(testData, 0, testData.Length);
             }
+
+            Assert.IsNotNull(filePath, "File should exist after disposal");
             Assert.IsTrue(File.Exists(filePath), "File should exist after disposal");
         }
     }
+
 }
