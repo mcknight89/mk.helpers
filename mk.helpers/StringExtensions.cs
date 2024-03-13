@@ -167,6 +167,7 @@ namespace mk.helpers
             str = Regex.Replace(str, @"[^a-z0-9\s-]", "");
             str = Regex.Replace(str, @"\s+", " ").Trim();
             str = Regex.Replace(str, @"\s", "-");
+            str = Regex.Replace(str, @"-{2,}", "-"); // Replace multiple consecutive "-" with a single "-"
             return str;
         }
 

@@ -91,6 +91,16 @@ namespace mk.helpers.tests
         }
 
         [TestMethod]
+        public void TestToSlugWithConcurrentHyphans()
+        {
+            string phrase = "This--iS a----test";
+            string result = phrase.ToSlug();
+            Assert.AreEqual("this-is-a-test", result);
+        }
+
+
+
+        [TestMethod]
         public void TestToBytesUtf8()
         {
             string str = "Hello, world!";
