@@ -59,6 +59,69 @@ namespace mk.helpers
             }
         }
 
+
+        /// <summary>
+        /// Retrieves the file size of a resource using a HEAD request with HttpClient.
+        /// </summary>
+        /// <param name="httpClient">The HttpClient instance.</param>
+        /// <param name="url">The URL of the resource.</param>
+        /// <returns>The size of the file in bytes.</returns>
+        public static async Task<long?> GetFileSizeAsync(this HttpClient httpClient, string url)
+        {
+            var headers = await GetHeadersAsync(httpClient, url);
+
+            if (headers.TryGetValue("Content-Length", out var contentLengthValue))
+            {
+                if (long.TryParse(contentLengthValue, out var contentLength))
+                {
+                    return contentLength;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Retrieves all headers of a resource using a HEAD request with HttpClient.
+        /// </summary>
+        /// <param name="httpClient">The HttpClient instance.</param>
+        /// <param name="url">The URL of the resource.</param>
+        /// <returns>A dictionary containing the header key/value pairs.</returns>
+        public static async Task<Dictionary<string, string>> GetHeadersAsync(this HttpClient httpClient, string url)
+        {
+            try
+            {
+                var request = new HttpRequestMessage(HttpMethod.Head, url);
+                var response = await httpClient.SendAsync(request);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var headers = new Dictionary<string, string>();
+
+                    foreach (var header in response.Headers)
+                    {
+                        headers.Add(header.Key, string.Join(", ", header.Value));
+                    }
+
+                    foreach (var header in response.Content.Headers)
+                    {
+                        headers.Add(header.Key, string.Join(", ", header.Value));
+                    }
+
+                    return headers;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (HttpRequestException)
+            {
+                return null;
+            }
+        }
+
+
         /// <summary>
         /// Sends an HTTP POST request with JSON data as the content.
         /// </summary>

@@ -16,14 +16,21 @@ namespace mk.helpers
     /// </summary>
     public static class FileHelper
     {
+        public class DownloadProgress
+        {
+            public long BytesDownloaded { get; set; }
+            public long? TotalBytes { get; set; }
+            public double? Progress => TotalBytes == null ? null : (double)BytesDownloaded / TotalBytes * 100;
+        }
+
         /// <summary>
         /// Asynchronously downloads a file from the specified URL and saves it to the specified file path.
-        /// </summary>
+        /// </summary>1
         /// <param name="url">The URL of the file to download.</param>
         /// <param name="onDownloadProgress">An optional action to report download progress.</param>
         /// <param name="filePath">The file path to save the downloaded file. If not provided, a temporary file will be used.</param>
         /// <returns>A task representing the asynchronous operation and containing information about the downloaded file.</returns>
-        public static async Task<DownloadFileResult> DownloadFileAsync(string url, Action<long>? onDownloadProgress, string filePath = null)
+        public static async Task<DownloadFileResult> DownloadFileAsync(string url, Action<DownloadProgress>? onDownloadProgress, string filePath = null)
         {
             var client = new HttpClient();
 
@@ -34,18 +41,37 @@ namespace mk.helpers
             File.Delete(filePath + ".incomplete");
             File.Delete(filePath);
 
+            long? fileTotalSize = null;
+            try
+            {
+                fileTotalSize = await client.GetFileSizeAsync(url);
+            }
+            catch
+            {
+                // No problem, we just don't know the file size
+            }
+
             long totalSize = 0;
             long temp = 0;
             using (var file = new FileStream(filePath + ".incomplete", FileMode.Create, FileAccess.Write, FileShare.None))
             {
-                await client.DownloadDataAsync(url, file, (progress) =>
+                await client.DownloadDataAsync(url, file, (bytes) =>
                 {
-                    totalSize = progress;
-                    if (progress > 1024 || temp < progress - 1024)
+                    totalSize = bytes;
+                    if (bytes > 1024 || temp < bytes - 1024)
                     {
-                        onDownloadProgress?.Invoke(totalSize);
-                        temp = progress;
+                        onDownloadProgress?.Invoke(new DownloadProgress
+                        {
+                            BytesDownloaded = bytes,
+                            TotalBytes = fileTotalSize,
+                        });
+                        temp = bytes;
                     }
+                });
+                onDownloadProgress?.Invoke(new DownloadProgress
+                {
+                    BytesDownloaded = fileTotalSize != null ? fileTotalSize.Value : totalSize,
+                    TotalBytes = fileTotalSize,
                 });
                 file.Close();
             }
@@ -57,6 +83,18 @@ namespace mk.helpers
                 FilePath = filePath,
                 Size = totalSize,
             };
+        }
+
+        /// <summary>
+        /// Asynchronously downloads a file from the specified URL and saves it to the specified file path.
+        /// </summary>1
+        /// <param name="url">The URL of the file to download.</param>
+        /// <param name="onDownloadProgress">An optional action to report download progress.</param>
+        /// <param name="filePath">The file path to save the downloaded file. If not provided, a temporary file will be used.</param>
+        /// <returns>A task representing the asynchronous operation and containing information about the downloaded file.</returns>
+        public static async Task<DownloadFileResult> DownloadFileAsync(string url, Action<long>? onDownloadProgress, string filePath = null)
+        {
+            return await DownloadFileAsync(url, (progress) => onDownloadProgress?.Invoke(progress.BytesDownloaded), filePath);
         }
 
         /// <summary>
