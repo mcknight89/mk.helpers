@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace mk.helpers
 
         private List<TimeSpan> times = new List<TimeSpan>(); // List to store individual action times
 
+        private ConcurrentDictionary<string, TimeSpan> checkpoints = new ConcurrentDictionary<string, TimeSpan>(); // Dictionary to store named action times
+
         private object _lock = new object(); // Object used for thread safety
 
         /// <summary>
@@ -24,6 +27,15 @@ namespace mk.helpers
         public PerfTimer()
         {
             // No additional initialization needed
+        }
+
+
+        /// <summary>
+        /// Create new instance of PerfTimer and start it
+        /// </summary>
+        public static PerfTimer StartNew()
+        {
+            return new PerfTimer().Start();
         }
 
         /// <summary>
@@ -82,7 +94,7 @@ namespace mk.helpers
 
         /// <summary>
         /// Stops the timer, records the elapsed time, and starts the timer again.
-        /// Used to measure intervals between actions.
+        /// Used to measure intervals between actions. This does not clear checkpoints.
         /// </summary>
         /// <returns>The PerfTimer instance for method chaining.</returns>
         public PerfTimer Interval()
@@ -110,6 +122,127 @@ namespace mk.helpers
                 return this;
             }
         }
+
+        /// <summary>
+        /// Executes the specified action and records the elapsed time in a checkpoint. the timer is not effected and continues to run / keep its current state.
+        /// </summary>
+        /// <param name="name">name of the checkpoint</param>
+        /// <param name="action">The action to be executed.</param>
+        /// <returns>The PerfTimer instance for method chaining.</returns>
+        public PerfTimer ExecuteWithCheckpoint(string name, Action action)
+        {
+            lock (_lock) // Thread-safe operation using lock
+            {
+                if (_enabled)
+                {
+                    var start = DateTime.Now;
+                    try
+                    {
+                        action();
+                    }
+                    finally
+                    {
+                        AddCheckpoint(name, DateTime.Now - start);
+                    }
+                }
+                return this;
+            }
+        }
+
+        /// <summary>
+        /// Add new checkpoint (store name, time). Timer is not reset!
+        /// </summary>
+        /// <param name="name">name of the checkpoint</param>
+        /// <returns>The PerfTimer instance for method chaining.</returns>
+        public PerfTimer AddCheckpoint(string name)
+        {
+            lock (_lock) // Thread-safe operation using lock
+            {
+                if (_enabled)
+                    checkpoints[name] = _timer.Elapsed;
+                return this;
+            }
+        }
+
+        /// <summary>
+        /// Add new checkpoint (store name, time). timer is not effected.
+        /// </summary>
+        /// <param name="name">name of the checkpoint</param>
+        /// <param name="timeSpan">timespan to store</param>
+        /// <returns>The PerfTimer instance for method chaining.</returns>
+        public PerfTimer AddCheckpoint(string name, TimeSpan timeSpan)
+        {
+            lock (_lock) // Thread-safe operation using lock
+            {
+                if (_enabled)
+                    checkpoints[name] = timeSpan;
+                return this;
+            }
+        }
+
+        /// <summary>
+        /// Get the timespan of a saved checkpoint, default is TimeSpan.Zero
+        /// </summary>
+        /// <param name="name">name of the checkpoint</param>
+        public TimeSpan GetCheckpoint(string name)
+        {
+            lock (_lock) // Thread-safe operation using lock
+            {
+                if (_enabled)
+                    return checkpoints[name];
+                return TimeSpan.Zero;
+            }
+        }
+
+        /// <summary>
+        /// Removes a checkpoint
+        /// </summary>
+        /// <param name="name">name of the checkpoint</param>
+        public PerfTimer RemoveCheckpoint(string name)
+        {
+            lock (_lock) // Thread-safe operation using lock
+            {
+                if (_enabled)
+                    checkpoints.TryRemove(name, out _);
+                return this;
+            }
+        }
+
+        /// <summary>
+        /// Clears all recorded checkpoints.
+        /// </summary>
+        public PerfTimer ClearCheckpoints()
+        {
+            lock (_lock) // Thread-safe operation using lock
+            {
+                if (_enabled)
+                    checkpoints.Clear();
+                return this;
+            }
+        }
+
+        /// <summary>
+        /// Gets a collection of all recorded checkpoints.
+        /// </summary>
+        public IDictionary<string, TimeSpan> GetCheckpoints()
+        {
+            lock (_lock) // Thread-safe operation using lock
+            {
+                return checkpoints;
+            }
+        }
+
+        /// <summary>
+        /// Clears all recorded action times, checkpoints will remain the same.
+        /// </summary>
+        public void Clear()
+        {
+            lock (_lock) // Thread-safe operation using lock
+            {
+                times.Clear();
+            }
+        }
+
 
         /// <summary>
         /// Gets a collection of all recorded action times.

@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace mk.helpers.tests
@@ -100,5 +101,93 @@ namespace mk.helpers.tests
                 Assert.IsTrue(time.TotalMilliseconds >= 100, "Each recorded time should be at least 100 milliseconds.");
             }
         }
+
+
+        [TestMethod]
+        public void PerfTimer_CheckpointTest()
+        {
+            var timer = PerfTimer.StartNew();
+
+            Thread.Sleep(10);
+
+            timer.AddCheckpoint("Timer 1");
+
+            Thread.Sleep(20);
+
+            timer.AddCheckpoint("Timer 2");
+
+            timer.AddCheckpoint("Timer 3");
+            timer.RemoveCheckpoint("Timer 3");
+
+            timer.AddCheckpoint("Timer 4", TimeSpan.FromSeconds(1));
+
+            timer.ExecuteWithCheckpoint("Timer 5", () =>
+            {
+                Thread.Sleep(30);
+            });
+
+            timer.Stop();
+
+            var total = timer.AllTimesElapsed;
+            var checkpoints = timer.GetCheckpoints();
+
+            Assert.IsTrue(total.TotalMilliseconds >= 30, "Total time should be at least 30 milliseconds.");
+            Assert.IsTrue(checkpoints["Timer 1"].TotalMilliseconds >= 10, "Timer 1 should be at least 10 milliseconds.");
+            Assert.IsTrue(checkpoints["Timer 2"].TotalMilliseconds >= 20, "Timer 2 should be at least 20 milliseconds.");
+            Assert.IsFalse(checkpoints.ContainsKey("Timer 3"), "Timer 3 should not be present in the checkpoints.");
+            Assert.IsTrue(checkpoints["Timer 4"].TotalSeconds == 1, "Timer 4 should be exactly 1 second.");
+            Assert.IsTrue(checkpoints["Timer 5"].TotalMilliseconds >= 30, "Timer 5 should be at least 30 milliseconds.");
+        }
+
+        [TestMethod]
+        public void PerfTimer_ClearCheckpoints()
+        {
+            var timer = PerfTimer.StartNew();
+
+            Thread.Sleep(10);
+
+            timer.AddCheckpoint("Timer 1");
+
+            Thread.Sleep(20);
+
+            timer.AddCheckpoint("Timer 2");
+
+            timer.ClearCheckpoints();
+
+            timer.AddCheckpoint("Timer 3");
+
+            timer.Stop();
+
+            var total = timer.AllTimesElapsed;
+            var checkpoints = timer.GetCheckpoints();
+
+            Assert.IsTrue(total.TotalMilliseconds >= 10, "Total time should be at least 10 milliseconds.");
+            Assert.IsFalse(checkpoints.ContainsKey("Timer 1"), "Timer 1 should not be present in the checkpoints.");
+            Assert.IsFalse(checkpoints.ContainsKey("Timer 2"), "Timer 2 should not be present in the checkpoints.");
+            Assert.IsTrue(checkpoints["Timer 3"].TotalMilliseconds >= 20, "Timer 3 should be at least 20 milliseconds.");
+        }
+
+        [TestMethod]
+        public void PerfTimer_ClearCheckpointsDisabled()
+        {
+            var timer = PerfTimer.StartNew().Stop();
+
+            timer.AddCheckpoint("Timer 1");
+            timer.AddCheckpoint("Timer 2");
+            timer.AddCheckpoint("Timer 3");
+            timer.ClearCheckpoints();
+
+            timer.Stop().Clear();
+
+            var total = timer.AllTimesElapsed;
+            var checkpoints = timer.GetCheckpoints();
+
+            Assert.IsTrue(total.TotalMilliseconds == 0, "Total time should be 0 milliseconds.");
+            Assert.IsFalse(checkpoints.ContainsKey("Timer 1"), "Timer 1 should not be present in the checkpoints.");
+            Assert.IsFalse(checkpoints.ContainsKey("Timer 2"), "Timer 2 should not be present in the checkpoints.");
+            Assert.IsFalse(checkpoints.ContainsKey("Timer 3"), "Timer 3 should not be present in the checkpoints.");
+        }
+
+
     }
 }

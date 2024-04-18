@@ -8,9 +8,9 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<FileVersion>1.0.0.0</FileVersion>
-		<Version>1.2.8</Version>
+		<Version>1.2.9</Version>
 		<PackageReleaseNotes>
-			Implemented new methods for getting http headers, file size via http head and updated new variant of DownloadFileAsync which returns percentage as well as bytes downloaded
+			Added new methods to PrefTimer for adding checkpoints during timer execution. This is helpful when you are testing execution times on sections of linear functions.
 		</PackageReleaseNotes>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<RepositoryUrl>https://github.com/mcknight89/mk.helpers</RepositoryUrl>
