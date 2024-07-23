@@ -8,9 +8,9 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<FileVersion>1.0.0.0</FileVersion>
-		<Version>1.2.9</Version>
+		<Version>1.3.0</Version>
 		<PackageReleaseNotes>
-			Added new methods to PrefTimer for adding checkpoints during timer execution. This is helpful when you are testing execution times on sections of linear functions.
+			Fix for System.Text.Json (7.0.0) - CVE-2024-30105 High severity Vulnerability
 		</PackageReleaseNotes>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<RepositoryUrl>https://github.com/mcknight89/mk.helpers</RepositoryUrl>
@@ -19,8 +19,8 @@
 
 
 	<ItemGroup>
-		<PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.1" />
-		<PackageReference Include="System.Text.Json" Version="7.0.3" />
+		<PackageReference Include="System.Text.Encoding.CodePages" Version="8.0.0" />
+		<PackageReference Include="System.Text.Json" Version="8.0.4" />
 		
 	</ItemGroup>
 
