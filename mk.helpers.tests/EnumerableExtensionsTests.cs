@@ -291,6 +291,184 @@ namespace mk.helpers.tests
             Assert.AreEqual("David", result[3].Name);
             Assert.AreEqual(40, result[3].Age);
         }
+
+
+
+
+        [TestMethod]
+        public async Task PagedAsync_Returns_CorrectPage()
+        {
+            // Arrange
+            var source = GetSampleData().ToAsyncEnumerable();
+            int page = 2;
+            int pageSize = 3;
+
+            // Act
+            var result = await source.PagedAsync(page, pageSize);
+
+            // Assert
+            Assert.AreEqual(3, result.Results.Count);
+            Assert.AreEqual(4, result.Results.First().Value);
+            Assert.AreEqual(6, result.Results.Last().Value);
+            Assert.AreEqual(page, result.CurrentPage);
+            Assert.AreEqual(10, result.RowCount);
+            Assert.AreEqual(4, result.PageCount); // 10 items with pageSize 3 => 4 pages
+        }
+
+
+
+        [TestMethod]
+        public async Task SkipAsync_Skips_CorrectNumber_OfElements()
+        {
+            // Arrange
+            var source = GetSampleData().ToAsyncEnumerable();
+            int skipCount = 5;
+
+            // Act
+            var result = await source.SkipAsync(skipCount).ToListAsync();
+
+            // Assert
+            Assert.AreEqual(5, result.Count);
+            Assert.AreEqual(6, result.First().Value);
+        }
+
+        [TestMethod]
+        public async Task TakeAsync_Takes_CorrectNumber_OfElements()
+        {
+            // Arrange
+            var source = GetSampleData().ToAsyncEnumerable();
+            int takeCount = 4;
+
+            // Act
+            var result = await source.TakeAsync(takeCount).ToListAsync();
+
+            // Assert
+            Assert.AreEqual(takeCount, result.Count);
+            Assert.AreEqual(1, result.First().Value);
+            Assert.AreEqual(4, result.Last().Value);
+        }
+
+        [TestMethod]
+        public async Task ToListAsync_Converts_To_List()
+        {
+            // Arrange
+            var source = GetSampleData().ToAsyncEnumerable();
+
+            // Act
+            var result = await source.ToListAsync();
+
+            // Assert
+            Assert.AreEqual(10, result.Count);
+            Assert.AreEqual(1, result.First().Value);
+            Assert.AreEqual(10, result.Last().Value);
+        }
+
+        [TestMethod]
+        public async Task CountAsync_Returns_CorrectCount()
+        {
+            // Arrange
+            var source = GetSampleData().ToAsyncEnumerable();
+
+            // Act
+            var count = await source.CountAsync();
+
+            // Assert
+            Assert.AreEqual(10, count);
+        }
+
+        [TestMethod]
+        public async Task SkipAsync_WithZero_Returns_FullList()
+        {
+            // Arrange
+            var source = GetSampleData().ToAsyncEnumerable();
+
+            // Act
+            var result = await source.SkipAsync(0).ToListAsync();
+
+            // Assert
+            Assert.AreEqual(10, result.Count);
+            Assert.AreEqual(1, result.First().Value);
+        }
+
+        [TestMethod]
+        public async Task TakeAsync_WithZero_Returns_EmptyList()
+        {
+            // Arrange
+            var source = GetSampleData().ToAsyncEnumerable();
+
+            // Act
+            var result = await source.TakeAsync(0).ToListAsync();
+
+            // Assert
+            Assert.AreEqual(0, result.Count);
+        }
+
+        [TestMethod]
+        public async Task PagedAsync_Returns_Empty_When_PageExceedsCount()
+        {
+            // Arrange
+            var source = GetSampleData().ToAsyncEnumerable();
+            int page = 5; // With a pageSize of 3 and 10 items, page 5 should be empty
+            int pageSize = 3;
+
+            // Act
+            var result = await source.PagedAsync(page, pageSize);
+
+            // Assert
+            Assert.AreEqual(0, result.Results.Count);
+            Assert.AreEqual(page, result.CurrentPage);
+            Assert.AreEqual(10, result.RowCount);
+            Assert.AreEqual(4, result.PageCount);
+        }
+
+        [TestMethod]
+        public async Task PagedAsync_Maintains_Order()
+        {
+            // Arrange
+            var source = GetSampleData().ToAsyncEnumerable();
+            int page = 1;
+            int pageSize = 5;
+
+            // Act
+            var result = await source.PagedAsync(page, pageSize);
+
+            // Assert
+            Assert.AreEqual(5, result.Results.Count);
+            Assert.AreEqual(1, result.Results.First().Value);
+            Assert.AreEqual(5, result.Results.Last().Value);
+            CollectionAssert.AreEqual(new List<int> { 1, 2, 3, 4, 5 }, result.Results.Select(d=>d.Value).ToList());
+        }
+
+        private List<IntWrapper> GetSampleData()
+        {
+            return Enumerable.Range(1, 10).Select(d=> new IntWrapper(d)).ToList();
+        }
     }
 
+
+    public class IntWrapper
+    {
+        public int Value { get; set; }
+
+        public IntWrapper(int value)
+        {
+            Value = value;
+        }
+        public IntWrapper()
+        {
+        }
+    }
+
+
+    public static class TestHelpers
+    {
+        public static async IAsyncEnumerable<T> ToAsyncEnumerable<T>(this IEnumerable<T> source)
+        {
+            foreach (var item in source)
+            {
+                yield return item;
+                await Task.Yield();
+            }
+        }
+    }
 }

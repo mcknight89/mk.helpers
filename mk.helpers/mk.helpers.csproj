@@ -8,9 +8,9 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<FileVersion>1.0.0.0</FileVersion>
-		<Version>1.3.0</Version>
+		<Version>1.3.1</Version>
 		<PackageReleaseNotes>
-			Fix for System.Text.Json (7.0.0) - CVE-2024-30105 High severity Vulnerability
+			Added new helpers for IAsyncEnumerable: PagedAsync, SkipAsync, TakeAsync, ToListAsync, CountAsync
 		</PackageReleaseNotes>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<RepositoryUrl>https://github.com/mcknight89/mk.helpers</RepositoryUrl>
@@ -21,7 +21,7 @@
 	<ItemGroup>
 		<PackageReference Include="System.Text.Encoding.CodePages" Version="8.0.0" />
 		<PackageReference Include="System.Text.Json" Version="8.0.4" />
-		
+
 	</ItemGroup>
 
 </Project>

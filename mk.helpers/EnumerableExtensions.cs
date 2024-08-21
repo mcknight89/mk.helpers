@@ -32,9 +32,163 @@ namespace mk.helpers.Types
                 Results = filtered,
                 CurrentPage = page,
                 RowCount = total,
-                PageCount = (total / pageSize) +1,
+                PageCount = (total / pageSize) + 1,
                 PageSize = filtered.Count()
             };
+        }
+
+
+        //
+        // Summary:
+        //     Implements paging on an System.Collections.Generic.IAsyncEnumerable`1 source asynchronously.
+        //
+        // Parameters:
+        //   source:
+        //     The source collection.
+        //
+        //   page:
+        //     The current page number.
+        //
+        //   pageSize:
+        //     The number of items per page.
+        //
+        // Type parameters:
+        //   T:
+        //     The type of elements in the collection.
+        //
+        // Returns:
+        //     A mk.helpers.Types.PagedResult`1 containing the paged data asynchronously.
+        public static async Task<PagedResult<T>> PagedAsync<T>(this IAsyncEnumerable<T> source, int page, int pageSize) where T : class
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var skippedSource = source.SkipAsync((page - 1) * pageSize);
+            var pagedSource = skippedSource.TakeAsync(pageSize);
+            var list = await pagedSource.ToListAsync();
+            var num = await source.CountAsync();
+
+            return new PagedResult<T>
+            {
+                Results = list,
+                CurrentPage = page,
+                RowCount = num,
+                PageCount = (int)Math.Ceiling((double)num / pageSize),
+                PageSize = list.Count
+            };
+        }
+
+        //
+        // Summary:
+        //     Skips a specified number of elements in an IAsyncEnumerable`1 source asynchronously.
+        //
+        // Parameters:
+        //   source:
+        //     The source collection.
+        //
+        //   count:
+        //     The number of elements to skip.
+        //
+        // Type parameters:
+        //   T:
+        //     The type of elements in the collection.
+        //
+        // Returns:
+        //     An IAsyncEnumerable`1 that contains the elements that occur after the specified index.
+        public static async IAsyncEnumerable<T> SkipAsync<T>(this IAsyncEnumerable<T> source, int count)
+        {
+            await foreach (var item in source)
+            {
+                if (count > 0)
+                {
+                    count--;
+                    continue;
+                }
+
+                yield return item;
+            }
+        }
+
+        //
+        // Summary:
+        //     Takes a specified number of elements from an IAsyncEnumerable`1 source asynchronously.
+        //
+        // Parameters:
+        //   source:
+        //     The source collection.
+        //
+        //   count:
+        //     The number of elements to take.
+        //
+        // Type parameters:
+        //   T:
+        //     The type of elements in the collection.
+        //
+        // Returns:
+        //     An IAsyncEnumerable`1 that contains the specified number of elements from the start of the collection.
+        public static async IAsyncEnumerable<T> TakeAsync<T>(this IAsyncEnumerable<T> source, int count)
+        {
+            await foreach (var item in source)
+            {
+                if (count-- > 0)
+                {
+                    yield return item;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+
+        //
+        // Summary:
+        //     Converts an IAsyncEnumerable`1 to a List`1 asynchronously.
+        //
+        // Parameters:
+        //   source:
+        //     The source collection.
+        //
+        // Type parameters:
+        //   T:
+        //     The type of elements in the collection.
+        //
+        // Returns:
+        //     A Task`1 representing the asynchronous operation, containing a List`1 of elements from the source collection.
+        public static async Task<List<T>> ToListAsync<T>(this IAsyncEnumerable<T> source)
+        {
+            var list = new List<T>();
+            await foreach (var item in source)
+            {
+                list.Add(item);
+            }
+            return list;
+        }
+
+        //
+        // Summary:
+        //     Counts the number of elements in an IAsyncEnumerable`1 source asynchronously.
+        //
+        // Parameters:
+        //   source:
+        //     The source collection.
+        //
+        // Type parameters:
+        //   T:
+        //     The type of elements in the collection.
+        //
+        // Returns:
+        //     A Task`1 representing the asynchronous operation, containing the total count of elements in the source collection.
+        public static async Task<int> CountAsync<T>(this IAsyncEnumerable<T> source)
+        {
+            int count = 0;
+            await foreach (var item in source)
+            {
+                count++;
+            }
+            return count;
         }
 
         /// <summary>
