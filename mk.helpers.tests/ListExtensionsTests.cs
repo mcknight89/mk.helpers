@@ -46,7 +46,7 @@ namespace mk.helpers.tests
             Assert.AreEqual(7, combinations.Count);
         }
 
-    
+
 
 
         [TestMethod]
@@ -70,6 +70,128 @@ namespace mk.helpers.tests
         }
 
 
-   
+        [TestMethod]
+        public void Median_WithDoubles_OddCount_ReturnsCorrectMedian()
+        {
+            // Arrange
+            var numbers = new List<double> { 1.5, 2.2, 2.8, 3.0, 4.6 };
+
+            // Act
+            var result = numbers.Median();
+
+            // Assert
+            Assert.AreEqual(2.8, result);
+        }
+
+        [TestMethod]
+        public void Median_WithDoubles_EvenCount_ReturnsCorrectMedian()
+        {
+            // Arrange
+            var numbers = new List<double> { 1.5, 2.2, 2.8, 3.0 };
+
+            // Act
+            var result = numbers.Median();
+
+            // Assert
+            Assert.AreEqual(2.5, result); // (2.2 + 2.8) / 2 = 2.5
+        }
+
+        [TestMethod]
+        public void Median_WithDecimals_OddCount_ReturnsCorrectMedian()
+        {
+            // Arrange
+            var numbers = new List<decimal> { 1.5m, 2.2m, 2.8m, 3.0m, 4.6m };
+
+            // Act
+            var result = numbers.Median();
+
+            // Assert
+            Assert.AreEqual(2.8m, result);
+        }
+
+        [TestMethod]
+        public void Median_WithDecimals_EvenCount_ReturnsCorrectMedian()
+        {
+            // Arrange
+            var numbers = new List<decimal> { 1.5m, 2.2m, 2.8m, 3.0m };
+
+            // Act
+            var result = numbers.Median();
+
+            // Assert
+            Assert.AreEqual(2.5m, result); // (2.2m + 2.8m) / 2 = 2.5m
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void Median_WithEmptySequence_ThrowsException()
+        {
+            // Arrange
+            var numbers = new List<double>();
+
+            // Act
+            var result = numbers.Median();
+
+            // Assert
+            // Expect an exception
+        }
+
+        [TestMethod]
+        public void Mode_WithDoubles_ReturnsCorrectMode()
+        {
+            // Arrange
+            var numbers = new List<double> { 1.5, 2.2, 2.8, 3.0, 2.2, 4.6 };
+
+            // Act
+            var result = numbers.Mode().ToList();
+
+            // Assert
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(2.2, result.First());
+        }
+
+        [TestMethod]
+        public void Mode_WithDecimals_ReturnsCorrectMode()
+        {
+            // Arrange
+            var numbers = new List<decimal> { 1.5m, 2.2m, 2.8m, 3.0m, 2.2m, 4.6m };
+
+            // Act
+            var result = numbers.Mode().ToList();
+
+            // Assert
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(2.2m, result.First());
+        }
+
+        [TestMethod]
+        public void Mode_WithMultipleModes_ReturnsAllModes()
+        {
+            // Arrange
+            var numbers = new List<double> { 1.5, 2.2, 2.8, 3.0, 2.2, 4.6, 3.0 };
+
+            // Act
+            var result = numbers.Mode().ToList();
+
+            // Assert
+            Assert.AreEqual(2, result.Count);
+            CollectionAssert.Contains(result, 2.2);
+            CollectionAssert.Contains(result, 3.0);
+        }
+
+        [TestMethod]
+        public void Mode_WithNoRepetition_ReturnsAllElements()
+        {
+            // Arrange
+            var numbers = new List<decimal> { 1.5m, 2.2m, 2.8m, 3.0m, 4.6m };
+
+            // Act
+            var result = numbers.Mode().ToList();
+
+            // Assert
+            Assert.AreEqual(numbers.Count, result.Count);
+            CollectionAssert.AreEqual(numbers, result);
+        }
     }
 }
+

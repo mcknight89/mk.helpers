@@ -88,6 +88,67 @@ namespace mk.helpers
                 .SelectMany(t => list.Where(e => !t.Contains(e)),
                     (t1, t2) => t1.Concat(new[] { t2 }));
         }
+
+
+
+        /// <summary>
+        /// Computes the median of a sequence of numbers.
+        /// </summary>
+        /// <typeparam name="T">The numeric type of the elements in the sequence. Supported types are decimal, double, int, etc.</typeparam>
+        /// <param name="source">The sequence of numbers.</param>
+        /// <returns>The median value, returned as the same type as the input.</returns>
+        /// <exception cref="InvalidOperationException">Thrown if the source sequence is null or empty.</exception>
+        public static T Median<T>(this IEnumerable<T> source) where T : struct, IComparable
+        {
+            if (source == null || !source.Any())
+                throw new InvalidOperationException("Cannot compute median for a null or empty set.");
+
+            var sortedList = source.Select(x => Convert.ToDecimal(x)).OrderBy(x => x).ToList();
+            int count = sortedList.Count;
+
+            decimal medianValue;
+            if (count % 2 == 0)
+            {
+                // Even count, average the two middle elements
+                medianValue = (sortedList[count / 2 - 1] + sortedList[count / 2]) / 2;
+            }
+            else
+            {
+                // Odd count, return the middle element
+                medianValue = sortedList[count / 2];
+            }
+
+            // Convert the median value back to the original type
+            return (T)Convert.ChangeType(medianValue, typeof(T));
+        }
+
+
+        /// <summary>
+        /// Computes the mode(s) of a sequence of elements, i.e., the element(s) that appear most frequently.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the sequence.</typeparam>
+        /// <param name="source">The sequence of elements.</param>
+        /// <returns>
+        /// An IEnumerable containing the mode(s) of the sequence. If there is more than one mode,
+        /// all modes are returned; if no mode exists (all elements are unique), all elements are returned.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">Thrown if the source sequence is null or empty.</exception>
+        public static IEnumerable<T> Mode<T>(this IEnumerable<T> source)
+        {
+            if (source == null || !source.Any())
+                throw new InvalidOperationException("Cannot compute mode for a null or empty set.");
+
+            var grouped = source.GroupBy(x => x)
+                                .OrderByDescending(g => g.Count());
+
+            int maxCount = grouped.First().Count();
+
+            return grouped.Where(g => g.Count() == maxCount)
+                          .Select(g => g.Key);
+        }
+
+
+
         /// <summary>
         /// Generates all combinations of the elements in the list.
         /// </summary>
