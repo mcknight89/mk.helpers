@@ -190,6 +190,75 @@ namespace mk.helpers.Types
             }
             return count;
         }
+        /// <summary>
+        /// Extension method to calculate the median of a sequence of numeric values using a selector.
+        /// Supported types are int, decimal, double, and long.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements in the source collection.</typeparam>
+        /// <typeparam name="TResult">The numeric type of the values returned by the selector (int, decimal, double, long).</typeparam>
+        /// <param name="source">An IEnumerable containing the elements.</param>
+        /// <param name="selector">A function to extract the numeric value from each element.</param>
+        /// <returns>The median value of the numeric list.</returns>
+        /// <exception cref="ArgumentException">Thrown when the source sequence is empty.</exception>
+        public static TResult Median<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
+            where TResult : struct, IComparable<TResult>, IConvertible
+        {
+            if (source == null || !source.Any())
+                throw new ArgumentException("The source sequence is empty or null.");
+
+            var sortedList = source.Select(selector).OrderBy(x => x).ToList();
+            int count = sortedList.Count;
+
+            if (count % 2 == 0)
+            {
+                // For even-sized list, return the average of the two middle elements
+                TResult midLeft = sortedList[count / 2 - 1];
+                TResult midRight = sortedList[count / 2];
+                return Average(midLeft, midRight);
+            }
+            else
+            {
+                // For odd-sized list, return the middle element
+                return sortedList[count / 2];
+            }
+        }
+
+
+        /// <summary>
+        /// Averages two values of type T and returns the result as T.
+        /// Handles numeric types like int, decimal, double, and long.
+        /// </summary>
+        /// <typeparam name="T">The numeric type of the values.</typeparam>
+        /// <param name="a">The first value.</param>
+        /// <param name="b">The second value.</param>
+        /// <returns>The average of the two values.</returns>
+        private static T Average<T>(T a, T b) where T : struct, IComparable<T>, IConvertible
+        {
+            if (typeof(T) == typeof(int))
+            {
+                int result = (((int)(object)a + (int)(object)b) / 2);
+                return (T)(object)result;
+            }
+            else if (typeof(T) == typeof(long))
+            {
+                long result = (((long)(object)a + (long)(object)b) / 2);
+                return (T)(object)result;
+            }
+            else if (typeof(T) == typeof(double))
+            {
+                double result = (((double)(object)a + (double)(object)b) / 2.0);
+                return (T)(object)result;
+            }
+            else if (typeof(T) == typeof(decimal))
+            {
+                decimal result = (((decimal)(object)a + (decimal)(object)b) / 2.0m);
+                return (T)(object)result;
+            }
+            else
+            {
+                throw new NotSupportedException($"Type {typeof(T)} is not supported.");
+            }
+        }
 
         /// <summary>
         /// Returns distinct elements from a sequence by a specified key selector.

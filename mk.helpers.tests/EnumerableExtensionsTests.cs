@@ -436,15 +436,165 @@ namespace mk.helpers.tests
             Assert.AreEqual(5, result.Results.Count);
             Assert.AreEqual(1, result.Results.First().Value);
             Assert.AreEqual(5, result.Results.Last().Value);
-            CollectionAssert.AreEqual(new List<int> { 1, 2, 3, 4, 5 }, result.Results.Select(d=>d.Value).ToList());
+            CollectionAssert.AreEqual(new List<int> { 1, 2, 3, 4, 5 }, result.Results.Select(d => d.Value).ToList());
         }
 
         private List<IntWrapper> GetSampleData()
         {
-            return Enumerable.Range(1, 10).Select(d=> new IntWrapper(d)).ToList();
+            return Enumerable.Range(1, 10).Select(d => new IntWrapper(d)).ToList();
         }
+
+
+
+        // Test for integers with odd length
+        [TestMethod]
+        public void Median_OddNumberOfIntegers_ReturnsMiddleValue()
+        {
+            // Arrange
+            var data = new List<int> { 1, 3, 5, 7, 9 };
+
+            // Act
+            var result = data.Median();
+
+            // Assert
+            Assert.AreEqual(5, result);
+        }
+
+        // Test for integers with even length
+        [TestMethod]
+        public void Median_EvenNumberOfIntegers_ReturnsAverageOfMiddleValues()
+        {
+            // Arrange
+            var data = new List<int> { 1, 3, 5, 7 };
+
+            // Act
+            var result = data.Median();
+
+            // Assert
+            Assert.AreEqual(4, result);
+        }
+
+        // Test for doubles with odd length
+        [TestMethod]
+        public void Median_OddNumberOfDoubles_ReturnsMiddleValue()
+        {
+            // Arrange
+            var data = new List<double> { 1.1, 2.2, 3.3, 4.4, 5.5 };
+
+            // Act
+            var result = data.Median();
+
+            // Assert
+            Assert.AreEqual(3.3, result);
+        }
+
+        // Test for doubles with even length
+        [TestMethod]
+        public void Median_EvenNumberOfDoubles_ReturnsAverageOfMiddleValues()
+        {
+            // Arrange
+            var data = new List<double> { 1.1, 2.2, 3.3, 4.4 };
+
+            // Act
+            var result = data.Median();
+
+            // Assert
+            Assert.AreEqual(2.75, result);
+        }
+
+        // Test for decimals with odd length
+        [TestMethod]
+        public void Median_OddNumberOfDecimals_ReturnsMiddleValue()
+        {
+            // Arrange
+            var data = new List<decimal> { 1.5m, 3.5m, 5.5m };
+
+            // Act
+            var result = data.Median();
+
+            // Assert
+            Assert.AreEqual(3.5m, result);
+        }
+
+        // Test for decimals with even length
+        [TestMethod]
+        public void Median_EvenNumberOfDecimals_ReturnsAverageOfMiddleValues()
+        {
+            // Arrange
+            var data = new List<decimal> { 1.5m, 3.5m, 5.5m, 7.5m };
+
+            // Act
+            var result = data.Median();
+
+            // Assert
+            Assert.AreEqual(4.5m, result);
+        }
+
+        // Test for longs with odd length
+        [TestMethod]
+        public void Median_OddNumberOfLongs_ReturnsMiddleValue()
+        {
+            // Arrange
+            var data = new List<long> { 10000000000, 30000000000, 50000000000 };
+
+            // Act
+            var result = data.Median();
+
+            // Assert
+            Assert.AreEqual(30000000000, result);
+        }
+
+        // Test for longs with even length
+        [TestMethod]
+        public void Median_EvenNumberOfLongs_ReturnsAverageOfMiddleValues()
+        {
+            // Arrange
+            var data = new List<long> { 10000000000, 20000000000, 30000000000, 40000000000 };
+
+            // Act
+            var result = data.Median();
+
+            // Assert
+            Assert.AreEqual(25000000000, result);
+        }
+
+
+
+
+        [TestMethod]
+        public void Median_LambdaSelector_ReturnsCorrectMedian()
+        {
+            // Arrange
+            var products = new List<Product>
+            {
+                new Product { Name = "Product A", Price = 10.5m },
+                new Product { Name = "Product B", Price = 20.0m },
+                new Product { Name = "Product C", Price = 15.0m }
+            };
+
+            // Act
+            var result = products.Median(p => p.Price);
+
+            // Assert
+            Assert.AreEqual(15.0m, result);
+        }
+
+
+
+
+
+
+
+
+
+
     }
 
+    public class Product
+    {
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+    }
 
     public class IntWrapper
     {
