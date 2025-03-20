@@ -67,13 +67,15 @@ namespace mk.helpers
             return new ConcurrentBag<TSource>(source);
         }
 
+
+
         /// <summary>
-        /// Increments the value at a specified key in a <see cref="Dictionary{TKey, TValue}"/>.
+        /// Increments the value at a specified key in a <see cref="IDictionary{TKey, TValue}"/>.
         /// </summary>
         /// <typeparam name="T">The type of keys in the dictionary.</typeparam>
         /// <param name="dictionary">The dictionary.</param>
         /// <param name="index">The key to increment.</param>
-        public static void IncrementAt<T>(this Dictionary<T, int> dictionary, T index)
+        public static void IncrementAt<T>(this IDictionary<T, int> dictionary, T index)
         {
             int count = 0;
             dictionary.TryGetValue(index, out count);
@@ -81,31 +83,34 @@ namespace mk.helpers
         }
 
         /// <summary>
-        /// Increments the value at a specified key in a <see cref="ConcurrentDictionary{TKey, TValue}"/>.
-        /// </summary>
-        /// <typeparam name="T">The type of keys in the dictionary.</typeparam>
-        /// <param name="dictionary">The dictionary.</param>
-        /// <param name="index">The key to increment.</param>
-        public static void IncrementAt<T>(this ConcurrentDictionary<T, int> dictionary, T index)
-        {
-            int count = 0;
-            dictionary.TryGetValue(index, out count);
-            dictionary[index] = ++count;
-        }
-
-        /// <summary>
-        /// Tries to get a value from a <see cref="ConcurrentDictionary{TKey, TValue}"/> based on a key.
+        /// Tries to get a value from a <see cref="IDictionary{TKey, TValue}"/> based on a key.
         /// </summary>
         /// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
         /// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
         /// <param name="dictionary">The dictionary.</param>
         /// <param name="key">The key to look up.</param>
         /// <returns>The value associated with the key, or the default value if not found.</returns>
-        public static TValue TryGet<TKey, TValue>(this ConcurrentDictionary<TKey, TValue> dictionary, TKey key)
+        public static TValue TryGet<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
         {
             if (dictionary?.ContainsKey(key) == true)
                 return dictionary[key];
             return default(TValue);
+        }
+
+        /// <summary>
+        /// Tries to get a value from a <see cref="IDictionary{TKey, TValue}"/> based on a key.
+        /// </summary>
+        /// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
+        /// <param name="dictionary">The dictionary.</param>
+        /// <param name="key">The key to look up.</param>
+        /// <param name="defaultValue">Default value if key is not found</param>
+        /// <returns>The value associated with the key, or the default value if not found.</returns>
+        public static TValue TryGet<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)
+        {
+            if (dictionary?.ContainsKey(key) == true)
+                return dictionary[key];
+            return defaultValue;
         }
     }
 }

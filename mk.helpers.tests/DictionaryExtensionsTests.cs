@@ -93,6 +93,19 @@ namespace mk.helpers.tests
         }
 
         [TestMethod]
+        public void TryGet_KeyExistsInDictionary_ReturnsDefaultValue()
+        {
+            // Arrange
+            var dictionary = new ConcurrentDictionary<int, string> { [1] = "One", [2] = "Two" };
+            // Act
+            var result = dictionary.TryGet(100, "Cake");
+
+            // Assert
+            Assert.AreEqual("Cake", result);
+        }
+
+
+        [TestMethod]
         public void TryGet_KeyExistsInDictionary_ReturnsValue()
         {
             // Arrange

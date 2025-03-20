@@ -8,9 +8,13 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<FileVersion>1.0.0.0</FileVersion>
-		<Version>1.3.5</Version>
+		<Version>1.3.3</Version>
 		<PackageReleaseNotes>
-			Updated System.Text due to security vulnerability (Microsoft Security Advisory CVE-2024-43485 | .NET Denial of Service Vulnerability)
+			- Updated `DictionaryExtensionsTests.cs` to include a new test method `TryGet_KeyExistsInDictionary_ReturnsDefaultValue`.
+			- Modified `DictionaryExtensions.cs`:
+			- Changed `IncrementAt` to operate on `IDictionary`
+			- Added a new overload of `TryGet` with a default value parameter.
+			- Updated `mk.helpers.csproj` to change the version number from `1.3.5` to `1.3.3`.
 		</PackageReleaseNotes>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<RepositoryUrl>https://github.com/mcknight89/mk.helpers</RepositoryUrl>
