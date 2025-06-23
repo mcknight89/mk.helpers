@@ -113,7 +113,7 @@ namespace mk.helpers
         /// <returns>The last day of the month.</returns>
         public static DateTime EndOfMonth(this DateTime dt)
         {
-            return new DateTime(dt.Year, dt.Month, 1,23,59,59, 999).AddMonths(1).AddDays(-1);
+            return new DateTime(dt.Year, dt.Month, 1, 23, 59, 59, 999).AddMonths(1).AddDays(-1);
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace mk.helpers
         /// <returns>The last day of the month.</returns>
         public static DateTime LastDayOfMonth(this DateTime dt)
         {
-            return new DateTime(dt.Year, dt.Month, 1,0,0,0).AddMonths(1).AddDays(-1);
+            return new DateTime(dt.Year, dt.Month, 1, 0, 0, 0).AddMonths(1).AddDays(-1);
         }
 
 
@@ -298,5 +298,35 @@ namespace mk.helpers
 
             return result;
         }
+
+
+        // <summary>
+        // Converts a <see cref="TimeSpan"/> to a negative value if it is not already negative.
+        /// <summary>
+        /// <returns>An negative <see cref="TimeSpan"/></returns>
+        public static TimeSpan ToNegative(this TimeSpan span)
+        {
+            if (span.Ticks < 0)
+            {
+                return span;
+            }
+            return new TimeSpan(-span.Ticks);
+        }
+
+        /// <summary>
+        /// Converts a <see cref="TimeSpan"/> to a positive value if it is not already positive.
+        /// </summary>
+        /// <returns>an positive <see cref="TimeSpan"/></returns>
+        public static TimeSpan ToPositive(this TimeSpan span)
+        {
+            if (span.Ticks > 0)
+            {
+                return span;
+            }
+            return new TimeSpan(-span.Ticks);
+        }
+
+
+
     }
 }

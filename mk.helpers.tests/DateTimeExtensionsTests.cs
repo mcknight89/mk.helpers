@@ -228,5 +228,30 @@ namespace mk.helpers.tests
 
             Assert.AreEqual("about 30 minutes ago", timeAgo);
         }
+
+        [TestMethod]
+        public void TimeSpan_ToNegative()
+        {
+            var timeSpan = new TimeSpan(0, 30, 0);
+            var negativeTimeSpan = timeSpan.ToNegative();
+            Assert.AreEqual(new TimeSpan(0, -30, 0), negativeTimeSpan);
+
+
+            timeSpan = new TimeSpan(0, -30, 0);
+            negativeTimeSpan = timeSpan.ToNegative();
+            Assert.AreEqual(new TimeSpan(0, -30, 0), negativeTimeSpan);
+        }
+
+        [TestMethod]
+        public void TimeSpan_ToPositive()
+        {
+            var timeSpan = new TimeSpan(0, -30, 0);
+            var positiveTimeSpan = timeSpan.ToPositive();
+            Assert.AreEqual(new TimeSpan(0, 30, 0), positiveTimeSpan);
+
+            timeSpan = new TimeSpan(0, 30, 0);
+            positiveTimeSpan = timeSpan.ToPositive();
+            Assert.AreEqual(new TimeSpan(0, 30, 0), positiveTimeSpan);
+        }
     }
 }
