@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -188,6 +189,22 @@ namespace mk.helpers.tests
             Assert.IsFalse(checkpoints.ContainsKey("Timer 3"), "Timer 3 should not be present in the checkpoints.");
         }
 
+        [TestMethod]
+        public void GetCheckpoints_Returns_Checkpoints_In_Insertion_Order()
+        {
+            var timer = new PerfTimer();
+            timer.Start();
+            timer.AddCheckpoint("first");
+            Thread.Sleep(5);
+            timer.AddCheckpoint("second");
+            Thread.Sleep(5);
+            timer.AddCheckpoint("third");
+            timer.Stop();
+
+            var ordered = timer.GetCheckpoints().Keys.ToList();
+
+            CollectionAssert.AreEqual(new[] { "first", "second", "third" }, ordered);
+        }
 
     }
 }

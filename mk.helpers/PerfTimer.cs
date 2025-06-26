@@ -19,6 +19,8 @@ namespace mk.helpers
 
         private ConcurrentDictionary<string, TimeSpan> checkpoints = new ConcurrentDictionary<string, TimeSpan>(); // Dictionary to store named action times
 
+        private List<string> _checkpointOrder = new List<string>(); // Preserve insertion order of checkpoints
+
         private object _lock = new object(); // Object used for thread safety
 
         /// <summary>
@@ -28,7 +30,6 @@ namespace mk.helpers
         {
             // No additional initialization needed
         }
-
 
         /// <summary>
         /// Create new instance of PerfTimer and start it
@@ -159,7 +160,7 @@ namespace mk.helpers
             lock (_lock) // Thread-safe operation using lock
             {
                 if (_enabled)
-                    checkpoints[name] = _timer.Elapsed;
+                    return AddCheckpoint(name, _timer.Elapsed);
                 return this;
             }
         }
@@ -175,7 +176,12 @@ namespace mk.helpers
             lock (_lock) // Thread-safe operation using lock
             {
                 if (_enabled)
-                    checkpoints[name] = timeSpan;
+                {
+                    if (checkpoints.TryAdd(name, timeSpan))
+                        _checkpointOrder.Add(name);
+                    else
+                        checkpoints[name] = timeSpan;
+                }
                 return this;
             }
         }
@@ -188,8 +194,8 @@ namespace mk.helpers
         {
             lock (_lock) // Thread-safe operation using lock
             {
-                if (_enabled)
-                    return checkpoints[name];
+                if (_enabled && checkpoints.TryGetValue(name, out var ts))
+                    return ts;
                 return TimeSpan.Zero;
             }
         }
@@ -203,7 +209,10 @@ namespace mk.helpers
             lock (_lock) // Thread-safe operation using lock
             {
                 if (_enabled)
-                    checkpoints.TryRemove(name, out _);
+                {
+                    if (checkpoints.TryRemove(name, out _))
+                        _checkpointOrder.Remove(name);
+                }
                 return this;
             }
         }
@@ -216,7 +225,10 @@ namespace mk.helpers
             lock (_lock) // Thread-safe operation using lock
             {
                 if (_enabled)
+                {
                     checkpoints.Clear();
+                    _checkpointOrder.Clear();
+                }
                 return this;
             }
         }
@@ -228,7 +240,9 @@ namespace mk.helpers
         {
             lock (_lock) // Thread-safe operation using lock
             {
-                return checkpoints;
+                return _checkpointOrder
+                    .Where(name => checkpoints.ContainsKey(name))
+                    .ToDictionary(name => name, name => checkpoints[name]);
             }
         }
 
@@ -242,7 +256,6 @@ namespace mk.helpers
                 times.Clear();
             }
         }
-
 
         /// <summary>
         /// Gets a collection of all recorded action times.
