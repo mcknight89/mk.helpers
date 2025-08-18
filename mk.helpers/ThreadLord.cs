@@ -1,37 +1,47 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace mk.helpers
 {
     /// <summary>
-    /// Process a collection of tasks as fast as posiable using a thread pool.
+    /// Process a collection of tasks as fast as possible using a thread pool.
     /// </summary>
     /// <typeparam name="T">The type of tasks to process.</typeparam>
     public class ThreadLord<T> : IDisposable
     {
-        private int queueLimit = 0;
-        private int maxThreads = 0;
+        private int queueLimit;
+        private readonly int maxThreads;
 
-        private long processed = 0;
-        private int lastSecondProcessed = 0;
-        private int lastSecondCount = 0;
-        private int[] avgData = new int[10];
+        private long processed;
+        private long failed;
+        private int lastSecondProcessed;
+        private int lastSecondCount;
+        private readonly int[] avgData = new int[10];
 
         private ConcurrentQueue<T> queue = new ConcurrentQueue<T>();
-        private Action<T> workerCallback;
+        private readonly SemaphoreSlim itemSignal = new SemaphoreSlim(0);
+        private SemaphoreSlim slots;
 
-        private Task[] workers = new Task[10];
-        private Task manager;
+        private readonly Action<T> workerCallback;
 
-        private LordState _state = LordState.Stopped;
+        private Task[] workers;
+        private CancellationTokenSource cts;
+        private Task statsTask;
+
+        private volatile LordState _state = LordState.Stopped;
+
+        private int enqueuedCount;
+        private int currentlyProcessing;
+
+        // on error
+        private Action<Exception> onError = null;
 
         /// <summary>
         /// Gets the current state of the ThreadLord instance.
         /// </summary>
-        public LordState State { get { return _state; } }
+        public LordState State => _state;
 
         /// <summary>
         /// Represents the state of the ThreadLord instance.
@@ -51,7 +61,7 @@ namespace mk.helpers
         {
             maxThreads = Environment.ProcessorCount * 4;
             workers = new Task[maxThreads];
-            workerCallback = onWork;
+            workerCallback = onWork ?? throw new ArgumentNullException(nameof(onWork));
         }
 
         /// <summary>
@@ -61,68 +71,86 @@ namespace mk.helpers
         /// <param name="maxThreads">The maximum number of worker threads.</param>
         public ThreadLord(Action<T> onWork, int maxThreads)
         {
+            if (maxThreads <= 0) throw new ArgumentOutOfRangeException(nameof(maxThreads));
             this.maxThreads = maxThreads;
             workers = new Task[maxThreads];
-            workerCallback = onWork;
+            workerCallback = onWork ?? throw new ArgumentNullException(nameof(onWork));
         }
 
-        private void ManagerWorker()
+        private async Task StatsWorkerAsync(CancellationToken token)
         {
-            var dt = DateTime.Now;
-            var lastSecondIndic = 0;
-
-            _state = LordState.Running;
-
-            while (_state == LordState.Running)
+#if NET6_0_OR_GREATER
+            var timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+            var idx = 0;
+            try
             {
-                // Data stats
-                if (DateTime.Now > dt.AddSeconds(1))
+                while (await timer.WaitForNextTickAsync(token).ConfigureAwait(false))
                 {
-                    dt = DateTime.Now;
-                    Interlocked.Exchange(ref lastSecondCount, lastSecondProcessed);
-                    Interlocked.Exchange(ref lastSecondProcessed, 0);
-
-                    if (lastSecondIndic > avgData.Length - 1)
-                        lastSecondIndic = 0;
-                    avgData[lastSecondIndic] = lastSecondCount;
-                    lastSecondIndic++;
-                }
-
-                // While any threads free for work
-                if (workers.Any(d => d == null || d.Status == TaskStatus.RanToCompletion))
-                {
-                    // Find free indic
-                    var indic = workers.Select((s, i) => new { s, i })
-                        .Where(d => d.s == null || d.s.Status == TaskStatus.RanToCompletion)
-                        .Select(d => d.i).First();
-                    // Add work
-                    workers[indic] = Task.Factory.StartNew(Worker);
-                }
-                else
-                {
-                    Thread.Sleep(100);
+                    lastSecondCount = Interlocked.Exchange(ref lastSecondProcessed, 0);
+                    avgData[idx] = lastSecondCount;
+                    idx = (idx + 1) % avgData.Length;
                 }
             }
-            _state = LordState.Stopped;
+            catch (OperationCanceledException) { }
+            finally { timer.Dispose(); }
+#else
+            var idx = 0;
+            while (!token.IsCancellationRequested)
+            {
+                await Task.Delay(1000, token).ConfigureAwait(false);
+                lastSecondCount = Interlocked.Exchange(ref lastSecondProcessed, 0);
+                avgData[idx] = lastSecondCount;
+                idx = (idx + 1) % avgData.Length;
+            }
+#endif
         }
 
-        private void Worker()
+        private async Task WorkerAsync(CancellationToken token)
         {
-            while (Enqueued > 0)
+            while (!token.IsCancellationRequested)
             {
-                if (_state != LordState.Running)
-                    throw new InvalidOperationException("cancellation requested");
+                try
+                {
+                    await itemSignal.WaitAsync(token).ConfigureAwait(false);
+                }
+                catch (OperationCanceledException) { break; }
+
                 if (queue.TryDequeue(out var work))
                 {
-                    workerCallback.Invoke(work);
-                    Interlocked.Increment(ref processed);
-                    Interlocked.Increment(ref lastSecondProcessed);
-                }
-                else
-                {
-                      Thread.Sleep(10);
+                    Interlocked.Decrement(ref enqueuedCount);
+                    Interlocked.Increment(ref currentlyProcessing);
+                    try
+                    {
+                        try
+                        {
+                            workerCallback(work);
+                        }
+                        catch (Exception ex)
+                        {
+                            Interlocked.Increment(ref failed);
+                            onError?.Invoke(ex);
+                        }
+                    }
+                    finally
+                    {
+                        // count attempts (success or failure)
+                        Interlocked.Increment(ref processed);
+                        Interlocked.Increment(ref lastSecondProcessed);
+                        Interlocked.Decrement(ref currentlyProcessing);
+                        slots?.Release();
+                    }
                 }
             }
+        }
+
+        /// <summary>
+        /// On error callback.
+        /// </summary>
+        // <param name="onError">The action to execute when an error occurs.</param>
+        public ThreadLord<T> OnError(Action<Exception> onError)
+        {
+            this.onError = onError;
+            return this;
         }
 
         /// <summary>
@@ -131,10 +159,13 @@ namespace mk.helpers
         /// <param name="data">The task data to enqueue.</param>
         public void Enqueue(T data)
         {
-            while (queueLimit != 0 && queue.Count > queueLimit)
-                Thread.Sleep(10);
-            if (data != null)
-                queue.Enqueue(data);
+            if (data == null) return;
+            if (_state == LordState.Stopped) throw new InvalidOperationException("ThreadLord is not running.");
+
+            slots?.Wait();
+            queue.Enqueue(data);
+            Interlocked.Increment(ref enqueuedCount);
+            itemSignal.Release();
         }
 
         /// <summary>
@@ -142,7 +173,11 @@ namespace mk.helpers
         /// </summary>
         public void Clear()
         {
-            queue = new ConcurrentQueue<T>();
+            while (queue.TryDequeue(out _))
+            {
+                Interlocked.Decrement(ref enqueuedCount);
+                slots?.Release();
+            }
         }
 
         /// <summary>
@@ -152,20 +187,34 @@ namespace mk.helpers
         /// <returns>The ThreadLord instance with the queue size limit set.</returns>
         public ThreadLord<T> LimitQueue(int limit)
         {
+            if (_state == LordState.Running) throw new InvalidOperationException("Set queue limit before Start.");
             queueLimit = limit;
+            slots = queueLimit > 0 ? new SemaphoreSlim(queueLimit, queueLimit) : null;
             return this;
         }
 
         /// <summary>
-        /// Starts processing tasks using the specified number of worker threads.
+        /// Starts processing tasks using worker threads.
         /// </summary>
         /// <returns>The ThreadLord instance in the Running state.</returns>
         public ThreadLord<T> Start()
         {
-            if (_state == LordState.Stopped)
+            if (_state != LordState.Stopped) return this;
+
+            _state = LordState.Running;
+            cts = new CancellationTokenSource();
+
+            for (int i = 0; i < maxThreads; i++)
             {
-                manager = Task.Factory.StartNew(ManagerWorker);
+                workers[i] = Task.Factory.StartNew(
+                    async obj => await WorkerAsync((CancellationToken)obj).ConfigureAwait(false),
+                    cts.Token,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default).Unwrap();
             }
+
+            statsTask = Task.Run(() => StatsWorkerAsync(cts.Token), cts.Token);
             return this;
         }
 
@@ -175,20 +224,16 @@ namespace mk.helpers
         /// <returns>The ThreadLord instance in the Stopping state.</returns>
         public ThreadLord<T> Stop()
         {
+            if (_state == LordState.Stopped) return this;
             _state = LordState.Stopping;
+            cts?.Cancel();
             return this;
         }
 
         /// <summary>
         /// Gets the number of tasks currently enqueued.
         /// </summary>
-        public long Enqueued
-        {
-            get
-            {
-                return queue.Count();
-            }
-        }
+        public long Enqueued => Volatile.Read(ref enqueuedCount);
 
         /// <summary>
         /// Gets the number of worker threads currently active.
@@ -197,20 +242,19 @@ namespace mk.helpers
         {
             get
             {
-                return maxThreads - workers.Count(d => d == null || d.Status == TaskStatus.RanToCompletion);
+                var active = 0;
+                foreach (var t in workers)
+                {
+                    if (t != null && !t.IsCompleted) active++;
+                }
+                return active;
             }
         }
 
         /// <summary>
         /// Gets the count of tasks processed in the last second.
         /// </summary>
-        public long ProcessedLastSecond
-        {
-            get
-            {
-                return lastSecondCount == 0 ? lastSecondProcessed : lastSecondCount;
-            }
-        }
+        public long ProcessedLastSecond => lastSecondCount == 0 ? lastSecondProcessed : lastSecondCount;
 
         /// <summary>
         /// Gets the average number of tasks processed per second.
@@ -219,47 +263,34 @@ namespace mk.helpers
         {
             get
             {
-                var data = avgData.Where(d => d != 0);
-                if (!data.Any())
-                    return lastSecondProcessed;
-                return data.Sum() / data.Count();
+                int sum = 0, count = 0;
+                foreach (var v in avgData)
+                {
+                    if (v != 0) { sum += v; count++; }
+                }
+                return count == 0 ? lastSecondProcessed : sum / count;
             }
         }
 
         /// <summary>
         /// Gets the queue size limit.
         /// </summary>
-        public long QueueLimit
-        {
-            get
-            {
-                return queueLimit;
-            }
-        }
+        public long QueueLimit => queueLimit;
 
         /// <summary>
         /// Gets the total number of processed tasks.
         /// </summary>
-        public long Processed
-        {
-            get
-            {
-                return processed;
-            }
-        }
+        public long Processed => Volatile.Read(ref processed);
 
         /// <summary>
         /// Gets the number of worker threads currently processing tasks.
         /// </summary>
-        public long CurrentlyProcessing
-        {
-            get
-            {
-                return workers.Count() - workers.Select((s, i) => new { s, i })
-                        .Where(d => d.s == null || d.s.Status == TaskStatus.RanToCompletion)
-                        .Select(d => d.i).Count();
-            }
-        }
+        public long CurrentlyProcessing => Volatile.Read(ref currentlyProcessing);
+
+        /// <summary>
+        /// Gets the total number of failed tasks.
+        /// </summary>
+        public long Failed => Volatile.Read(ref failed);
 
         /// <summary>
         /// Waits for all tasks to be processed and then stops the processing.
@@ -280,10 +311,10 @@ namespace mk.helpers
         /// <returns>The ThreadLord instance after all tasks are processed.</returns>
         public ThreadLord<T> WaitAll(Action whileWaiting = null)
         {
-            while (!workers.All(d => d == null || d.Status == TaskStatus.RanToCompletion) || Enqueued > 0)
+            while (Enqueued > 0 || CurrentlyProcessing > 0)
             {
                 whileWaiting?.Invoke();
-                Thread.Sleep(25);
+                Thread.SpinWait(200);
             }
             return this;
         }
@@ -294,7 +325,15 @@ namespace mk.helpers
         public void Dispose()
         {
             Stop();
+            try { Task.WhenAll(workers ?? Array.Empty<Task>()).Wait(TimeSpan.FromSeconds(5)); } catch { }
+            try { statsTask?.Wait(TimeSpan.FromSeconds(1)); } catch { }
+
+            cts?.Dispose();
+            slots?.Dispose();
+            itemSignal?.Dispose();
+
             queue = null;
+            _state = LordState.Stopped;
         }
     }
 }
