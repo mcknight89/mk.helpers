@@ -25,17 +25,17 @@ namespace mk.helpers.tests
         //}
 
 
-        [TestMethod]
-        public async Task GetHeadersAsync()
-        {
-            using var client = new HttpClient();
-            var url = "https://www.sample-videos.com/zip/20mb.zip";
+        //[TestMethod]
+        //public async Task GetHeadersAsync()
+        //{
+        //    using var client = new HttpClient();
+        //    var url = "https://www.sample-videos.com/zip/20mb.zip";
 
-            // Act
-            var headers = await client.GetHeadersAsync(url);
+        //    // Act
+        //    var headers = await client.GetHeadersAsync(url);
 
-            Assert.IsTrue(headers.Any());
-        }
+        //    Assert.IsTrue(headers.Any());
+        //}
 
     }
 }
