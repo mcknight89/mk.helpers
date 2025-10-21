@@ -1,0 +1,42 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "..",
+          "files": [
+            "mk.helpers/mk.helpers.csproj"
+          ]
+        }
+      ],
+      "dest": "api",
+      "includePrivateMembers": false,
+      "disableGitFeatures": false
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [ "index.md", "toc.yml" ]
+      },
+      {
+        "files": [ "api/**.yml", "api/index.md" ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [ "images/**" ]
+      }
+    ],
+    "output": "_site",
+    "globalMetadata": {
+      "_appTitle": "mk.helpers Documentation",
+      "_appName": "mk.helpers",
+      "_appFooter": "© mk.helpers - MIT License",
+      "_enableSearch": true
+    },
+    "template": [ "default" ],
+    "markdownEngineName": "markdig",
+    "xref": [ "https://xref.docs.microsoft.com/query?uid={uid}" ]
+  }
+}
