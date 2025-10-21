@@ -17,7 +17,7 @@
   "build": {
     "content": [
       {
-        "files": [ "api/**.yml" ]
+        "files": [ "api/**.yml", "api/index.md" ]
       }
     ],
     "resource": [

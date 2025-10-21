@@ -1,31 +1,25 @@
-# API Reference
+# mk.helpers API Reference
 
-Welcome to the mk.helpers API reference documentation.
+Browse the complete API documentation using the navigation on the left.
 
 ## Namespaces
 
-Explore the complete API by namespace:
-
-- **mk.helpers** - Core utilities and helper classes
+- **[mk.helpers](xref:mk.helpers)** - Core utilities and helper classes
 
 ## Key Classes
 
-### Threading & Performance
-- **ThreadLord** - Advanced thread pool manager with pre-warmed workers, backpressure, and error handling
-- **PerfTimer** - High-precision performance timer
+- **[ThreadLord](xref:mk.helpers.ThreadLord`1)** - Thread pool manager with backpressure and error handling
+- **[PerfTimer](xref:mk.helpers.PerfTimer)** - High-precision performance timer
+- **[EnumHelper](xref:mk.helpers.EnumHelper)** - Enum utility methods
+- **[IpHelper](xref:mk.helpers.IpHelper)** - IP address operations
+- **[RandomHelper](xref:mk.helpers.RandomHelper)** - Enhanced random number generation
+- **[ReflectionHelper](xref:mk.helpers.ReflectionHelper)** - Reflection utilities
+- **[StaticData](xref:mk.helpers.StaticData)** - Common static data access
 
-### Helpers
-- **EnumHelper** - Enum utility methods
-- **IpHelper** - IP address operations
-- **RandomHelper** - Enhanced random number generation
-- **ReflectionHelper** - Reflection utilities
-- **StaticData** - Common static data access
+## Extension Methods
 
-### Extensions
-- **DateTimeExtensions** - DateTime utility methods
-- **DbSetExtension** - Entity Framework DbSet extensions
-- **HttpClientExtensions** - HttpClient helpers
-- **ListExtensions** - List manipulation extensions
-- **ObjectExtensions** - Object utility extensions
-
-Browse the left navigation to explore all types and members.
+- **[DateTimeExtensions](xref:mk.helpers.DateTimeExtensions)** - DateTime utilities
+- **[StringExtensions](xref:mk.helpers.StringExtensions)** - String manipulation
+- **[ListExtensions](xref:mk.helpers.ListExtensions)** - List operations
+- **[DictionaryExtensions](xref:mk.helpers.DictionaryExtensions)** - Dictionary utilities
+- **[ObjectExtensions](xref:mk.helpers.ObjectExtensions)** - Object utilities
