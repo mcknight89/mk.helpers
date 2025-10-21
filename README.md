@@ -6,7 +6,7 @@
 
 `mk.helpers` is a comprehensive collection of utility and extension methods designed to enhance your .NET development experience. With a wide array of helper methods, this library aims to simplify various tasks and processes, making your development journey a breeze.
 
-## ?? [View Full API Documentation](https://mcknight89.github.io/mk.helpers)
+## [View Full API Documentation](https://mcknight89.github.io/mk.helpers)
 
 ## Installation
 
