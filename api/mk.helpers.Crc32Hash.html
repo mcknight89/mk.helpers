@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class Crc32Hash | mk.helpers API </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class Crc32Hash | mk.helpers API ">
+    
+    <meta name="description" content="Implements a 32-bit CRC hash algorithm compatible with Zip etc.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="mk.helpers">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="mk.helpers.Crc32Hash">
+
+
+
+  <h1 id="mk_helpers_Crc32Hash" data-uid="mk.helpers.Crc32Hash" class="text-break">Class Crc32Hash</h1>
+  <div class="markdown level0 summary"><p>Implements a 32-bit CRC hash algorithm compatible with Zip etc.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm">HashAlgorithm</a></div>
+    <div class="level2"><span class="xref">Crc32Hash</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.icryptotransform">ICryptoTransform</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm.clear">HashAlgorithm.Clear()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm.computehash#system-security-cryptography-hashalgorithm-computehash(system-byte())">HashAlgorithm.ComputeHash(byte[])</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm.computehash#system-security-cryptography-hashalgorithm-computehash(system-byte()-system-int32-system-int32)">HashAlgorithm.ComputeHash(byte[], int, int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm.computehash#system-security-cryptography-hashalgorithm-computehash(system-io-stream)">HashAlgorithm.ComputeHash(Stream)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm.create#system-security-cryptography-hashalgorithm-create">HashAlgorithm.Create()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm.create#system-security-cryptography-hashalgorithm-create(system-string)">HashAlgorithm.Create(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm.dispose#system-security-cryptography-hashalgorithm-dispose">HashAlgorithm.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm.transformblock">HashAlgorithm.TransformBlock(byte[], int, int, byte[], int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm.transformfinalblock">HashAlgorithm.TransformFinalBlock(byte[], int, int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm.trycomputehash">HashAlgorithm.TryComputeHash(ReadOnlySpan&lt;byte&gt;, Span&lt;byte&gt;, out int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm.canreusetransform">HashAlgorithm.CanReuseTransform</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm.cantransformmultipleblocks">HashAlgorithm.CanTransformMultipleBlocks</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm.hash">HashAlgorithm.Hash</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm.inputblocksize">HashAlgorithm.InputBlockSize</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm.outputblocksize">HashAlgorithm.OutputBlockSize</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="mk.html">mk</a>.<a class="xref" href="mk.helpers.html">helpers</a></h6>
+  <h6><strong>Assembly</strong>: mk.helpers.dll</h6>
+  <h5 id="mk_helpers_Crc32Hash_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class Crc32Hash : HashAlgorithm, ICryptoTransform, IDisposable</code></pre>
+  </div>
+  <h5 id="mk_helpers_Crc32Hash_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Crc32 should only be used for backward compatibility with older file formats
+and algorithms. It is not secure enough for new applications.
+If you need to call multiple times for the same data either use the HashAlgorithm
+interface or remember that the result of one Compute call needs to be ~ (XOR) before
+being passed in as the seed for the next Compute call.</p>
+</div>
+  <h3 id="constructors">Constructors
+</h3>
+  <a id="mk_helpers_Crc32Hash__ctor_" data-uid="mk.helpers.Crc32Hash.#ctor*"></a>
+  <h4 id="mk_helpers_Crc32Hash__ctor" data-uid="mk.helpers.Crc32Hash.#ctor">Crc32Hash()</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="mk.helpers.Crc32Hash.html">Crc32Hash</a> class using the default polynomial and seed values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Crc32Hash()</code></pre>
+  </div>
+  <a id="mk_helpers_Crc32Hash__ctor_" data-uid="mk.helpers.Crc32Hash.#ctor*"></a>
+  <h4 id="mk_helpers_Crc32Hash__ctor_System_UInt32_System_UInt32_" data-uid="mk.helpers.Crc32Hash.#ctor(System.UInt32,System.UInt32)">Crc32Hash(uint, uint)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="mk.helpers.Crc32Hash.html">Crc32Hash</a> class using the specified polynomial and seed values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Crc32Hash(uint polynomial, uint seed)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></td>
+        <td><span class="parametername">polynomial</span></td>
+        <td><p>The polynomial value to use for CRC32 calculation.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></td>
+        <td><span class="parametername">seed</span></td>
+        <td><p>The seed value to use for CRC32 calculation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+  <h4 id="mk_helpers_Crc32Hash_DefaultPolynomial" data-uid="mk.helpers.Crc32Hash.DefaultPolynomial">DefaultPolynomial</h4>
+  <div class="markdown level1 summary"><p>Default polynomial value for CRC32 calculation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint DefaultPolynomial = 3988292384</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h4 id="mk_helpers_Crc32Hash_DefaultSeed" data-uid="mk.helpers.Crc32Hash.DefaultSeed">DefaultSeed</h4>
+  <div class="markdown level1 summary"><p>Default seed value for CRC32 calculation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint DefaultSeed = 4294967295</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <a id="mk_helpers_Crc32Hash_HashSize_" data-uid="mk.helpers.Crc32Hash.HashSize*"></a>
+  <h4 id="mk_helpers_Crc32Hash_HashSize" data-uid="mk.helpers.Crc32Hash.HashSize">HashSize</h4>
+  <div class="markdown level1 summary"><p>Gets the size, in bits, of the computed hash code.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int HashSize { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><p>The size, in bits, of the computed hash code.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm.hashsize">HashAlgorithm.HashSize</a></div>
+  <h3 id="methods">Methods
+</h3>
+  <a id="mk_helpers_Crc32Hash_Compute_" data-uid="mk.helpers.Crc32Hash.Compute*"></a>
+  <h4 id="mk_helpers_Crc32Hash_Compute_System_Byte___" data-uid="mk.helpers.Crc32Hash.Compute(System.Byte[])">Compute(byte[])</h4>
+  <div class="markdown level1 summary"><p>Computes the CRC32 hash value for the specified buffer using the default seed value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static uint Compute(byte[] buffer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</td>
+        <td><span class="parametername">buffer</span></td>
+        <td><p>The input buffer for which to compute the hash value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></td>
+        <td><p>The computed CRC32 hash value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="mk_helpers_Crc32Hash_Compute_" data-uid="mk.helpers.Crc32Hash.Compute*"></a>
+  <h4 id="mk_helpers_Crc32Hash_Compute_System_UInt32_System_Byte___" data-uid="mk.helpers.Crc32Hash.Compute(System.UInt32,System.Byte[])">Compute(uint, byte[])</h4>
+  <div class="markdown level1 summary"><p>Computes the CRC32 hash value for the specified buffer using the specified seed value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static uint Compute(uint seed, byte[] buffer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></td>
+        <td><span class="parametername">seed</span></td>
+        <td><p>The seed value to use for CRC32 calculation.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</td>
+        <td><span class="parametername">buffer</span></td>
+        <td><p>The input buffer for which to compute the hash value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></td>
+        <td><p>The computed CRC32 hash value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="mk_helpers_Crc32Hash_Compute_" data-uid="mk.helpers.Crc32Hash.Compute*"></a>
+  <h4 id="mk_helpers_Crc32Hash_Compute_System_UInt32_System_UInt32_System_Byte___" data-uid="mk.helpers.Crc32Hash.Compute(System.UInt32,System.UInt32,System.Byte[])">Compute(uint, uint, byte[])</h4>
+  <div class="markdown level1 summary"><p>Computes the CRC32 hash value for the specified buffer using the specified polynomial and seed values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static uint Compute(uint polynomial, uint seed, byte[] buffer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></td>
+        <td><span class="parametername">polynomial</span></td>
+        <td><p>The polynomial value to use for CRC32 calculation.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></td>
+        <td><span class="parametername">seed</span></td>
+        <td><p>The seed value to use for CRC32 calculation.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</td>
+        <td><span class="parametername">buffer</span></td>
+        <td><p>The input buffer for which to compute the hash value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></td>
+        <td><p>The computed CRC32 hash value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="mk_helpers_Crc32Hash_HashCore_" data-uid="mk.helpers.Crc32Hash.HashCore*"></a>
+  <h4 id="mk_helpers_Crc32Hash_HashCore_System_Byte___System_Int32_System_Int32_" data-uid="mk.helpers.Crc32Hash.HashCore(System.Byte[],System.Int32,System.Int32)">HashCore(byte[], int, int)</h4>
+  <div class="markdown level1 summary"><p>When overridden in a derived class, routes data written to the object into the hash algorithm for computing the hash.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void HashCore(byte[] array, int ibStart, int cbSize)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</td>
+        <td><span class="parametername">array</span></td>
+        <td><p>The input to compute the hash code for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">ibStart</span></td>
+        <td><p>The offset into the byte array from which to begin using data.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">cbSize</span></td>
+        <td><p>The number of bytes in the byte array to use as data.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm.hashcore#system-security-cryptography-hashalgorithm-hashcore(system-byte()-system-int32-system-int32)">HashAlgorithm.HashCore(byte[], int, int)</a></div>
+  <a id="mk_helpers_Crc32Hash_HashFinal_" data-uid="mk.helpers.Crc32Hash.HashFinal*"></a>
+  <h4 id="mk_helpers_Crc32Hash_HashFinal" data-uid="mk.helpers.Crc32Hash.HashFinal">HashFinal()</h4>
+  <div class="markdown level1 summary"><p>When overridden in a derived class, finalizes the hash computation after the last data is processed by the cryptographic stream object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override byte[] HashFinal()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</td>
+        <td><p>The computed hash code.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm.hashfinal">HashAlgorithm.HashFinal()</a></div>
+  <a id="mk_helpers_Crc32Hash_Initialize_" data-uid="mk.helpers.Crc32Hash.Initialize*"></a>
+  <h4 id="mk_helpers_Crc32Hash_Initialize" data-uid="mk.helpers.Crc32Hash.Initialize">Initialize()</h4>
+  <div class="markdown level1 summary"><p>Initializes an implementation of the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm">HashAlgorithm</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Initialize()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.hashalgorithm.initialize">HashAlgorithm.Initialize()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.cryptography.icryptotransform">ICryptoTransform</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="mk.helpers.ObjectExtensions.html#mk_helpers_ObjectExtensions_AsDictionary_System_Object_">ObjectExtensions.AsDictionary(object)</a>
+  </div>
+  <div>
+      <a class="xref" href="mk.helpers.ObjectExtensions.html#mk_helpers_ObjectExtensions_ToExpandoObject_System_Object_">ObjectExtensions.ToExpandoObject(object)</a>
+  </div>
+  <div>
+      <a class="xref" href="mk.helpers.ReflectionHelper.html#mk_helpers_ReflectionHelper_Changes_System_Object_System_Object_">ReflectionHelper.Changes(object, object)</a>
+  </div>
+  <div>
+      <a class="xref" href="mk.helpers.ReflectionHelper.html#mk_helpers_ReflectionHelper_CopyProperties_System_Object_System_Object_System_Collections_Generic_List_mk_helpers_Types_EntityChange___">ReflectionHelper.CopyProperties(object, object, out List&lt;EntityChange&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="mk.helpers.ReflectionHelper.html#mk_helpers_ReflectionHelper_CopyProperties_System_Object_System_Object_System_Collections_Generic_List_mk_helpers_Types_EntityChange___System_String___">ReflectionHelper.CopyProperties(object, object, out List&lt;EntityChange&gt;, params string[])</a>
+  </div>
+  <div>
+      <a class="xref" href="mk.helpers.ReflectionHelper.html#mk_helpers_ReflectionHelper_CopyProperties_System_Object_System_Object_System_String___">ReflectionHelper.CopyProperties(object, object, params string[])</a>
+  </div>
+  <div>
+      <a class="xref" href="mk.helpers.ReflectionHelper.html#mk_helpers_ReflectionHelper_CopyPropertiesFrom_System_Object_System_Object_System_Collections_Generic_List_mk_helpers_Types_EntityChange___">ReflectionHelper.CopyPropertiesFrom(object, object, out List&lt;EntityChange&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="mk.helpers.ReflectionHelper.html#mk_helpers_ReflectionHelper_CopyPropertiesFrom_System_Object_System_Object_System_String___">ReflectionHelper.CopyPropertiesFrom(object, object, params string[])</a>
+  </div>
+  <div>
+      <a class="xref" href="mk.helpers.ObjectExtensions.html#mk_helpers_ObjectExtensions_IsDefault__1___0_">ObjectExtensions.IsDefault&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="mk.helpers.ObjectExtensions.html#mk_helpers_ObjectExtensions_IsIn__1___0___0___">ObjectExtensions.IsIn&lt;T&gt;(T, params T[])</a>
+  </div>
+  <div>
+      <a class="xref" href="mk.helpers.ReflectionHelper.html#mk_helpers_ReflectionHelper_DeepClone__1___0_">ReflectionHelper.DeepClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="mk.helpers.ReflectionHelper.html#mk_helpers_ReflectionHelper_PublicPropertiesEqual__1___0___0_System_String___">ReflectionHelper.PublicPropertiesEqual&lt;T&gt;(T, T, params string[])</a>
+  </div>
+  <div>
+      <a class="xref" href="mk.helpers.Types.EnumerableExtensions.html#mk_helpers_Types_EnumerableExtensions_IsAnyOf__1___0___0___">EnumerableExtensions.IsAnyOf&lt;T&gt;(T, params T[])</a>
+  </div>
+  <div>
+      <a class="xref" href="mk.helpers.Types.EnumerableExtensions.html#mk_helpers_Types_EnumerableExtensions_Yield__1___0_">EnumerableExtensions.Yield&lt;T&gt;(T)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      mk.helpers - MIT License
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

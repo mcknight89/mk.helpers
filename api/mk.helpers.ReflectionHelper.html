@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class ReflectionHelper | mk.helpers API </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class ReflectionHelper | mk.helpers API ">
+    
+    <meta name="description" content="Provides utility methods for reflection-related operations.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="mk.helpers">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="mk.helpers.ReflectionHelper">
+
+
+
+  <h1 id="mk_helpers_ReflectionHelper" data-uid="mk.helpers.ReflectionHelper" class="text-break">Class ReflectionHelper</h1>
+  <div class="markdown level0 summary"><p>Provides utility methods for reflection-related operations.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">ReflectionHelper</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="mk.html">mk</a>.<a class="xref" href="mk.helpers.html">helpers</a></h6>
+  <h6><strong>Assembly</strong>: mk.helpers.dll</h6>
+  <h5 id="mk_helpers_ReflectionHelper_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class ReflectionHelper</code></pre>
+  </div>
+  <h3 id="methods">Methods
+</h3>
+  <a id="mk_helpers_ReflectionHelper_Changes_" data-uid="mk.helpers.ReflectionHelper.Changes*"></a>
+  <h4 id="mk_helpers_ReflectionHelper_Changes_System_Object_System_Object_" data-uid="mk.helpers.ReflectionHelper.Changes(System.Object,System.Object)">Changes(object, object)</h4>
+  <div class="markdown level1 summary"><p>Determines the changes between two objects and returns a list of <a class="xref" href="mk.helpers.Types.EntityChange.html">EntityChange</a> instances.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static List&lt;EntityChange&gt; Changes(this object oldEntity, object newEntity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">oldEntity</span></td>
+        <td><p>The old object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">newEntity</span></td>
+        <td><p>The new object.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="mk.helpers.Types.EntityChange.html">EntityChange</a>&gt;</td>
+        <td><p>A list of <a class="xref" href="mk.helpers.Types.EntityChange.html">EntityChange</a> instances representing the changes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="mk_helpers_ReflectionHelper_CopyProperties_" data-uid="mk.helpers.ReflectionHelper.CopyProperties*"></a>
+  <h4 id="mk_helpers_ReflectionHelper_CopyProperties_System_Object_System_Object_System_Collections_Generic_List_mk_helpers_Types_EntityChange___" data-uid="mk.helpers.ReflectionHelper.CopyProperties(System.Object,System.Object,System.Collections.Generic.List{mk.helpers.Types.EntityChange}@)">CopyProperties(object, object, out List&lt;EntityChange&gt;)</h4>
+  <div class="markdown level1 summary"><p>Copies the properties from the source object to the destination object and captures the changes made.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CopyProperties(this object source, object destination, out List&lt;EntityChange&gt; changes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The source object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">destination</span></td>
+        <td><p>The destination object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="mk.helpers.Types.EntityChange.html">EntityChange</a>&gt;</td>
+        <td><span class="parametername">changes</span></td>
+        <td><p>The list of changes made during copying.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="mk_helpers_ReflectionHelper_CopyProperties_" data-uid="mk.helpers.ReflectionHelper.CopyProperties*"></a>
+  <h4 id="mk_helpers_ReflectionHelper_CopyProperties_System_Object_System_Object_System_Collections_Generic_List_mk_helpers_Types_EntityChange___System_String___" data-uid="mk.helpers.ReflectionHelper.CopyProperties(System.Object,System.Object,System.Collections.Generic.List{mk.helpers.Types.EntityChange}@,System.String[])">CopyProperties(object, object, out List&lt;EntityChange&gt;, params string[])</h4>
+  <div class="markdown level1 summary"><p>Copies the properties from the source object to the destination object, ignoring specified properties, and captures the changes made.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CopyProperties(this object source, object destination, out List&lt;EntityChange&gt; changes, params string[] ignore)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The source object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">destination</span></td>
+        <td><p>The destination object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="mk.helpers.Types.EntityChange.html">EntityChange</a>&gt;</td>
+        <td><span class="parametername">changes</span></td>
+        <td><p>The list of changes made during copying.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td><span class="parametername">ignore</span></td>
+        <td><p>An array of property names to ignore during copying.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="mk_helpers_ReflectionHelper_CopyProperties_" data-uid="mk.helpers.ReflectionHelper.CopyProperties*"></a>
+  <h4 id="mk_helpers_ReflectionHelper_CopyProperties_System_Object_System_Object_System_String___" data-uid="mk.helpers.ReflectionHelper.CopyProperties(System.Object,System.Object,System.String[])">CopyProperties(object, object, params string[])</h4>
+  <div class="markdown level1 summary"><p>Copies the properties from the source object to the destination object, ignoring specified properties.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CopyProperties(this object source, object destination, params string[] ignore)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The source object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">destination</span></td>
+        <td><p>The destination object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td><span class="parametername">ignore</span></td>
+        <td><p>An array of property names to ignore during copying.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="mk_helpers_ReflectionHelper_CopyPropertiesFrom_" data-uid="mk.helpers.ReflectionHelper.CopyPropertiesFrom*"></a>
+  <h4 id="mk_helpers_ReflectionHelper_CopyPropertiesFrom_System_Object_System_Object_System_Collections_Generic_List_mk_helpers_Types_EntityChange___" data-uid="mk.helpers.ReflectionHelper.CopyPropertiesFrom(System.Object,System.Object,System.Collections.Generic.List{mk.helpers.Types.EntityChange}@)">CopyPropertiesFrom(object, object, out List&lt;EntityChange&gt;)</h4>
+  <div class="markdown level1 summary"><p>Copies the properties from the source object to the destination object and returns the changes made.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CopyPropertiesFrom(this object source, object destination, out List&lt;EntityChange&gt; changes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The source object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">destination</span></td>
+        <td><p>The destination object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="mk.helpers.Types.EntityChange.html">EntityChange</a>&gt;</td>
+        <td><span class="parametername">changes</span></td>
+        <td><p>The list of changes made during copying.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="mk_helpers_ReflectionHelper_CopyPropertiesFrom_" data-uid="mk.helpers.ReflectionHelper.CopyPropertiesFrom*"></a>
+  <h4 id="mk_helpers_ReflectionHelper_CopyPropertiesFrom_System_Object_System_Object_System_String___" data-uid="mk.helpers.ReflectionHelper.CopyPropertiesFrom(System.Object,System.Object,System.String[])">CopyPropertiesFrom(object, object, params string[])</h4>
+  <div class="markdown level1 summary"><p>Copies the properties from the source object to the destination object, ignoring specified properties.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CopyPropertiesFrom(this object source, object destination, params string[] ignore)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The source object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">destination</span></td>
+        <td><p>The destination object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td><span class="parametername">ignore</span></td>
+        <td><p>An array of property names to ignore during copying.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="mk_helpers_ReflectionHelper_DeepClone_" data-uid="mk.helpers.ReflectionHelper.DeepClone*"></a>
+  <h4 id="mk_helpers_ReflectionHelper_DeepClone__1___0_" data-uid="mk.helpers.ReflectionHelper.DeepClone``1(``0)">DeepClone&lt;T&gt;(T)</h4>
+  <div class="markdown level1 summary"><p>Creates a deep clone of the provided object using JSON serialization.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T DeepClone&lt;T&gt;(this T obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>The object to be cloned.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><p>The deep-cloned object.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type of the object to clone.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="mk_helpers_ReflectionHelper_GetUnderlyingType_" data-uid="mk.helpers.ReflectionHelper.GetUnderlyingType*"></a>
+  <h4 id="mk_helpers_ReflectionHelper_GetUnderlyingType_System_Reflection_MemberInfo_" data-uid="mk.helpers.ReflectionHelper.GetUnderlyingType(System.Reflection.MemberInfo)">GetUnderlyingType(MemberInfo)</h4>
+  <div class="markdown level1 summary"><p>Retrieves the underlying type of a member (event, field, method, or property).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Type GetUnderlyingType(this MemberInfo member)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.memberinfo">MemberInfo</a></td>
+        <td><span class="parametername">member</span></td>
+        <td><p>The member to retrieve the underlying type for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><p>The underlying type of the member.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="mk_helpers_ReflectionHelper_IsPrimitive_" data-uid="mk.helpers.ReflectionHelper.IsPrimitive*"></a>
+  <h4 id="mk_helpers_ReflectionHelper_IsPrimitive_System_Type_" data-uid="mk.helpers.ReflectionHelper.IsPrimitive(System.Type)">IsPrimitive(Type)</h4>
+  <div class="markdown level1 summary"><p>Checks if the provided type is a primitive type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsPrimitive(this Type type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The type to check.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p><code>true</code> if the type is a primitive type; otherwise, <code>false</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="mk_helpers_ReflectionHelper_IsSimpleType_" data-uid="mk.helpers.ReflectionHelper.IsSimpleType*"></a>
+  <h4 id="mk_helpers_ReflectionHelper_IsSimpleType_System_Type_" data-uid="mk.helpers.ReflectionHelper.IsSimpleType(System.Type)">IsSimpleType(Type)</h4>
+  <div class="markdown level1 summary"><p>Checks if the provided type is a simple type (value type, primitive type, or simple reference type).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsSimpleType(this Type type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The type to be checked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p><code>true</code> if the type is a simple type; otherwise, <code>false</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="mk_helpers_ReflectionHelper_PublicPropertiesEqual_" data-uid="mk.helpers.ReflectionHelper.PublicPropertiesEqual*"></a>
+  <h4 id="mk_helpers_ReflectionHelper_PublicPropertiesEqual__1___0___0_System_String___" data-uid="mk.helpers.ReflectionHelper.PublicPropertiesEqual``1(``0,``0,System.String[])">PublicPropertiesEqual&lt;T&gt;(T, T, params string[])</h4>
+  <div class="markdown level1 summary"><p>Compares the public properties of two objects of the same type and checks if they are equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool PublicPropertiesEqual&lt;T&gt;(this T self, T to, params string[] ignore) where T : class</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">self</span></td>
+        <td><p>The first object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">to</span></td>
+        <td><p>The second object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td><span class="parametername">ignore</span></td>
+        <td><p>A list of property names to ignore during comparison.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p><code>true</code> if the public properties are equal; otherwise, <code>false</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type of the objects to compare.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      mk.helpers - MIT License
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

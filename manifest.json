@@ -1,0 +1,597 @@
+{
+  "source_base_path": "/home/runner/work/mk.helpers/mk.helpers/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.Crc32Hash.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.Crc32Hash.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.Crc32Hash",
+      "Summary": "<p sourcefile=\"api/mk.helpers.Crc32Hash.yml\" sourcestartlinenumber=\"1\">Implements a 32-bit CRC hash algorithm compatible with Zip etc.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.CsvHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.CsvHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.CsvHelper",
+      "Summary": "<p sourcefile=\"api/mk.helpers.CsvHelper.yml\" sourcestartlinenumber=\"1\">Provides methods for converting data to CSV format.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.DateTimeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.DateTimeExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.DateTimeExtensions",
+      "Summary": "<p sourcefile=\"api/mk.helpers.DateTimeExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for working with <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> values.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.DictionaryExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.DictionaryExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.DictionaryExtensions",
+      "Summary": "<p sourcefile=\"api/mk.helpers.DictionaryExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for working with <xref href=\"System.Collections.Generic.Dictionary%602\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Collections.Concurrent.ConcurrentDictionary%602\" data-throw-if-not-resolved=\"false\"></xref> collections.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.EnumHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.EnumHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.EnumHelper",
+      "Summary": "<p sourcefile=\"api/mk.helpers.EnumHelper.yml\" sourcestartlinenumber=\"1\">Provides utility methods for working with enumerations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.FileHelper.DownloadProgress.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.FileHelper.DownloadProgress.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.FileHelper.DownloadProgress",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.FileHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.FileHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.FileHelper",
+      "Summary": "<p sourcefile=\"api/mk.helpers.FileHelper.yml\" sourcestartlinenumber=\"1\">Provides utility methods for file-related operations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.HttpClientExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.HttpClientExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.HttpClientExtensions",
+      "Summary": "<p sourcefile=\"api/mk.helpers.HttpClientExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for the HttpClient class.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.IntExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.IntExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.IntExtensions",
+      "Summary": "<p sourcefile=\"api/mk.helpers.IntExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for working with integer values.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.IpHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.IpHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.IpHelper",
+      "Summary": "<p sourcefile=\"api/mk.helpers.IpHelper.yml\" sourcestartlinenumber=\"1\">Provides utility methods for working with IP addresses and their numeric representations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.ListExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.ListExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.ListExtensions",
+      "Summary": "<p sourcefile=\"api/mk.helpers.ListExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for working with lists and collections.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.ObjectExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.ObjectExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.ObjectExtensions",
+      "Summary": "<p sourcefile=\"api/mk.helpers.ObjectExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for object manipulation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.ParallelHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.ParallelHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.ParallelHelper",
+      "Summary": "<p sourcefile=\"api/mk.helpers.ParallelHelper.yml\" sourcestartlinenumber=\"1\">Provides utility methods for parallel execution using the Parallel.ForEach pattern.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.PerfTimer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.PerfTimer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.PerfTimer",
+      "Summary": "<p sourcefile=\"api/mk.helpers.PerfTimer.yml\" sourcestartlinenumber=\"1\">A performance timer that measures the elapsed time for different actions and intervals.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.QueueExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.QueueExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.QueueExtensions",
+      "Summary": "<p sourcefile=\"api/mk.helpers.QueueExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for working with queues.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.RandomHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.RandomHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.RandomHelper",
+      "Summary": "<p sourcefile=\"api/mk.helpers.RandomHelper.yml\" sourcestartlinenumber=\"1\">Provides utility methods for generating random values.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.ReflectionHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.ReflectionHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.ReflectionHelper",
+      "Summary": "<p sourcefile=\"api/mk.helpers.ReflectionHelper.yml\" sourcestartlinenumber=\"1\">Provides utility methods for reflection-related operations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.Serialization.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.Serialization.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.Serialization",
+      "Summary": "<p sourcefile=\"api/mk.helpers.Serialization.yml\" sourcestartlinenumber=\"1\">Provides methods for data serialization and deserialization using JSON and BSON formats.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.StaticData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.StaticData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.StaticData",
+      "Summary": "<p sourcefile=\"api/mk.helpers.StaticData.yml\" sourcestartlinenumber=\"1\">A static class for managing and retrieving static data stored in a dictionary.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.Store.InMemoryStore.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.Store.InMemoryStore.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.Store.InMemoryStore",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.Store.StoreValue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.Store.StoreValue.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.Store.StoreValue",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.Store.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.Store.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.Store",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.StreamExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.StreamExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.StreamExtensions",
+      "Summary": "<p sourcefile=\"api/mk.helpers.StreamExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for working with streams.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.StringExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.StringExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.StringExtensions",
+      "Summary": "<p sourcefile=\"api/mk.helpers.StringExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for string manipulation and formatting.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.TempStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.TempStream.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.TempStream",
+      "Summary": "<p sourcefile=\"api/mk.helpers.TempStream.yml\" sourcestartlinenumber=\"1\">A temporary file stream that tries to use a file stream in the temp folder, but falls back to a memory stream if that fails. Will delete the file on dispose unless specified otherwise.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.ThreadLord-1.LordState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.ThreadLord-1.LordState.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.ThreadLord<T>.LordState",
+      "Summary": "<p sourcefile=\"api/mk.helpers.ThreadLord-1.LordState.yml\" sourcestartlinenumber=\"1\">Represents the state of the ThreadLord instance.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.ThreadLord-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.ThreadLord-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.ThreadLord<T>",
+      "Summary": "<p sourcefile=\"api/mk.helpers.ThreadLord-1.yml\" sourcestartlinenumber=\"1\">Process a collection of tasks as fast as possible using a thread pool.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.TimeSpanExtenstions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.TimeSpanExtenstions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.TimeSpanExtenstions",
+      "Summary": "<p sourcefile=\"api/mk.helpers.TimeSpanExtenstions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for working with <xref href=\"System.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref> objects.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.Types.DownloadFileResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.Types.DownloadFileResult.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.Types.DownloadFileResult",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.Types.EntityChange.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.Types.EntityChange.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.Types.EntityChange",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.Types.EnumWrapper-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.Types.EnumWrapper-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.Types.EnumWrapper<T>",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.Types.EnumerableExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.Types.EnumerableExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.Types.EnumerableExtensions",
+      "Summary": "<p sourcefile=\"api/mk.helpers.Types.EnumerableExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for working with <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> collections.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.Types.ImageFormat.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.Types.ImageFormat.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.Types.ImageFormat",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.Types.PagedResult-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.Types.PagedResult-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.Types.PagedResult<T>",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.Types.PagedResultBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.Types.PagedResultBase.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.Types.PagedResultBase",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.Types.SerializationType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.Types.SerializationType.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.Types.SerializationType",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.Types.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.Types.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers.Types",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/mk.helpers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/mk.helpers.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "mk.helpers",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "index.html",
+      "output": {
+        "resource": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
