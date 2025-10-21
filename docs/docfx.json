@@ -17,10 +17,7 @@
   "build": {
     "content": [
       {
-        "files": [ "index.md", "toc.yml" ]
-      },
-      {
-        "files": [ "api/**.yml", "api/index.md" ]
+        "files": [ "api/**.yml" ]
       }
     ],
     "resource": [
@@ -30,10 +27,11 @@
     ],
     "output": "_site",
     "globalMetadata": {
-      "_appTitle": "mk.helpers Documentation",
+      "_appTitle": "mk.helpers API",
       "_appName": "mk.helpers",
       "_appFooter": "mk.helpers - MIT License",
-      "_enableSearch": true
+      "_enableSearch": true,
+      "_disableContribution": true
     },
     "template": [ "default" ],
     "markdownEngineName": "markdig",
