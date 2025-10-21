@@ -1,14 +1,19 @@
-[![Unit Tests](https://github.com/mcknight89/mk.helpers/actions/workflows/tests.yml/badge.svg)](https://github.com/mcknight89/mk.helpers/actions/workflows/tests.yml)
 # mk.helpers
 
+[![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://mcknight89.github.io/mk.helpers)
+[![NuGet](https://img.shields.io/nuget/v/mk.helpers.svg)](https://www.nuget.org/packages/mk.helpers/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 `mk.helpers` is a comprehensive collection of utility and extension methods designed to enhance your .NET development experience. With a wide array of helper methods, this library aims to simplify various tasks and processes, making your development journey a breeze.
+
+## ?? [View Full API Documentation](https://mcknight89.github.io/mk.helpers)
 
 ## Installation
 
 You can easily integrate `mk.helpers` into your .NET projects using [NuGet](https://www.nuget.org/packages/mk.helpers):
 
 ```bash
-nuget install mk.helpers
+dotnet add package mk.helpers
 ```
 
 ## Contribution
