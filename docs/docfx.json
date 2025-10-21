@@ -22,7 +22,7 @@
     ],
     "resource": [
       {
-        "files": [ "images/**" ]
+        "files": [ "images/**", "index.html" ]
       }
     ],
     "output": "_site",
