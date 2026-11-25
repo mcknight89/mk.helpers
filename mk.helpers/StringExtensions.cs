@@ -457,6 +457,36 @@ namespace mk.helpers
             var stepsToSame = Compute(source, target);
             return (1.0 - (stepsToSame / (double)Math.Max(source.Length, target.Length)));
         }
+
+        /// <summary>
+        /// Splits a line into its words on spaces, skipping empty parts.
+        /// </summary>
+        public static string[] Words(this string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return new string[0];
+
+            return text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        /// <summary>
+        /// Returns the text before the first comment marker that isn't inside double quotes, with trailing spaces trimmed.
+        /// </summary>
+        public static string StripComment(this string text, char marker = '#')
+        {
+            if (string.IsNullOrEmpty(text))
+                return text;
+
+            var inQuotes = false;
+            for (var i = 0; i < text.Length; i++)
+            {
+                if (text[i] == '"')
+                    inQuotes = !inQuotes;
+                else if (text[i] == marker && !inQuotes)
+                    return text.Substring(0, i).TrimEnd();
+            }
+
+            return text.TrimEnd();
+        }
     }
 }
-

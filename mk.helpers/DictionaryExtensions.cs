@@ -112,5 +112,65 @@ namespace mk.helpers
                 return dictionary[key];
             return defaultValue;
         }
+
+        /// <summary>
+        /// Reads a float from a string dictionary, or returns the fallback when the key is missing or not a number.
+        /// </summary>
+        public static float GetFloat(this IDictionary<string, string> dictionary, string key, float fallback = 0)
+        {
+            if (dictionary == null || !dictionary.TryGetValue(key, out var text))
+                return fallback;
+
+            return text.ToFloat(fallback);
+        }
+
+        /// <summary>
+        /// Reads an int from a string dictionary, or returns the fallback when the key is missing or not a whole number.
+        /// </summary>
+        public static int GetInt(this IDictionary<string, string> dictionary, string key, int fallback = 0)
+        {
+            if (dictionary == null || !dictionary.TryGetValue(key, out var text))
+                return fallback;
+
+            return text.ToInt(fallback);
+        }
+
+        /// <summary>
+        /// Reads "true" or "false" from a string dictionary, or returns the fallback when the key is missing or neither.
+        /// </summary>
+        public static bool GetBool(this IDictionary<string, string> dictionary, string key, bool fallback = false)
+        {
+            if (dictionary == null || !dictionary.TryGetValue(key, out var text))
+                return fallback;
+
+            return bool.TryParse(text?.Trim(), out var value) ? value : fallback;
+        }
+
+        /// <summary>
+        /// Reads a space-separated list of floats from a string dictionary, or returns the fallback when the key is missing or empty.
+        /// </summary>
+        public static float[] GetFloats(this IDictionary<string, string> dictionary, string key, params float[] fallback)
+        {
+            if (dictionary == null || !dictionary.TryGetValue(key, out var text))
+                return fallback;
+
+            var values = text.ToFloats();
+            return values.Length > 0 ? values : fallback;
+        }
+
+        /// <summary>
+        /// True when both dictionaries hold the same keys with the same values.
+        /// </summary>
+        public static bool SameAs<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, IDictionary<TKey, TValue> other)
+        {
+            if (ReferenceEquals(dictionary, other))
+                return true;
+
+            if (dictionary == null || other == null || dictionary.Count != other.Count)
+                return false;
+
+            var comparer = EqualityComparer<TValue>.Default;
+            return dictionary.All(x => other.TryGetValue(x.Key, out var value) && comparer.Equals(x.Value, value));
+        }
     }
 }

@@ -261,5 +261,28 @@ namespace mk.helpers.tests
         }
 
 
+
+        [TestMethod]
+        public void ToSlug_DropsApostrophe()
+        {
+            Assert.AreEqual("bens-wet-dream", "Ben's Wet Dream".ToSlug());
+            Assert.AreEqual("bens-wet-dream", "Ben\u2019s Wet Dream".ToSlug());
+        }
+
+        [TestMethod]
+        public void Words_SkipsEmptyParts()
+        {
+            CollectionAssert.AreEqual(new[] { "meta", "speed", "1.5" }, "  meta  speed 1.5 ".Words());
+            Assert.AreEqual(0, "".Words().Length);
+        }
+
+        [TestMethod]
+        public void StripComment_IgnoresMarkerInQuotes()
+        {
+            Assert.AreEqual("tile 1 2", "tile 1 2   # grass".StripComment());
+            Assert.AreEqual("text \"a # b\"", "text \"a # b\" # note".StripComment());
+            Assert.AreEqual("", "# only a comment".StripComment());
+            Assert.AreEqual("a", "a ; note".StripComment(';'));
+        }
     }
 }

@@ -150,5 +150,38 @@ namespace mk.helpers
                 }
             }
         }
+
+        /// <summary>
+        /// Writes to a .tmp file, then moves it over the path. Creates the folder if needed.
+        /// </summary>
+        public static void WriteAllTextAtomic(string path, string text)
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(path)));
+            var tempPath = path + ".tmp";
+            File.WriteAllText(tempPath, text);
+
+            if (File.Exists(path))
+                File.Replace(tempPath, path, null);
+            else
+                File.Move(tempPath, path);
+        }
+
+        /// <summary>
+        /// Reads a file that another process may have locked, trying again after a short wait.
+        /// </summary>
+        public static string ReadAllTextWithRetry(string path, int tries = 5, int delayMs = 200)
+        {
+            for (var i = 1; ; i++)
+            {
+                try
+                {
+                    return File.ReadAllText(path);
+                }
+                catch (IOException ex) when (i < tries && !(ex is FileNotFoundException) && !(ex is DirectoryNotFoundException))
+                {
+                    Thread.Sleep(delayMs);
+                }
+            }
+        }
     }
 }

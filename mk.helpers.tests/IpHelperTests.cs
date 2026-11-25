@@ -97,5 +97,18 @@ namespace mk.helpers.tests
             bool isValidIpv6 = IpHelper.IsValidIpv6(ipAddress);
             Assert.IsFalse(isValidIpv6);
         }
+
+        [TestMethod]
+        public async System.Threading.Tasks.Task IsPortOpenAsync_TrueOnlyWhenListening()
+        {
+            var listener = new System.Net.Sockets.TcpListener(System.Net.IPAddress.Loopback, 0);
+            listener.Start();
+            var port = ((System.Net.IPEndPoint)listener.LocalEndpoint).Port;
+
+            Assert.IsTrue(await IpHelper.IsPortOpenAsync("127.0.0.1", port, TimeSpan.FromSeconds(2)));
+
+            listener.Stop();
+            Assert.IsFalse(await IpHelper.IsPortOpenAsync("127.0.0.1", port, TimeSpan.FromSeconds(2)));
+        }
     }
 }

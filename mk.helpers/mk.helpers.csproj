@@ -8,12 +8,10 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<FileVersion>1.0.0.0</FileVersion>
-		<Version>1.3.9</Version>
+		<Version>1.4.0</Version>
 		<PackageReleaseNotes>
-			Updates for `ThreadLord` class:
-			- Pre-warmed worker threads for faster startup and consistent throughput.
-			- Added `Failed` counter and `OnError` callback for exception handling.
-			- Improved backpressure: queue limits now include in-flight tasks.
+			- New: NumberExtensions (invariant ToFloat/ToInt/ToDouble, ToFloats/ToInts, ToInvariant), PathHelper (IsInside, SafeCombine, FindUp, ToForwardSlashes, ShortHash), FixedQueue, HttpListenerExtensions and LocalHttp for small localhost servers, JsonNodeExtensions (ParseJsonObject, HasJsonComments, DeepMerge and more), CommandArgs (Windows-safe Split/Join), AnsiExtensions.StripAnsi, SerialQueue, MathExtensions (Approach, Wrap).
+			- Added: string dictionary GetFloat/GetInt/GetBool/GetFloats and SameAs, StringExtensions Words/StripComment, FileHelper WriteAllTextAtomic/ReadAllTextWithRetry, TimeSpan ToClock/SecondsToClock, IpHelper.IsPortOpenAsync.
 		</PackageReleaseNotes>
 
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>

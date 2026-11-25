@@ -56,5 +56,15 @@ namespace mk.helpers.tests
 
             Assert.AreEqual(TimeSpan.FromMinutes(30), multiplied);
         }
+
+        [TestMethod]
+        public void ToClock_ShowsMinutesOrHours()
+        {
+            Assert.AreEqual("0:05", TimeSpan.FromSeconds(5).ToClock());
+            Assert.AreEqual("12:34", TimeSpan.FromSeconds(754).ToClock());
+            Assert.AreEqual("1:02:03", new TimeSpan(1, 2, 3).ToClock());
+            Assert.AreEqual("26:00:00", TimeSpan.FromHours(26).ToClock());
+            Assert.AreEqual("1:01", 61.9.SecondsToClock());
+        }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net.Sockets;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
@@ -79,5 +81,28 @@ namespace mk.helpers
             return false;
         }
 
+
+        /// <summary>
+        /// True when something accepts a TCP connection on host:port within the timeout.
+        /// </summary>
+        public static async Task<bool> IsPortOpenAsync(string host, int port, TimeSpan timeout)
+        {
+            using (var client = new TcpClient())
+            {
+                try
+                {
+                    var connect = client.ConnectAsync(host, port);
+                    if (await Task.WhenAny(connect, Task.Delay(timeout)) != connect)
+                        return false;
+
+                    await connect;
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
     }
 }

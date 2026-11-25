@@ -63,5 +63,27 @@ namespace mk.helpers
         {
             return TimeSpan.FromTicks(timeSpan.Ticks * multiplier);
         }
+
+        /// <summary>
+        /// Shows a time as m:ss, or h:mm:ss from an hour up.
+        /// </summary>
+        public static string ToClock(this TimeSpan time)
+        {
+            if (time < TimeSpan.Zero)
+                return "-" + time.Negate().ToClock();
+
+            if (time.TotalHours >= 1)
+                return $"{(int)time.TotalHours}:{time.Minutes:00}:{time.Seconds:00}";
+
+            return $"{(int)time.TotalMinutes}:{time.Seconds:00}";
+        }
+
+        /// <summary>
+        /// Shows a number of seconds as m:ss, or h:mm:ss from an hour up.
+        /// </summary>
+        public static string SecondsToClock(this double seconds)
+        {
+            return TimeSpan.FromSeconds(seconds).ToClock();
+        }
     }
 }
